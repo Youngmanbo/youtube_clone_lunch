@@ -7,7 +7,7 @@
 
 # 브랜치 구성
 - html 코드 전체
-- css1
+- css1 
   - css 
 - css2
   - css 
