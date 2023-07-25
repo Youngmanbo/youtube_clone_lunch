@@ -14,26 +14,46 @@ body{
     /* 어두워서 추후에 */
 }
 
-#Navigations{
+#top-bar{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    height: 60px;
+    padding: 15px;
     width: 1440px;
-    height: 56px;
-    flex-shrink: 0;
-    background-color: #212121;
 }
 
-.Navigations hambuger{
+/* 상단 바 메뉴 컬러 */
+#top-bar{
+    width: 1700px;
+    height: 56px;
+    flex-shrink: 0;
+    background-color: black;
+}
+
+/* 검색 바 */
+#search-bar{
+    width: 362px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 2px 0px 0px 2px;
+    background: #121212;
+}
+
+
+#Navigations hambuger{
     display: flex;
     padding: 8px;
     align-items: flex-start;
     gap: 10px;
 }
 
-.Navigations img{
+#Navigations img{
     width: 24px;
     height: 24px;
 }
 
-.Navigations youtube logo{
+#Navigations youtube logo{
     display: flex;
     padding: 18px 14px 18px 16px;
     flex-direction: column;
@@ -41,12 +61,12 @@ body{
     gap: 10px;
 }
 
-.Navigations youtube logo img{
+#Navigations youtube logo img{
     width: 90px;
     height: 20px;
 }
 
-.Navigations search-box{
+#Navigations search-box{
     display: flex;
     width: 470px;
     height: 40px;
