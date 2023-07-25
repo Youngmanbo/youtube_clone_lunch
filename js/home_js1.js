@@ -13,7 +13,8 @@ function getVideoInfo(n){    // n번째 동영상 info 가져오기
 }
 
 // video 정보
-const videoList = [
+const videoContainer=document.getElementByClass("body-container")
+let videoList = [
   {
     videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_1.mp4',
     title: '블록체인의 미래와 혁신',
@@ -112,4 +113,7 @@ function getVideoList() {
 
   xhr.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
   xhr.send(null);
+}
+window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
+  getVideoList();
 }
