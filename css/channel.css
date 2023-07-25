@@ -43,13 +43,34 @@ body {
     height: 80px;
     border-radius: 80px;
 };
+
+/* 채널 */
+#channel{
+    display: flex;
+    flex-direction: row;
+}
 #channel-title {
     display: flex;
     direction: row;
     padding: 16px 65px 4px 65px;
     
 }
+#channel > #channel-title-profile {
+    padding-left: 10px;
+    justify-content: flex-start;
+}
 
-.small-video{
-    display:flex;
+#channel-title-subscribes{
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+/* 헤더 */
+
+#channel-top-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
