@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="channel.css">
+    <link rel="stylesheet" href="../css/channel.css">
 </head>
 
 <body>
@@ -15,33 +15,33 @@
         <div id="channel-logo" style="background-color: black;">
             <!-- 메뉴바 아이콘 -->
             <!-- 유튜브 로고 아이콘 -->
-            <img src="imgs/Navigations/icon.svg" alt="" width="40px" height="40px">
-            <img src="imgs/Navigations/Logo.svg" alt="" width="40px" height="40px">
+            <img src="../imgs/Navigations/icon.svg" alt="" width="40px" height="40px">
+            <img src="../imgs/Navigations/Logo.svg" alt="" width="40px" height="40px">
         </div>
         <div>
             <input id="channel-search-bar" placeholder="검색" />
         </div>
         <div id="channel-voice-search">
             <!-- 보이스 검색 이모티콘 -->
-            <img src="imgs/Navigations/voice-search.svg" alt="" width="40px" height="40px">
+            <img src="../imgs/Navigations/voice-search.svg" alt="" width="40px" height="40px">
         </div>
         <div id="channel-create" style="background-color: black;">
             <!-- 촬영 이모티콘 -->
-            <img src="imgs/Navigations/Create.svg" alt="" width="40px" height="40px">
+            <img src="../imgs/Navigations/Create.svg" alt="" width="40px" height="40px">
         </div>
         <div id="channel-apps" style="background-color: black;">
             <!-- Apps 이모티콘 -->
-            <img src="imgs/Navigations/Apps.svg" alt="" width="40px" height="40px">
+            <img src="../imgs/Navigations/Apps.svg" alt="" width="40px" height="40px">
         </div>
 
         <div id="channel-notifications" style="background-color: black;">
             <!-- 알람 이모티콘 -->
-            <img src="imgs/Navigations/Notifications.svg" alt="" width="40px" height="40px">
+            <img src="../imgs/Navigations/Notifications.svg" alt="" width="40px" height="40px">
         </div>
 
         <div id="channel_profile">
             <!-- 홈 프로필 -->
-            <img src="imgs/Navigations/Profile-pic.svg" alt="" width="40px" height="40px">
+            <img src="../imgs/Navigations/Profile-pic.svg" alt="" width="40px" height="40px">
 
         </div>
 
@@ -122,21 +122,32 @@
         </nav>
 
         <article id="channel-videos-container">
-            <section> </section>
-            <!-- 상단 체널 배경 사진 -->
+            <section id="channel-cover"> 
+                <!-- 상단 체널 배경 사진 -->
+                <img src="../imgs/channel/Channel-Cover.svg" alt="" width="1200px" height="192px">
+            </section>
 
-
-            <header>
-                <button class="channel-filters">HOME</button>
-                <button class="channel-filters">VIDEOS</button>
-                <button class="channel-filters">PLAYLISTS</button>
-                <button class="channel-filters">COMMUNITY</button>
-                <button class="channel-filters">CHANNELS</button>
-                <button class="channel-filters">ABOUT</button>
+            <header id="channel">
+                <div id="channel-title" style="background-color: black;">
+                    <div id="channel-title-profile">
+                        <img src="../imgs/channel/Profile.svg" alt="">
+                    </div> 
+                    <div id="channel-title-subscribes">
+                        <button id="channel-subscribes-btn"><img src="../imgs/channel/Subscribes-Btn.svg" alt=""></button>
+                </div>
+                <div id="channel-toolbar">
+                    <div id="channel-toolbar-home"><a href="#">HOME</a></div>
+                    <div id="channel-toolbar-VIDEOS"><a href="#">VIDEOS</a></div>
+                    <div id="channel-toolbar-PLAYLISTS"><a href="#">PLAYLISTS</a></div>
+                    <div id="channel-toolbar-COMMUNITY"><a href="#">COMMUNITY</a></div>
+                    <div id="channel-toolbar-CHANNELS"><a href="#">CHANNELS</a></div>
+                    <div id="channel-toolbar-ABOUT"><a href="#">ABOUT</a></div>
+                    <input id="channel-toolbar-search" class="channel-filters" placeholder="검색" />
+                </div>
             </header>
             <!-- body부분 동영상들 -->
-            <article class="channel-body-container">비디오들</article>
-            <footer>footer</footer>
+            <article class="channel-body-container">메인 비디오</article>
+            <footer id="channel-footer-videoList">다른 비디오 종류들</footer>
         </article>
 
 
@@ -146,7 +157,7 @@
         하단
     </footer>
 
-    <script src="channel.js"></script>
+    <script src="../js/channel.js"></script>
 </body>
 
 </html>

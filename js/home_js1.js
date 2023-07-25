@@ -13,6 +13,7 @@ function getVideoInfo(n){    // n번째 동영상 info 가져오기
 }
 
 // video 정보
+const videoContainer=document.getElementsByClass("body-container")
 const videoList = [
   {
     videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_1.mp4',
