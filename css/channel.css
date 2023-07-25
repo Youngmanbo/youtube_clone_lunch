@@ -17,6 +17,9 @@ body {
     height: 60px;
     padding: 15px;
 }
+#channel-videos-container {
+    width: 100%;
+}
 
 .channel-cover {
     height: 192px;
