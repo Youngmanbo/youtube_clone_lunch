@@ -21,7 +21,14 @@ body {
     width: 100%;
 }
 
-.channel-cover {
+#channel-toolbar {
+    display : flex;
+    direction: row;
+    padding: 10px 5px 10px 5px;
+}
+
+#channel-cover {
+    width: 100%;
     height: 192px;
 }
 
@@ -36,7 +43,7 @@ body {
     height: 80px;
     border-radius: 80px;
 };
-.channel-title {
+#channel-title {
     display: flex;
     direction: row;
     justify-content: space-between;
