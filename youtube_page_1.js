@@ -26,7 +26,7 @@ function getVideoList(){    // 동영상 리스트들 가져오기
             console.error('Error:', xhr.status);
         }
     };
-    xhr.open('GET', '<http://oreumi.appspot.com/video/getVideoList>', true);
+    xhr.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
     xhr.send(null);
 }
 
