@@ -1,11 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../css/video.css">
 </head>
+
 <body>
-    
+    <!-- 상단 검색바 - 검색 나의정도 알림 등 -->
+    <header id="video-top-bar">
+        <div id="video-logo" >
+            <!-- 메뉴바 아이콘 -->
+            <!-- 유튜브 로고 아이콘 -->
+            <img src="../imgs/Navigations/icon.svg" alt="" >
+            <img src="../imgs/Navigations/Logo.svg" alt="" >
+        </div>
+        <div>
+            <input id="video-search-bar" placeholder="검색" />
+        </div>
+        <div id="video-voice-search">
+            <!-- 보이스 검색 이모티콘 -->
+            <img src="../imgs/Navigations/voice-search.svg" alt="" >
+        </div>
+        <div id="video-create" >
+            <!-- 촬영 이모티콘 -->
+            <img src="../imgs/Navigations/Create.svg" alt="" >
+        </div>
+        <div id="video-apps" >
+            <!-- Apps 이모티콘 -->
+            <img src="../imgs/Navigations/Apps.svg" alt="" >
+        </div>
+
+        <div id="video-notifications" >
+            <!-- 알람 이모티콘 -->
+            <img src="../imgs/Navigations/Notifications.svg" alt="" >
+        </div>
+
+        <div id="video_profile">
+            <!-- 홈 프로필 -->
+            <img src="../imgs/Navigations/Profile-pic.svg" alt="" >
+
+        </div>
+
+    </header>
+
+    <section>
+        <nav id="video-left-nav">
+            <ul class="nav-lists">
+                <li>
+                    <ul>
+                        <li><a href="#">홈</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">Shorts</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">구독</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">보관함</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">시청 기록</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">내 동영상</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">나중에 볼 동영상</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">좋아요 표시한 동영상</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">구독</a></li>
+                        <ul class="subsc-lists">
+                            <li><a href="#">구독1</a></li>
+                            <li><a href="#">구독2</a></li>
+                            <li><a href="#">구독3</a></li>
+                            <li><a href="#">구독4</a></li>
+                            <li><a href="#">구독5</a></li>
+                        </ul>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#">탐색</a></li>
+                        <ul class="search-menu">
+                            <li><a href="#">인기급상승</a></li>
+                            <li><a href="#">쇼핑</a></li>
+                            <li><a href="#">음악</a></li>
+                            <li><a href="#">영화</a></li>
+                            <li><a href="#">실시간</a></li>
+                            <li><a href="#">게임</a></li>
+                            <li><a href="#">스포츠</a></li>
+                            <li><a href="#">학습</a></li>
+                        </ul>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        
+        <header id="primary">
+            <div id="video-player">
+                <div id="youtube-player">
+                    <!-- 동영상이 들어갈 자리 -->
+                </div>
+                <div id="video-info">
+                    <!-- 동영상 제목, 좋아요 등 표시 -->
+                </div>
+            </div>
+        </header>
+
+        <article id="video-desc">
+            <!-- 동영상 설명 등 -->
+
+        </article>
+
+        <footer id="comment">
+            <div id="comments">
+                <!-- 댓글 수, 정렬 기준 넣는곳 -->
+            </div>
+
+            <div id="comment-write">
+                <!-- 댓글 쓰는 -->
+                <input type="text" id="comment-write-input">
+            </div>
+
+            <div id="comments-list">
+                <!-- 댓글들 있는 곳 -->
+            </div>
+
+        </footer>
+        
+        <aside id="secondary">
+            <!-- 추천 동영상 리스트 -->
+
+            <div id="video-top-menu">
+                <!-- 상단 메뉴바 -->
+                <div><a href="#">All</a></div>
+                <div><a href="#">From Marcus Levin</a></div>
+            </div>
+
+            <div id="recommended-video-list">
+                <!-- 동영상 추가 리스트 -->
+            </div>
+        </aside>
+
+
+    </section>
+
+    <footer>
+        하단
+    </footer>
+
+    <script src="../js/channel.js"></script>
 </body>
+
 </html>
