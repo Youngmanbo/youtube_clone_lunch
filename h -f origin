@@ -1,0 +1,310 @@
+[33mcommit e2458887d84b97651f2af9fa89878744cddd6aa4[m[33m ([m[1;36mHEAD -> [m[1;32mcss_1[m[33m)[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 10:46:23 2023 +0900
+
+    add imgs & icons
+
+[33mcommit c448a4702cbbedee6ac2cfd3a6f5f068ed9f842c[m[33m ([m[1;32mmain[m[33m)[m
+Merge: 37e3aa9 7bd68d1
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 15:03:34 2023 +0900
+
+    Merge branch 'js_1'
+
+[33mcommit 7bd68d15038f58e3a271fa97615aa865ed73144b[m
+Author: EunCheol <ek5172@naver.com>
+Date:   Tue Jul 25 14:52:37 2023 +0900
+
+    hell git
+
+[33mcommit 37e3aa9316c54dbca152aaec4afe6e2c30ec965e[m
+Merge: af360d8 574311e
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 14:46:52 2023 +0900
+
+    Merge branch 'html'
+
+[33mcommit af360d894682d3ecfa49d24633b8cace5e58133c[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 14:46:18 2023 +0900
+
+    수정 js_1파일
+
+[33mcommit 574311e5404693065abcf0eba779ed7308735e03[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 14:44:22 2023 +0900
+
+    channel.html 이미지 추가, id값, 뼈대 작성
+
+[33mcommit 64b5c1e9192f266cdf3d58b022757d4d77216371[m
+Merge: bcbf667 f0a34cc
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 14:44:19 2023 +0900
+
+    'd'
+
+[33mcommit f0a34cc8c8c80fdd85ddcfb0ec776076bfba9b31[m
+Author: EunCheol <ek5172@naver.com>
+Date:   Tue Jul 25 14:42:43 2023 +0900
+
+    real gogo
+
+[33mcommit bcbf66720ea9a7c634001f49bb2284c072e944f6[m
+Merge: 0e42cfd 58d83e4
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 14:36:12 2023 +0900
+
+    Merge branch 'js_1'
+
+[33mcommit 58d83e4fd64521d43c7b3a1ead8680351feaf0fc[m
+Author: EunCheol <ek5172@naver.com>
+Date:   Tue Jul 25 14:35:03 2023 +0900
+
+    we can do make the youtube
+
+[33mcommit 0e42cfd6c58444ffbf085f657f7a2d64a40c3ca2[m
+Merge: f09031a 993b43c
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 14:13:42 2023 +0900
+
+    Merge branch 'js_1'
+
+[33mcommit 993b43cc34d9c5575a6e5a4c26e74ab59e80ce5e[m
+Author: EunCheol <ek5172@naver.com>
+Date:   Tue Jul 25 14:12:07 2023 +0900
+
+    test push js_1
+
+[33mcommit f09031a01c3997782713c04fdfeefac8e4a21bc2[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 13:40:46 2023 +0900
+
+    'd'
+
+[33mcommit 6c38fd3f78e64eeec314e334eaf1cdb40bb5ef36[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 13:11:15 2023 +0900
+
+    channel html 경로 수정
+
+[33mcommit d3a0063f4a38e3bf260e37e6a9cf9a55afb05c18[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 12:51:27 2023 +0900
+
+    img, js,css 경로 수정
+
+[33mcommit 4c46308ab915cebe8f69331c463fafebac9d9167[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 11:53:56 2023 +0900
+
+    파일별 폴더에 분류
+
+[33mcommit edaac69343b0c30424ac79ad50f544a9a4c1d331[m
+Merge: 624a3a2 975e28f
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 11:51:17 2023 +0900
+
+    Merge branch 'css_1'
+
+[33mcommit 624a3a2391d0c0860c64b3025e2b9526ec6adb32[m
+Merge: 821a623 fb3b533
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 11:51:10 2023 +0900
+
+    Merge branch 'html'
+
+[33mcommit fb3b533bab6dc3a309acc90dee810a9c98d4a122[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 11:47:39 2023 +0900
+
+    Add channel.html
+
+[33mcommit 821a623378d6ada9f6c99b69be9bf469107cd0d1[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 11:47:23 2023 +0900
+
+    update channel_css
+
+[33mcommit b902fa01d8cc60dd76c423acfe9e760024579cb8[m
+Merge: 919b8c8 dc5b0e3
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 11:41:52 2023 +0900
+
+    Merge branch 'js_1'
+
+[33mcommit dc5b0e319f478ffb5222cd9601facb43fb4adea5[m
+Author: EunCheol <ek5172@naver.com>
+Date:   Tue Jul 25 11:29:52 2023 +0900
+
+    0725 js1
+    
+    video 불러오기 기능 추가
+    동작여부 미지수
+    
+    작성자 김은철
+
+[33mcommit 975e28feaec3c06a27afa15760d2c4a2aadc3d27[m[33m ([m[1;31morigin/css_1[m[33m)[m
+Author: yumi choi <skgishaf@naver.com>
+Date:   Tue Jul 25 11:12:02 2023 +0900
+
+    add css선택자 수정
+
+[33mcommit 919b8c8fb0f43c866e4e88a5da16a941760e78ec[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 11:08:05 2023 +0900
+
+    home으로 이름 수정
+    css & js connect
+
+[33mcommit c0d0084cc8df7ed0b3b5a81013c66ac546b7def3[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 10:46:23 2023 +0900
+
+    add imgs & icons
+
+[33mcommit 3714f96171602d114021822e6dd95c0fda6c3af9[m
+Merge: 998a56e 7a0ebf8
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 09:59:21 2023 +0900
+
+    Merge branch 'main' into html
+
+[33mcommit dfd885764407e773adfd40703b053c2b79d686b9[m
+Merge: 397db46 98c03ff
+Author: yumi choi <skgishaf@naver.com>
+Date:   Tue Jul 25 09:43:56 2023 +0900
+
+    Merge remote-tracking branch 'refs/remotes/origin/css_1' into css_1
+
+[33mcommit 998a56e8606e0d635614310c2e3fe305950f9f27[m
+Merge: f0561ae 72c84a5
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Tue Jul 25 09:33:57 2023 +0900
+
+    Merge branch 'main' into html
+
+[33mcommit 7a0ebf8c3914f5dc5f347648dea45b34cea09f68[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Tue Jul 25 09:28:10 2023 +0900
+
+    정리
+
+[33mcommit 4e8b35d1efba35e029a23a23fdb704060b97417c[m
+Merge: 814db19 ce964f7
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Mon Jul 24 11:51:51 2023 +0900
+
+    Merge branch 'js_1'
+
+[33mcommit 814db192236e5f11584f0554786035ccea13517e[m
+Merge: fb5a51c ea47ddf
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Mon Jul 24 11:49:52 2023 +0900
+
+    Merge branch 'js_2'
+
+[33mcommit fb5a51c9ec8d0944fd1b93a2c858d4b205cda75e[m
+Merge: 4f6df2b 98c03ff
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Mon Jul 24 11:49:11 2023 +0900
+
+    Merge branch 'css_1'
+
+[33mcommit 4f6df2b7bf9aba4153c5dcbe02111b12cfa797a3[m
+Merge: 72c84a5 f0561ae
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Mon Jul 24 11:49:05 2023 +0900
+
+    Merge branch 'html'
+
+[33mcommit ce964f7e57af75b850ee3ec004fa4ddc8a4275a0[m[33m ([m[1;32mjs_1[m[33m)[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Mon Jul 24 11:46:07 2023 +0900
+
+    Add youtube_page_1.js
+    
+    api 가져오기 실패
+    
+    Day 1 김지호
+
+[33mcommit f0561aee00b35858dee801d00f703e7cb32ce283[m[33m ([m[1;32mhtml[m[33m)[m
+Author: yumi choi <skgishaf@naver.com>
+Date:   Mon Jul 24 11:44:32 2023 +0900
+
+    Init index.html file
+    
+    뼈대만들기_1
+
+[33mcommit 397db466715be5ccfa4f6bd10bd6fe9ec796a2ec[m
+Author: yumi choi <skgishaf@naver.com>
+Date:   Mon Jul 24 11:42:02 2023 +0900
+
+    Init index.html file
+
+[33mcommit 98c03ff4cfc03f633752ee3417cd97fa9706b98a[m
+Author: EunCheol <ek5172@naver.com>
+Date:   Mon Jul 24 11:41:24 2023 +0900
+
+    css1
+    
+    css 큰 틀 잡기
+    네비 바 : 미완 (서치박스부터 해야함)
+    사이드바 : 완성(?)
+    카테고리 : 해야함
+    비디오 : 완성(?)
+    
+    oneday : 김은철
+
+[33mcommit ea47ddf1e3876e589ef622cb1cd1ae5f759bba0b[m[33m ([m[1;31morigin/js_2[m[33m, [m[1;32mjs_2[m[33m)[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Mon Jul 24 11:17:12 2023 +0900
+
+    파일 수정 js_2.js 주석추가
+
+[33mcommit aaa1b0a1e0b6bc91287c7ea08155b42b41576dea[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Mon Jul 24 11:14:03 2023 +0900
+
+    파일추가 js_2.js 네비이게이션바 클릭 기능 추가
+
+[33mcommit 72c84a5181d3f46122787bd1ebc0d35fe31d1f19[m
+Author: kimziho <rlawlgh1027@naver.com>
+Date:   Mon Jul 24 10:04:46 2023 +0900
+
+    Add youtube_page_3.html
+
+[33mcommit 6c592666870f3b4a9cd590363a92adc646ea71e7[m
+Author: yumi choi <skgishaf@naver.com>
+Date:   Mon Jul 24 09:44:36 2023 +0900
+
+    Add common.css file
+
+[33mcommit 813ea035dfe1631f1b1a82317ca0581200811cc1[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Sun Jul 23 20:54:03 2023 +0900
+
+    'temp_save'
+
+[33mcommit 37363335e696ca4c8742a920fe5ea3f5635a0da7[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Sun Jul 23 17:50:12 2023 +0900
+
+    'start'
+
+[33mcommit 5d846b0901956b54b398221090894d1b78f929ad[m
+Author: Youngmanbo <yo900326@gmail.com>
+Date:   Sun Jul 23 00:41:21 2023 +0900
+
+    add folder practice
+
+[33mcommit 219b0b3bebfb5fccee6658f0759d16bf87dc571d[m
+Author: youngmanbo <43477138+Youngmanbo@users.noreply.github.com>
+Date:   Thu Jul 20 15:22:07 2023 +0900
+
+    Update README.md
+
+[33mcommit 61233644e31e5de2269895097275ea957a8c913f[m[33m ([m[1;32mcss_2[m[33m)[m
+Author: youngmanbo <43477138+Youngmanbo@users.noreply.github.com>
+Date:   Thu Jul 20 15:08:44 2023 +0900
+
+    Create README.md
