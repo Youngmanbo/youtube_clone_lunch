@@ -40,3 +40,7 @@ body {
     padding: 16px 65px 4px 65px;
     
 }
+
+.small-video{
+    display:flex;
+}
