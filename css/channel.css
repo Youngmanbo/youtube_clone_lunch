@@ -46,7 +46,6 @@ body {
 #channel-title {
     display: flex;
     direction: row;
-    justify-content: space-between;
     padding: 16px 65px 4px 65px;
     
 }
