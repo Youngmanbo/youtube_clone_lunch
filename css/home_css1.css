@@ -1,189 +1,88 @@
+/* 상단바 */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body{
+    height: 100%;
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-
-body{
-    /* width: 500px;
-    height: 1024px; */
-    font-family: 'Roboto', sans-serif;
-    /* background-color: #000; */
-    /* 어두워서 추후에 */
 }
 
-#top-bar{
-    width: 1440px;
-    height: 56px;
-    flex-shrink: 0;
-}
-
-#top-bar{
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    height: 60px;
-    padding: 15px;
-    width: 1440px;
-}
-
-/* 상단 바 메뉴 컬러 */
-#top-bar{
-    width: 1700px;
-    height: 56px;
-    flex-shrink: 0;
-    background-color: black;
-}
-
-
-#search-bar{
-    display: flex;
-    width: 470px;
-    height: 40px;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 4px;
-    flex-shrink: 0;
-    background-color: black;
-}
-
-/* 상단 오른쪽 아이콘들 묶어서 css만들기 */
-/* display: flex;
-width: 204px;
-height: 40px;
-justify-content: center;
-align-items: flex-start;
-gap: 8px;
-flex-shrink: 0; */
-
-
-
-/* 검색 바 */
-/* #search-bar{
-    width: 362px;
-    height: 40px;
-    flex-shrink: 0;
-    border-radius: 2px 0px 0px 2px;
-    background: #121212;
-} */
-
-
-#Navigations hambuger{
-    display: flex;
-    padding: 8px;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-#Navigations img{
-    width: 24px;
-    height: 24px;
-}
-
-#Navigations youtube logo{
-    display: flex;
-    padding: 18px 14px 18px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-#Navigations youtube logo img{
-    width: 90px;
-    height: 20px;
-}
-
-#Navigations search-box{
-    display: flex;
-    width: 470px;
-    height: 40px;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 4px;
-    flex-shrink: 0;
-}
-
-.sidevar{
-    display: flex;
-    width: 240px;
-    height: 968px;
-    padding-right: 0px;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    flex-shrink: 0;
+/* 상단 바 */
+#top-bar {  /* 기본 설정 */
     background-color: #212121;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.sidebar Top{
+/* 로고 부분 */
+#home-logo{
     display: flex;
-    padding: 12px 0px;
-    flex-direction: column;
-    align-items: flex-start;
+}/* 로고 부분 */
+
+
+
+/* 검색 부분 */
+#home-search-div {
+    display: flex;
+}
+
+#search-bar {
+    background-color: black;
+    width: auto;
+    color: white;
+    border: none;
+    outline: none;
+    height: 100%;
+}
+/* 검색 부분 */
+
+/* 상단 우측 부분 */
+#home-info-div {
+    float: right;
+    display: flex;
+}
+
+#home_profile {
+    margin-right: 1.5rem;
+}/* 상단 우측 부분 */
+
+
+/* 상단바 끝*/
+
+
+/* 네비게이션 */
+section {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#left-nav {
+    width: 20%;
     background-color: #303030;
-    color: #ffffff;
 }
 
-.sidebar Top2{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+#videos-container {
+    background-color: #212121;
+    width: 100%;
 }
 
-.sidebar menu{
-    background-color: #303030;
-    color: #ffffff;
+.body-container {
+    background-color: black;
+    align-items: stretch;
+    color: white;
+    height: 80%;
 }
 
-.sidebar Subscriptions{
-    display: flex;
-    padding-top: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+.nav-lists {
+    text-align: start;
 }
 
-.sidebar moreform{
-    display: flex;
-    padding-top: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.sidebar menu-title{
-    background-color: #303030;
-    color: #aaaaaa;
-}
-
-.category{
-    display: inline-flex;
-    padding: 12px 12px 12px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.video{
-    display: flex;
-    width: 1151px;
-    height: 1395px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    flex-shrink: 0;
-}
-
-.video input{
-    display: flex;
-    width: 1151px;
-    height: 247px;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 16px;
-    flex-shrink: 0;
-}
+/* 네비게이션 끝*/
