@@ -114,6 +114,7 @@ function renderVideoList() {
     let descriptionElement = document.createElement('p');
     descriptionElement.textContent = video.description;
 
+    
     videoContainer.appendChild(titleElement);
     videoContainer.appendChild(videoElement);
     videoContainer.appendChild(descriptionElement);
