@@ -1,3 +1,4 @@
+// ulr을 제외한 비디오 정보들
 function getVideoInfo(n){    // n번째 동영상 info 가져오기
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `<http://oreumi.appspot.com/video/getVideoInfo?vidie_id=${n}>`, true);
@@ -12,8 +13,31 @@ function getVideoInfo(n){    // n번째 동영상 info 가져오기
     };
 }
 
-// video 정보
-const videoContainer=document.querySelector(".body-container")
+//url받아오기
+function getVideoUrl(n) {
+  // n번째 동영상 info 가져오기
+  const url = new XMLHttpRequest();
+  url.open('GET', `http://oreumi.appspot.com/video/getVideoInfo?video_id=${n}`, true);
+  url.onreadystatechange = function() {
+    if (url.readyState === 4) {
+      if (url.status === 200) {
+        // 값을 잘 받아왔을 때
+        let videoInfo = JSON.parse(url.responseText);
+        console.log(videoInfo);
+      } else {
+        // 요청이 실패한 경우
+        console.error('Error:', url.status);
+      }
+    }
+  };
+  url.send();
+}
+
+
+
+// 비디오 넣을 태그 자리 불러옴
+const videoContainer=document.querySelector(".body-container");
+
 let videoList = [
   {
     videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_1.mp4',
@@ -79,22 +103,21 @@ let videoList = [
 
 function renderVideoList() {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
-
   videoList.forEach((video, index) => {
-    const videoElement = document.createElement('video');
-    videoElement.src = "http://oreumi.appspot.com/video/getVideoInfo?video_id=1";
+    let videoElement = document.createElement('video');
+    videoElement.src = video.videoUrl;
     videoElement.controls = true;
 
-    const titleElement = document.createElement('h2');
+    let titleElement = document.createElement('h2');
     titleElement.textContent = video.title;
 
-    const descriptionElement = document.createElement('p');
+    let descriptionElement = document.createElement('p');
     descriptionElement.textContent = video.description;
 
-    
     videoContainer.appendChild(titleElement);
     videoContainer.appendChild(videoElement);
     videoContainer.appendChild(descriptionElement);
+
   });
 }
 
@@ -116,5 +139,6 @@ function getVideoList() {
   xhr.send(null);
 }
 window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
+  getVideoUrl(0);
   getVideoList();
 }
