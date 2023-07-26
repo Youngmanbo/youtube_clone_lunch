@@ -13,6 +13,8 @@ function getVideoInfo(n){    // n번째 동영상 info 가져오기
     };
 }
 
+let videoUrls=[];
+
 //url받아오기
 function getVideoUrl(n) {
   // n번째 동영상 info 가져오기
@@ -22,8 +24,9 @@ function getVideoUrl(n) {
     if (url.readyState === 4) {
       if (url.status === 200) {
         // 값을 잘 받아왔을 때
-        let videoInfo = JSON.parse(url.responseText);
-        console.log(videoInfo);
+        var videoInfo = JSON.parse(url.responseText);
+        videoUrls.push(videoInfo);
+        //console.log(videoInfo);
       } else {
         // 요청이 실패한 경우
         console.error('Error:', url.status);
@@ -32,7 +35,7 @@ function getVideoUrl(n) {
   };
   url.send();
 }
-
+//console.log(videoUrls);
 
 
 // 비디오 넣을 태그 자리 불러옴
@@ -104,6 +107,10 @@ let videoList = [
 function renderVideoList() {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
   videoList.forEach((video, index) => {
+    // videoUrls받아오는거 아직안됨
+    // let videoUrls=getVideoUrl(index)
+    // console.log(videoUrls);
+    
     let videoElement = document.createElement('video');
     videoElement.src = video.videoUrl;
     videoElement.controls = true;
@@ -140,6 +147,6 @@ function getVideoList() {
   xhr.send(null);
 }
 window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
-  getVideoUrl(0);
   getVideoList();
+  getVideoUrl(0); 
 }
