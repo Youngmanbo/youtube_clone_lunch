@@ -21,9 +21,6 @@ body{
     align-items: center;
 }
 
-
-
-
 /* 로고 부분 */
 #home-logo{
     display: flex;
@@ -44,12 +41,7 @@ body{
     outline: none;
     height: 100%;
 }
-
-
-
 /* 검색 부분 */
-
-
 
 /* 상단 우측 부분 */
 #home-info-div {
@@ -62,11 +54,7 @@ body{
 }/* 상단 우측 부분 */
 
 
-
-
-
 /* 상단바 끝*/
-
 
 
 /* 네비게이션 */
