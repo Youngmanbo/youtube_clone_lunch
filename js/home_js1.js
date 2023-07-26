@@ -13,7 +13,7 @@ function getVideoInfo(n){    // n번째 동영상 info 가져오기
 }
 
 // video 정보
-const videoContainer=document.getElementsByClassName("body-container")
+const videoContainer=document.querySelector(".body-container")
 let videoList = [
   {
     videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_1.mp4',
@@ -80,7 +80,7 @@ let videoList = [
 function renderVideoList() {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
 
-  videoList.forEach(video => {
+  videoList.forEach((video, index) => {
     const videoElement = document.createElement('video');
     videoElement.src = "http://oreumi.appspot.com/video/getVideoInfo?video_id=1";
     videoElement.controls = true;
@@ -91,6 +91,7 @@ function renderVideoList() {
     const descriptionElement = document.createElement('p');
     descriptionElement.textContent = video.description;
 
+    
     videoContainer.appendChild(titleElement);
     videoContainer.appendChild(videoElement);
     videoContainer.appendChild(descriptionElement);
