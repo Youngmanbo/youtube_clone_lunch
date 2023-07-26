@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+/* header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #212121;
+    border-color:#303030;
+    color: white;
+    height: 56px;
+}
+.navigations{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+.search-bar{
+    background-color: white;
+    height: 25px;
+}
+
+.search{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icons{
+    display: flex;
+    flex-direction: row;
+}
+
+
+/*info*/
+
+section{
+    background-color: black;
+}
+.player{
+    padding: 0px 10px 0px 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background-color: black;
+}
+
+video{
+    width:100%;
+    max-width: 1000px;
+    height: 100%;
+}
+
+.info{
+    padding: 10px 10px 10px 10px ;
+    display:flex;
+    flex-direction: column;
+}
+.info .metadata{
+    padding-bottom: 10px;
+    display:flex;
+    flex-direction: column;
+    border-color:gray;
+}
+.info .metadata .actionsAndViews{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.info .channel {
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding: 10px 0px 10px 5px;
+}
+.info .channel .yt-profile{
+    text-align: center;
+}
+.info .channel .yt-info{
+    display: flex;
+    flex-direction: column;
+}
+.info .channel .yt-info .ytNick{
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.info .channel .yt-info .ytNick .sub{
+    text-transform: uppercase;
+    background-color: red;
+    text-align: center;
+    border-radius: 10%;
+    font-size: 15px;
+}
