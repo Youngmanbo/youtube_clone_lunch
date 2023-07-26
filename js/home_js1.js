@@ -14,7 +14,6 @@ function getVideoInfo(n){    // n번째 동영상 info 가져오기
 }
 
 let videoUrls=[];
-
 //url받아오기
 function getVideoUrl(n) {
   // n번째 동영상 info 가져오기
@@ -108,7 +107,7 @@ function renderVideoList() {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
   videoList.forEach((video, index) => {
     // videoUrls받아오는거 아직안됨
-    // let videoUrls=getVideoUrl(index)
+    // let videoUrls=getVideoUrl(index);
     // console.log(videoUrls);
     
     let videoElement = document.createElement('video');
