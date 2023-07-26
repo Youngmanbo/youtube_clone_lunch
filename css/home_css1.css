@@ -11,6 +11,8 @@ body{
     box-sizing: border-box;
 }
 
+
+
 /* 상단 바 */
 #top-bar {  /* 기본 설정 */
     background-color: #212121;
@@ -31,17 +33,25 @@ body{
 /* 검색 부분 */
 #home-search-div {
     display: flex;
+    width : 60%;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.search{
+    display: flex;
+    flex-direction: row;
+    width: 60%;
 }
 
 #search-bar {
     background-color: black;
-    width: auto;
     color: white;
     border: none;
     outline: none;
-    height: 100%;
-}
-/* 검색 부분 */
+    width: 90%;
+}/* 검색 부분 */
+
 
 /* 상단 우측 부분 */
 #home-info-div {
@@ -67,6 +77,7 @@ section {
 #left-nav {
     width: 20%;
     background-color: #303030;
+    color: white;
 }
 
 #videos-container {
