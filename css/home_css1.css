@@ -41,16 +41,17 @@ body{
 .search{
     display: flex;
     flex-direction: row;
+    width: 60%;
 }
 
 #search-bar {
     background-color: black;
     color: white;
     border: none;
-}
+    outline: none;
+    width: 90%;
+}/* 검색 부분 */
 
-
-/* 검색 부분 */
 
 /* 상단 우측 부분 */
 #home-info-div {
