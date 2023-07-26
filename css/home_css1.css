@@ -3,6 +3,8 @@
 
 body{
     height: 100%;
+    background-color: #303030;
+
 }
 
 * {
@@ -79,6 +81,33 @@ section {
     background-color: #303030;
     color: white;
 }
+
+ul{
+    list-style-type: none;
+    border-bottom: white 0.5px solid;
+}
+ul > li {
+    margin-left: 10%;
+}
+
+li{
+    list-style-type: none;
+    justify-content: start;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+ul > span {
+    margin-top: 4%;
+}
+
+
+li > span{
+    justify-content: center;
+    align-items: center;
+    /* border: blue 2px solid; */
+}
+
 
 #videos-container {
     background-color: #212121;
