@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*:focus{
+    outline: none;
+}
+
+body {
+    position: relative;
+    background-color: #000000;
+    font-family: 'Roboto', sans-serif;
+    color:white;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+a{
+    margin: 0 .25rem;
+    text-decoration: none;
+}
+
+ul{
+    margin: .25rem;
+}
+
+li{
+    margin: .25rem;
+    flex: none;
+    font-size: .75rem;
+    list-style-type: none;
+}
+
+button{
+    margin: 0 .25rem;
+    flex: none;
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgrey;
+    background: #f8f8f8;
+    border-radius: 2px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+h3 {
+    font-size: .8125rem;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: .8rem;
+    margin: .4rem 0;
+}
+
+p{
+    font-size: .75rem;
+}
+
+textarea {
+    border: 1px solid #e2e2e2;
+    line-height: 2;
+    font-size: .75rem;
+}
+
+span {
+    color: #767676;
+    font-size: .6875rem;
+}
+
+strong {
+    font-weight: 500;
+}
+
+i {
+    padding-right: .4rem;
+}
+
+iframe {
+    width: 400px;
+    height: 240px;
+}
+
+/* 상단 바 */
+#top-bar {  /* 기본 설정 */
+    background-color: #212121;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 로고 부분 */
+#home-logo{
+    display: flex;
+    cursor: pointer;
+}/* 로고 부분 */
+
+
+
+/* 검색 부분 */
+#home-search-div {
+    display: flex;
+    width : 60%;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.search{
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    cursor: pointer;
+}
+
+#search-bar {
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+    width: 90%;
+}
+
+#voice-search {
+    float: right;
+    display: flex;
+    cursor: pointer;
+}
+/* 검색 부분 */
+
+
+/* 상단 우측 부분 */
+#home-info-div {
+    float: right;
+    display: flex;
+    cursor: pointer;
+}
+
+#home_profile {
+    margin-right: 1.5rem;
+    cursor: pointer;
+}/* 상단 우측 부분 */
+
+
+/* 상단바 끝*/
+
+/* 폰트 사이즈 고정 */
+.icons { font-size: 18px;}
+
+.footer{
+    min-width: 1000px;
+}
+
+.footer-links{
+    display: flex;
+    border-top: 1px solid #e2e2e2;
+    padding-top: .5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.footer-links2{
+    display: flex;
+    padding-bottom: 30px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.aside{
+    width: 400px;
+}
+
+.aside-span {
+    display: block;
+}
+
+.img-aside{
+    margin-right: 1rem;
+    width: 120px;
+    height: 90px;
+}
+
+.media{
+    display: flex;
+    align-items: flex-start;
+}
+
+.media-body{
+    flex: 1;
+}
+
+.media-aside{
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.media-profile {
+    height: 48px;
+    width: 48px:
+}
+
+.main{
+    width:400px;
+}
+
+.comments{
+    display: none;
+}
+
+.info{
+    padding: .5rem;
+}
+
+.username{
+    font-weight: 500;
+    color: #167ac6;
+}
+
+.sub {
+    display: flex;
+}
+
+.More {
+    text-align: center;
+    padding-top: .5rem;
+    border-top: 1px solid #e2e2e2;
+}
+
+.logo {
+    height: 30px;
+    width: 72px;
+}
+
+@media all and (min-width: 650px) {
+    .content {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    .aside {
+      width: 350px;
+      flex: none;
+    }
+    .main { 
+      width: 640px;
+      flex: none;
+      margin-right: 8px;
+    }
+    iframe {
+      width: 640px;
+      height: 350px;
+    }
+    .btn-upload,
+    .btn-notifications,
+    .comments {
+      display: block;
+    }
+  }
+
+  @media all and (min-width: 1000px) {
+    .content {
+      justify-content: center;
+    }
+  }
