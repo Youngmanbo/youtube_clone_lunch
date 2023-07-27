@@ -1,63 +1,26 @@
-// ulr을 제외한 비디오 정보들
-function getVideoInfo(n){    // n번째 동영상 info 가져오기
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `<http://oreumi.appspot.com/video/getVideoInfo?vidie_id=${n}>`, true);
-    xhr.onreadystatechange = function(){
-        if (xhr.status === 200 && xhr.readyState === 4){
-            // 값을 잘 받아왔을 때
-            return JSON.parse(xhr.responseText) ;
-        }else{
-            // 요청이 실패한 경우
-            console.error('Error:', xhr.status);
-        }
-    };
-}
-
-let videoUrls=[];
-//url받아오기
-function getVideoUrl(n) {
-  // n번째 동영상 info 가져오기
-  const url = new XMLHttpRequest();
-  url.open('GET', `http://oreumi.appspot.com/video/getVideoInfo?video_id=${n}`, true);
-  url.onreadystatechange = function() {
-    if (url.readyState === 4) {
-      if (url.status === 200) {
-        // 값을 잘 받아왔을 때
-        var videoInfo = JSON.parse(url.responseText);
-        videoUrls.push(videoInfo);
-        //console.log(videoInfo);
-      } else {
-        // 요청이 실패한 경우
-        console.error('Error:', url.status);
-      }
-    }
-  };
-  url.send();
-}
-//console.log(videoUrls);
-
+// import * as res from './requests.js';
 
 // 비디오 넣을 태그 자리 불러옴
 const videoContainer=document.querySelector(".body-container");
 
 let videoList = [];
+let videoUrls = [];
 
-function renderVideoList() {
+function renderVideoList(videoList) {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
   videoList.forEach((video, index) => {
-    // videoUrls받아오는거 아직안됨
-    // let videoUrls=getVideoUrl(index);
-    // console.log(videoUrls);
     
     let videoElement = document.createElement('video');
-    videoElement.src = video.videoUrl;
+    let videoInfoIndex = videoUrls[video.video_id];
+    videoElement.src = videoInfoIndex.video_link;
     videoElement.controls = true;
+    videoElement.poster = videoInfoIndex.image_link;
 
     let titleElement = document.createElement('h2');
-    titleElement.textContent = video.title;
+    titleElement.textContent = videoInfoIndex.video_title;
 
     let descriptionElement = document.createElement('p');
-    descriptionElement.textContent = video.description;
+    descriptionElement.textContent = videoInfoIndex.video_title;
 
     
     videoContainer.appendChild(titleElement);
@@ -67,29 +30,38 @@ function renderVideoList() {
   });
 }
 
+function getVideo(id){
+    let url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
+    return fetch(url).then(res=> res.json());
+}
+
+function makeurlList(videoList){
+  videoList.forEach((video, index) => {
+    videoUrls[index]=(getVideo(index));
+  });
+}
+
+
 function getVideoList() {
-  const xhr = new XMLHttpRequest();
+  const temp = new XMLHttpRequest();
+  temp.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
   
-  xhr.onreadystatechange = function() {
-    if (xhr.status === 200 && xhr.readyState === 4) {
+  temp.onreadystatechange = function() {
+    if (temp.status === 200 && temp.readyState === 4) {
       // 값을 잘 받아왔을 때
-      videoList = JSON.parse(xhr.responseText);
-      renderVideoList();
+      videoList = JSON.parse(temp.responseText);
+      makeurlList(videoList);
+      renderVideoList(videoList);
     } else {
       // 요청이 실패한 경우
-      console.error('Error:', xhr.status);
+      console.error('Error:', temp.status);
     }
   };
 
-  xhr.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
-  xhr.send(null);
-}
-
-async function getVideoList(){
-  
+  temp.send();
 }
 
 window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
   getVideoList();
-  getVideoUrl(0); 
+  // getVideoUrl(0); 
 }
