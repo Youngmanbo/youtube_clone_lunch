@@ -30,10 +30,10 @@ function renderVideoList(videoList) {
   });
 }
 
-async function getVideo(id){
+ function getVideo(id){
   url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
-  const response = await fetch(url);
-  return response.json();
+  const response =  fetch(url);
+  return response;
 }
 
 function makeurlList(videoList){
