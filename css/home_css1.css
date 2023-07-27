@@ -71,7 +71,7 @@ body{
 
 
 
-/* 탑메뉴 시작 */
+/* 탑메뉴 시작 - html탑메뉴 필터들 완료되면 연결하기*/
 .top_manu{
     display: flex;
     flex-direction: row;
@@ -79,6 +79,47 @@ body{
     align-items: flex-start;
     gap: 10px;
 }
+
+/* 필터 */
+.filter-lists{
+    position: fixed;
+    left: 250px;
+    top: 60px;
+    width: calc(100% - 250px);
+    height: 60px;
+    background: #fff;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.filter-lists::-webkit-scrollbar{
+    display: none;
+}
+
+.filters{
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: #f0f0f0;
+    border: 1px solid #dbdbdb;
+    text-transform: capitalize;
+    margin-right: 10px;
+    color: #242424;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.filters.active{
+    color: #fff;
+    background: #242424;
+}
+
+
 /* 탑메뉴 끝 */
 
 
@@ -97,6 +138,48 @@ section {
     color: white;
     min-width: 10%;
 }
+
+/* left-nav (s) */
+.channel-left-nav{
+    position: fixed;
+    top: 56px;
+    left: 0;
+    min-width: 240px;
+    width: 240px;
+    height: 100%;
+    background: #212121;
+    padding-right: 10px;
+}
+
+.links{
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.links img{
+    height: 25px;
+    margin-right: 20px;
+}
+
+.links:hover, .links.active{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.seperator{
+    border: none;
+    border-bottom: 1px solid #AAAAAA;
+    margin: 20px 0;
+}
+/* left-nav (e) */
+
 
 ul{
     list-style-type: none;
@@ -120,6 +203,7 @@ ul > span {
 
 
 li > span{
+    display: flex;
     justify-content: center;
     align-items: center;
     /* border: blue 2px solid; */
