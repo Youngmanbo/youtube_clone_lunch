@@ -22,47 +22,52 @@ async function getVideoList(){
 }
 
 async function getVideoInfoList(res){
+    let video = ''
+    await res.then(data =>{
+        video = data.map(async data => {
+            return await getVideo(data.video_id);
+        })
+    });
 
-    const prom = Object.keys(res).map(async key => {
-        return await getVideo(res[key].video_id);
-    })
-    const result = await Promise.all(prom);
-
-    return res;
+    
+    return video; 
 }
 
 function render(info){
-    let parent = document.querySelector('#channel-footer-videoList');
-    let div = document.createElement('div');
-    div.className = 'video-container';
-    let video = document.createElement('video');
-    video.src=info.video_link;
-    video.poster = info.lmg_link;
-    video.setAttribute('controls');
-    
-    div.appendChild(video);
-    parent.appendChild(div);
+    info.then(obj => {
 
+        let parent = document.querySelector('#channel-footer-videoList');
+        
+        let div = document.createElement('div');
+        div.className = 'video-container';
+        let video = document.createElement('video');
+        video.src=obj.video_link;
+        video.poster = obj.image_link;
+        
+        div.appendChild(video);
+        parent.appendChild(div);
 
-    parent.appendChild(html);
+    })
+
 }
 
 async function renderList(res){
-    const prom = Object.keys(res).map(async key => {
-        return await render(res[key]);
+    await res.then(async data => {
+        data.map(obj =>{
+            console.log(obj);
+            render(obj);
+        })
     })
-    const result = await Promise.all(prom);
-
     
 }
 
 
 
 window.onload = function(){
-
+    let result = [];
     let channel = getChannel();
     let videoInfos = getVideoInfoList(channel);
-    console.log(videoInfos);
-    render(videoInfos[0]);
+
+    renderList(videoInfos);
 
 }
