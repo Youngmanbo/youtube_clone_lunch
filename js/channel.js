@@ -33,13 +33,16 @@ async function getVideoInfoList(res){
 
 function render(info){
     let parent = document.querySelector('#channel-footer-videoList');
-    html = '';
-    html +='<div class=channel-video-list>';
-    html +=`<video controls poster=${info.imgae_link} src=${info.video_link}></video></div>`;
-    html += '<div class=video-title>';
-    html += `<span>${info.video_title}</span></div>`;
-    html += '<div class=video-date>';
-    html += `<span>${info.upload_date}</span></div>`;
+    let div = document.createElement('div');
+    div.className = 'video-container';
+    let video = document.createElement('video');
+    video.src=info.video_link;
+    video.poster = info.lmg_link;
+    video.setAttribute('controls');
+    
+    div.appendChild(video);
+    parent.appendChild(div);
+
 
     parent.appendChild(html);
 }
@@ -56,8 +59,10 @@ async function renderList(res){
 
 
 window.onload = function(){
+
     let channel = getChannel();
     let videoInfos = getVideoInfoList(channel);
-    render(videoInfo[0]);
+    console.log(videoInfos);
+    render(videoInfos[0]);
 
 }
