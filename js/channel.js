@@ -35,7 +35,12 @@ function render(info){
     html = `
     <div class=channel-video-list>
         <video controls poster=${info.imgae_link} src=${info.video_link}></video>
-        <
+    </div>
+    <div class=video-title>
+        <span>${info.video_title}</span>
+    </div>
+    <div class=video-date>
+        <span>${info.upload_date}</span>
     </div>
     `;
 }
