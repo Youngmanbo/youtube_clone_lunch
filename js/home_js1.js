@@ -4,10 +4,6 @@
 const videoContainer=document.querySelector(".body-container");
 
 let videoList = [];
-<<<<<<<<< Temporary merge branch 1
-=========
-let videoUrls = [];
->>>>>>>>> Temporary merge branch 2
 
 function renderVideoList(videoList) {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
