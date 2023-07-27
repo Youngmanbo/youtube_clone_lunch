@@ -31,27 +31,33 @@ async function getVideoInfoList(res){
     return res;
 }
 
-function render(info){
-    html = `
-    <div class=channel-video-list>
-        <video controls poster=${info.imgae_link} src=${info.video_link}></video>
-    </div>
-    <div class=video-title>
-        <span>${info.video_title}</span>
-    </div>
-    <div class=video-date>
-        <span>${info.upload_date}</span>
-    </div>
-    `;
+async function render(info){
+    let parent = document.querySelector('#channel-footer-videoList');
+    html = '';
+    html +='<div class=channel-video-list>';
+    html +='<video controls poster=${info.imgae_link} src=${info.video_link}></video></div>';
+    html += '<div class=video-title>';
+    html += '<span>${info.video_title}</span></div>';
+    html += '<div class=video-date>';
+    html += '<span>${info.upload_date}</span></div>';
+
+    parent.appendChild(html);
 }
 
-function renderList(data){
+async function renderList(res){
+    const prom = Object.keys(res).map(async key => {
+        return await render(res[key]);
+    })
+    const result = await Promise.all(prom);
+
     
 }
 
 
-let channel = getChannel();
-let videoInfo = getVideoInfoList(channel);
 
-channel.videoInfo = videoInfo;
-console.log(channel);
+window.onload = function(){
+    let channel = getChannel();
+    let videoInfos = getVideoInfoList(channel);
+    renderList(videoInfos);
+
+}
