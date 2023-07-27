@@ -44,7 +44,12 @@ function render(info){
     </div>
     `;
 }
-0
+
+function renderList(data){
+    
+}
+
+
 let channel = getChannel();
 let videoInfo = getVideoInfoList(channel);
 
