@@ -9,111 +9,73 @@
 </head>
 
 <body>
-    <!-- 상단 검색바 - 검색 나의정도 알림 등 -->
-    <header id="channel-top-bar">
-        <!-- 메뉴바 아이콘 -->
-        <div class="toggle-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <!-- 유튜브 로고 아이콘 -->
-            <img src="../imgs/Navigations/Logo.svg" class="logo" alt="" >
-        <!-- 서치 툴 -->
-        <div class="channel-search-div">
-            <input type="text" id="channel-search-bar" placeholder="검색">
-            <button class="search-btn"><img src=../imgs/channel/search.png alt=""></button>
-        </div>
-            <!-- 탑바 아이콘 -->
-        <div class="top-bar-option">
-            <!-- 보이스 이모티콘 -->
-            <img src="../imgs/Navigations/voice-search.svg" class="icon" alt="" >
-            <!-- 촬영 이모티콘 -->
-            <img src="../imgs/Navigations/Create.svg" class="icon" alt="" >
-            <!-- Apps 이모티콘 -->
-            <img src="../imgs/Navigations/Apps.svg" class="icon" alt="" >
-            <!-- 알람 이모티콘 -->
-            <img src="../imgs/Navigations/Notifications.svg" class="icon" alt="" >
-            <!-- 홈 프로필 -->
-            <div class="user-profile"
-                <img src="../imgs/Navigations/Profile-pic.svg" alt="" >
+    <header>
+        <!-- 상단 검색바 - 검색 나의정도 알림 등 -->
+        <nav class="channel-top-bar">
+            <!-- 메뉴바 아이콘 -->
+            <div class="toggle-btn">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </div>
+            <!-- 유튜브 로고 아이콘 -->
+                <img src="../imgs/Navigations/Logo.svg" class="logo" alt="" >
+            <!-- 서치 툴 -->
+            <div class="channel-search-div">
+                <input type="text" id="channel-search-bar" placeholder="검색">
+                <button class="search-btn"><img src=../imgs/channel/search.png alt=""></button>
+            </div>
+                <!-- 탑바 아이콘 -->
+            <div class="voice-search">
+                <!-- 보이스 이모티콘 -->
+                <img src="../imgs/Navigations/voice-search.svg" alt="" >
+            </div>
+
+            <div class="top-bar-option">
+                <!-- 촬영 이모티콘 -->
+                <img src="../imgs/Navigations/Create.svg" class="icon" alt="" >
+                <!-- Apps 이모티콘 -->
+                <img src="../imgs/Navigations/Apps.svg" class="icon" alt="" >
+                <!-- 알람 이모티콘 -->
+                <img src="../imgs/Navigations/Notifications.svg" class="icon" alt="" >
+                <!-- 홈 프로필 -->
+                <div class="user-profile"
+                    <img src="../imgs/Navigations/Profile-pic.svg" alt="" >
+                </div>
+            </div>
+        </nav>
     </header>
 
     <section>
-        <nav id="channel-left-nav">
-            <ul class="nav-lists">
-                <li>
-                    <ul>
-                        <li><a href="#">홈</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">Shorts</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">구독</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">보관함</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">시청 기록</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">내 동영상</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">나중에 볼 동영상</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">좋아요 표시한 동영상</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">구독</a></li>
-                        <ul class="subsc-lists">
-                            <li><a href="#">구독1</a></li>
-                            <li><a href="#">구독2</a></li>
-                            <li><a href="#">구독3</a></li>
-                            <li><a href="#">구독4</a></li>
-                            <li><a href="#">구독5</a></li>
-                        </ul>
-                    </ul>
-                </li>
-                <li>
-                    <ul>
-                        <li><a href="#">탐색</a></li>
-                        <ul class="search-menu">
-                            <li><a href="#">인기급상승</a></li>
-                            <li><a href="#">쇼핑</a></li>
-                            <li><a href="#">음악</a></li>
-                            <li><a href="#">영화</a></li>
-                            <li><a href="#">실시간</a></li>
-                            <li><a href="#">게임</a></li>
-                            <li><a href="#">스포츠</a></li>
-                            <li><a href="#">학습</a></li>
-                        </ul>
-                    </ul>
-                </li>
-
-            </ul>
-        </nav>
+        <div class="channel-left-nav">
+            <a href="#" class="links active"><img src="../imgs/channel/icon.png" alt="">Home</a>
+            <a href="#" class="links"><img src="../imgs/channel/icon-1.png" alt="">Explore</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-2.png" alt="">Subscriptions</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/Icon-3.png" alt="">Library</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-4.png" alt="">History</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-5.png" alt="">Your Video</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-6.png" alt="">Watch Later</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-7.png" alt="">Liked Video</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-8.png" alt="">Show More</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar1.png" alt="">영민Tube</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar2.png" alt="">철이네 먹방</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar3.png" alt="">유미의 세포들</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar4.png" alt="">지호지아</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar5.png" alt="">탈주닌자</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/Icon-9.png" alt="">Youtube premium</a>
+            <a href="#" class="links"><img src="../imgs/channel/Group.png" alt="">Gaming</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-10.png" alt="">Live</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon11.png" alt="">Sports</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/Settings.png" alt="">Settings</a>
+            <a href="#" class="links"><img src="../imgs/channel/Report history.png" alt="">Report history</a>
+            <a href="#" class="links"><img src="../imgs/channel/Help.png" alt="">Help</a>
+            <a href="#" class="links"><img src="../imgs/channel/Send feedback.png" alt="">Send feedback</a>
+            <hr class="seperator">
+        </div>
 
         <article id="channel-videos-container">
             <section id="channel-cover"> 
