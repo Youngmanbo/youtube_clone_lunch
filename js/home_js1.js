@@ -1,35 +1,30 @@
 // ulr을 제외한 비디오 정보들
-function getVideoInfo(n){    // n번째 동영상 info 가져오기
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `<http://oreumi.appspot.com/video/getVideoInfo?vidie_id=${n}>`, true);
-    xhr.onreadystatechange = function(){
-        if (xhr.status === 200 && xhr.readyState === 4){
-            // 값을 잘 받아왔을 때
-            return JSON.parse(xhr.responseText) ;
-        }else{
-            // 요청이 실패한 경우
-            console.error('Error:', xhr.status);
-        }
-    };
-}
+// function getVideoInfo(n){    // n번째 동영상 info 가져오기
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('GET', `<http://oreumi.appspot.com/video/getVideoInfo?vidie_id=${n}>`, true);
+//     xhr.onreadystatechange = function(){
+//         if (xhr.status === 200 && xhr.readyState === 4){
+//             // 값을 잘 받아왔을 때
+//             return JSON.parse(xhr.responseText) ;
+//         }else{
+//             // 요청이 실패한 경우
+//             console.error('Error:', xhr.status);
+//         }
+//     };
+// }
 
-let videoUrls=[];
 //url받아오기
 function getVideoUrl(n) {
   // n번째 동영상 info 가져오기
   const url = new XMLHttpRequest();
   url.open('GET', `http://oreumi.appspot.com/video/getVideoInfo?video_id=${n}`, true);
   url.onreadystatechange = function() {
-    if (url.readyState === 4) {
-      if (url.status === 200) {
-        // 값을 잘 받아왔을 때
-        var videoInfo = JSON.parse(url.responseText);
-        videoUrls.push(videoInfo);
-        //console.log(videoInfo);
-      } else {
-        // 요청이 실패한 경우
-        console.error('Error:', url.status);
-      }
+    if (url.status === 200 && url.readyState === 4) {
+      // 값을 잘 받아왔을 때
+      return JSON.parse(url.responseText);
+    } else {
+      // 요청이 실패한 경우
+      console.error('Error:', url.status);
     }
   };
   url.send();
@@ -40,70 +35,10 @@ function getVideoUrl(n) {
 // 비디오 넣을 태그 자리 불러옴
 const videoContainer=document.querySelector(".body-container");
 
-let videoList = [
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_1.mp4',
-    title: '블록체인의 미래와 혁신',
-    description: '분산 원장 기술의 놀라운 가능성',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_2.mp4',
-    title: '로봇 공학의 최신 동향',
-    description: '인간과 기계가 공존하는 새로운 시대',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_3.mp4',
-    title: '사물인터넷(IoT) 기술의 전망',
-    description: '모든 것이 연결되는 미래',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_4.mp4',
-    title: '생명공학의 유망한 발전',
-    description: '질병 치료와 유전자 편집의 새로운 효과',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_5.mp4',
-    title: '환경 친화적 기술의 지속 가능성',
-    description: '녹색 에너지 혁명의 중심',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_6.mp4',
-    title: '가상현실(VR)과 증강현실(AR)의 혁신',
-    description: '새로운 경험의 창조',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_7.mp4',
-    title: '양자 컴퓨팅의 미래',
-    description: '빠른 계산 속도와 보안의 패러다임 전환',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_8.mp4',
-    title: '자율주행 차량의 도래',
-    description: '운전의 패러다임을 완전히 바꾸는 기술',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_9.mp4',
-    title: '디지털 의료 서비스의 급부상',
-    description: '포스트 코로나 시대의 헬스케어 혁신',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_10.mp4',
-    title: '귀여운 토끼와 함께하는 일상',
-    description: '토끼의 매력에 빠져보세요!',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_11.mp4',
-    title: '토끼의 생태와 서식지 탐방',
-    description: '자연에서 만난 토끼들의 이야기',
-  },
-  {
-    videoUrl: 'https://storage.googleapis.com/oreumi.appspot.com/video_12.mp4',
-    title: '재미있는 토끼 트릭과 놀이',
-    description: '귀여운 동물 친구들의 재롱꾼 면모',
-  }
-];
+let videoList = [];
+let videoUrls = [];
 
-function renderVideoList() {
+function renderVideoList(videoList) {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
   videoList.forEach((video, index) => {
     // videoUrls받아오는거 아직안됨
@@ -111,14 +46,16 @@ function renderVideoList() {
     // console.log(videoUrls);
     
     let videoElement = document.createElement('video');
-    videoElement.src = video.videoUrl;
+    let videoInfoIndex = videoUrls[video.video_id];
+    videoElement.src = videoInfoIndex.video_link;
     videoElement.controls = true;
+    videoElement.poster = videoInfoIndex.image_link;
 
     let titleElement = document.createElement('h2');
-    titleElement.textContent = video.title;
+    titleElement.textContent = videoInfoIndex.video_title;
 
     let descriptionElement = document.createElement('p');
-    descriptionElement.textContent = video.description;
+    descriptionElement.textContent = videoInfoIndex.video_title;
 
     
     videoContainer.appendChild(titleElement);
@@ -128,24 +65,45 @@ function renderVideoList() {
   });
 }
 
+function makeurlList(videoList){
+  videoList.forEach((video) => {
+    const videoUrl = new XMLHttpRequest();
+    let requestUrl = "http://oreumi.appspot.com/video/getVideoInfo?video_id=";
+    requestUrl += video.video_id
+    videoUrl.open('GET' , requestUrl, true);
+
+    videoUrl.onreadystatechange = function() {
+      if(videoUrl.status === 200 && video.readyState === 4) {
+        let videoUrlList = JSON.parse(videoUrl.responseText);
+        videoUrls[video.video_id] = videoUrlList;
+      }else{
+        console.error('Error:' , videoUrl.status);
+      }
+    };
+    videoUrl.send();
+
+  });
+}
+
 function getVideoList() {
-  const xhr = new XMLHttpRequest();
+  const temp = new XMLHttpRequest();
+  temp.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
   
-  xhr.onreadystatechange = function() {
-    if (xhr.status === 200 && xhr.readyState === 4) {
+  temp.onreadystatechange = function() {
+    if (temp.status === 200 && temp.readyState === 4) {
       // 값을 잘 받아왔을 때
-      videoList = JSON.parse(xhr.responseText);
-      renderVideoList();
+      videoList = JSON.parse(temp.responseText);
+      makeurlList(videoList);
+      renderVideoList(videoList);
     } else {
       // 요청이 실패한 경우
-      console.error('Error:', xhr.status);
+      console.error('Error:', temp.status);
     }
   };
 
-  xhr.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
-  xhr.send(null);
+  temp.send();
 }
 window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
   getVideoList();
-  getVideoUrl(0); 
+  // getVideoUrl(0); 
 }
