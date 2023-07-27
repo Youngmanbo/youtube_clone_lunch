@@ -4,6 +4,7 @@
 const videoContainer=document.querySelector(".body-container");
 
 let videoList = [];
+let videoUrls = [];
 
 function renderVideoList(videoList) {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
@@ -29,10 +30,9 @@ function renderVideoList(videoList) {
   });
 }
 
- function getVideo(id){
-  url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
-  const response =  fetch(url);
-  return response;
+function getVideo(id){
+    let url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
+    return fetch(url).then(res=> res.json());
 }
 
 function makeurlList(videoList){
