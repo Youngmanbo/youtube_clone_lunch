@@ -141,6 +141,7 @@ section {
     min-width: 10%;
 }
 
+/* 은철님 코드 추가 */
 /* left-nav (s) */
 .channel-left-nav{
     position: fixed;
@@ -191,7 +192,7 @@ ul > li {
     margin-left: 10%;
 }
 
-
+   
 li{
     list-style-type: none;
     justify-content: start;
