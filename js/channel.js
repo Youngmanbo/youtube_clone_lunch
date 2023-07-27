@@ -1,3 +1,16 @@
+/*  
+    let channel = getChannel(); or getVideoList;
+    let videoInfos = getVideoInfoList(channel);
+
+    renderList(videoInfos);
+
+
+    render() 함수에서 html 수정 및 변경   
+
+*/
+
+
+
 async function getChannel(param=undefined){
     Url = 'http://oreumi.appspot.com/channel/getChannelVideo?video_channel=oreumi'
     const response = await fetch(Url,{
@@ -64,7 +77,6 @@ async function renderList(res){
 
 
 window.onload = function(){
-    let result = [];
     let channel = getChannel();
     let videoInfos = getVideoInfoList(channel);
 
