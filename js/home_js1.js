@@ -11,7 +11,7 @@ function renderVideoList(videoList) {
   videoList.forEach((video, index) => {
     
     let videoElement = document.createElement('video');
-    let videoInfoIndex = videoUrls[video.video_id];
+    let videoInfoIndex = getVideo(index);
     videoElement.src = videoInfoIndex.video_link;
     videoElement.controls = true;
     videoElement.poster = videoInfoIndex.image_link;
@@ -30,9 +30,24 @@ function renderVideoList(videoList) {
   });
 }
 
-function getVideo(id){
-    let url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
-    return fetch(url).then(res=> res.json());
+// function getVideo(id){
+//     let url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
+//     return fetch(url).then(res=> res.json());
+// }
+
+function getVideo(index){
+  const plz = new XMLHttpRequest();
+  plz.open('GET' , `http://oreumi.appspot.com/video/getVideoInfo?video_id=${index}` ,true);
+
+  plz.onreadystatechange = function() {
+    if(plz.status === 200 && plz.readyState === 4) {
+      
+      return JSON.parse(plz.responseText);
+    }else{
+      console.error('Error:', plz.status);
+    }
+  };
+  plz.send(index);
 }
 
 function makeurlList(videoList){
@@ -50,8 +65,7 @@ function getVideoList() {
     if (temp.status === 200 && temp.readyState === 4) {
       // 값을 잘 받아왔을 때
       videoList = JSON.parse(temp.responseText);
-      makeurlList(videoList);
-      renderVideoList(videoList);
+      return renderVideoList(videoList);
     } else {
       // 요청이 실패한 경우
       console.error('Error:', temp.status);
@@ -63,5 +77,6 @@ function getVideoList() {
 
 window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
   getVideoList();
+  
   // getVideoUrl(0); 
 }
