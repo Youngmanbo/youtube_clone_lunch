@@ -21,23 +21,27 @@ async function getVideoList(){
     return response.json();
 }
 
-// function render(res){
-//     res.forEach(data){
-//         let uploadDate = data.upload_date;
-//         let channel = data.video_channel;
-//         let detail = data.video_detail;
-//         let id = data.video_id;
-//         let tag = data.video_tag;
-//         let title = data.video_title;
-//         let views = data.views;
+async function getVideoInfoList(res){
 
-//         let html = `
+    const prom = Object.keys(res).map(async key => {
+        return await getVideo(res[key].video_id);
+    })
+    const result = await Promise.all(prom);
 
-//         `;
-//     }
-// }
+    return res;
+}
 
+function render(info){
+    html = `
+    <div class=channel-video-list>
+        <video controls poster=${info.imgae_link} src=${info.video_link}></video>
+        <
+    </div>
+    `;
+}
+0
+let channel = getChannel();
+let videoInfo = getVideoInfoList(channel);
 
-console.log(getVideoList());
-console.log(getVideo(0));
-console.log(getChannel());
+channel.videoInfo = videoInfo;
+console.log(channel);
