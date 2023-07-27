@@ -54,7 +54,7 @@ function render(info){
 async function renderList(res){
     await res.then(async data => {
         data.map(obj =>{
-            console.log(obj);
+
             render(obj);
         })
     })
