@@ -9,10 +9,9 @@ async function getChannel(param=undefined){
     return response.json();
 }
 
-async function getVideo(id){
-    url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
-    const response = await fetch(url);
-    return response.json();
+function getVideo(id){
+    let url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
+    return fetch(url).then(res=> res.json());
 }
 
 async function getVideoList(){
