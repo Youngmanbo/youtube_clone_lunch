@@ -37,7 +37,10 @@ const videoContainer=document.querySelector(".body-container");
 
 let videoList = [];
 let videoUrls = [];
+<<<<<<< HEAD
 let videoList = [];
+=======
+>>>>>>> 4f483618864a6a9866f37f3aca783fa0c207e5a0
 
 function renderVideoList(videoList) {
   videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
@@ -102,8 +105,7 @@ function getVideoList() {
     }
   };
 
-  xhr.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
-  xhr.send(null);
+  temp.send();
 }
 
 window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
