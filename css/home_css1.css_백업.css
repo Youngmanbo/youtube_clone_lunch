@@ -63,7 +63,6 @@ body{
 
 #home_profile {
     margin-top: 0.4rem;
-    margin-top: 0.4rem;
     margin-right: 1.5rem;
 }/* 상단 우측 부분 */
 
@@ -72,7 +71,7 @@ body{
 
 
 
-/* 탑메뉴 시작 - html탑메뉴 필터들 완료되면 연결하기*/
+/* 탑메뉴 시작 */
 .top_manu{
     display: flex;
     flex-direction: row;
@@ -80,48 +79,6 @@ body{
     align-items: flex-start;
     gap: 10px;
 }
-
-
-/* 은철님 코드  */
-/* 필터 */
-.filter-lists{
-    position: fixed;
-    left: 250px;
-    top: 60px;
-    width: calc(100% - 250px);
-    height: 60px;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-.filter-lists::-webkit-scrollbar{
-    display: none;
-}
-
-.filters{
-    flex: 0 0 auto;
-    padding: 10px 20px;
-    border-radius: 50px;
-    background: #f0f0f0;
-    border: 1px solid #dbdbdb;
-    text-transform: capitalize;
-    margin-right: 10px;
-    color: #242424;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.filters.active{
-    color: #fff;
-    background: #242424;
-}
-
-
 /* 탑메뉴 끝 */
 
 
