@@ -12,15 +12,21 @@ function renderVideoList(videoList) {
     
     let videoElement = document.createElement('video');
     let videoInfoIndex = getVideo(index);
-    videoElement.src = videoInfoIndex.video_link;
+
+
+    // videoElement.src = videoInfoIndex.video_link;
+    // 동영상 링크 넣기 실패
+
     videoElement.controls = true;
-    videoElement.poster = videoInfoIndex.image_link;
+  
+    // videoElement.poster = videoInfoIndex.image_link;
+    // 
 
     let titleElement = document.createElement('h2');
-    titleElement.textContent = videoInfoIndex.video_title;
+    // titleElement.textContent = videoInfoIndex.video_title;
 
     let descriptionElement = document.createElement('p');
-    descriptionElement.textContent = videoInfoIndex.video_title;
+    // descriptionElement.textContent = videoInfoIndex.video_title;
 
     
     videoContainer.appendChild(titleElement);
@@ -35,45 +41,45 @@ function renderVideoList(videoList) {
 //     return fetch(url).then(res=> res.json());
 // }
 
-function getVideo(index){
-  const plz = new XMLHttpRequest();
-  plz.open('GET' , `http://oreumi.appspot.com/video/getVideoInfo?video_id=${index}` ,true);
+// function getVideo(index){
+//   const plz = new XMLHttpRequest();
+//   plz.open('GET' , `http://oreumi.appspot.com/video/getVideoInfo?video_id=${index}` ,true);
 
-  plz.onreadystatechange = function() {
-    if(plz.status === 200 && plz.readyState === 4) {
+//   plz.onreadystatechange = function() {
+//     if(plz.status === 200 && plz.readyState === 4) {
       
-      return JSON.parse(plz.responseText);
-    }else{
-      console.error('Error:', plz.status);
-    }
-  };
-  plz.send(index);
-}
+//       return JSON.parse(plz.responseText);
+//     }else{
+//       console.error('Error:', plz.status);
+//     }
+//   };
+//   plz.send(index);
+// }
 
-function makeurlList(videoList){
-  videoList.forEach((video, index) => {
-    videoUrls[index]=(getVideo(index));
-  });
-}
+// function makeurlList(videoList){
+//   videoList.forEach((video, index) => {
+//     videoUrls[index]=(getVideo(index));
+//   });
+// }
 
 
-function getVideoList() {
-  const temp = new XMLHttpRequest();
-  temp.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
+// function getVideoList() {
+//   const temp = new XMLHttpRequest();
+//   temp.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
   
-  temp.onreadystatechange = function() {
-    if (temp.status === 200 && temp.readyState === 4) {
-      // 값을 잘 받아왔을 때
-      videoList = JSON.parse(temp.responseText);
-      return renderVideoList(videoList);
-    } else {
-      // 요청이 실패한 경우
-      console.error('Error:', temp.status);
-    }
-  };
+//   temp.onreadystatechange = function() {
+//     if (temp.status === 200 && temp.readyState === 4) {
+//       // 값을 잘 받아왔을 때
+//       videoList = JSON.parse(temp.responseText);
+//       return renderVideoList(videoList);
+//     } else {
+//       // 요청이 실패한 경우
+//       console.error('Error:', temp.status);
+//     }
+//   };
 
-  temp.send();
-}
+//   temp.send();
+// }
 
 
 
@@ -114,10 +120,14 @@ async function getVideoInfoList(res){
 
   return result;
 }
+let channel = getChannel();
+let videoInfo = getVideoInfoList(channel);
+
 
 window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
-  videoUrls = getVideoInfoList(getChannel())
-  getVideoList();
+  // videoUrls = getVideoInfoList(getChannel())
+  // getVideoList();
   
   // getVideoUrl(0); 
 }
+
