@@ -62,11 +62,26 @@ body{
 }
 
 #home_profile {
+    margin-top: 0.4rem;
     margin-right: 1.5rem;
 }/* 상단 우측 부분 */
 
 
 /* 상단바 끝*/
+
+
+
+/* 탑메뉴 시작 */
+.top_manu{
+    display: flex;
+    flex-direction: row;
+    padding: 12px 12px 12px 24px;
+    align-items: flex-start;
+    gap: 10px;
+}
+/* 탑메뉴 끝 */
+
+
 
 
 /* 네비게이션 */
