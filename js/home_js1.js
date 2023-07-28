@@ -1,133 +1,48 @@
-// import * as res from './requests.js';
+// 동영상 정보를 직접 가져와 동영상 컨테이너에 표시하는 함수
+async function populateVideoContainer() {
+  const response = await fetch("http://oreumi.appspot.com/video/getVideoList");
+  const data = await response.json();
+  const videoContainer = document.querySelector(".body-container");
 
-// 비디오 넣을 태그 자리 불러옴
-const videoContainer=document.querySelector(".body-container");
-
-let videoList = [];
-let videoUrls = [];
-
-function renderVideoList(videoList) {
-  videoContainer.innerHTML = ''; // 기존 비디오 목록 초기화
-  videoList.forEach((video, index) => {
-    
-    let videoElement = document.createElement('video');
-    let videoInfoIndex = getVideo(index);
-
-
-    // videoElement.src = videoInfoIndex.video_link;
-    // 동영상 링크 넣기 실패
-
-    videoElement.controls = true;
-  
-    // videoElement.poster = videoInfoIndex.image_link;
-    // 
-
-    let titleElement = document.createElement('h2');
-    // titleElement.textContent = videoInfoIndex.video_title;
-
-    let descriptionElement = document.createElement('p');
-    // descriptionElement.textContent = videoInfoIndex.video_title;
-
-    
-    videoContainer.appendChild(titleElement);
-    videoContainer.appendChild(videoElement);
-    videoContainer.appendChild(descriptionElement);
-
+  data.forEach((videoInfo) => {
+    const videoItem = createVideoItem(videoInfo);
+    videoContainer.appendChild(videoItem);
   });
 }
 
-// function getVideo(id){
-//     let url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
-//     return fetch(url).then(res=> res.json());
-// }
+// 동영상 데이터를 기반으로 동영상 아이템 엘리먼트를 생성하는 함수
+function createVideoItem(videoData) {
+  const videoItem = document.createElement("div");
+  videoItem.classList.add("video-item");
 
-// function getVideo(index){
-//   const plz = new XMLHttpRequest();
-//   plz.open('GET' , `http://oreumi.appspot.com/video/getVideoInfo?video_id=${index}` ,true);
+  const video = document.createElement("video");
+  video.src = videoData.video_link;
+  video.controls = true;
+  video.preload = "metadata";
 
-//   plz.onreadystatechange = function() {
-//     if(plz.status === 200 && plz.readyState === 4) {
-      
-//       return JSON.parse(plz.responseText);
-//     }else{
-//       console.error('Error:', plz.status);
-//     }
-//   };
-//   plz.send(index);
-// }
-
-// function makeurlList(videoList){
-//   videoList.forEach((video, index) => {
-//     videoUrls[index]=(getVideo(index));
-//   });
-// }
-
-
-// function getVideoList() {
-//   const temp = new XMLHttpRequest();
-//   temp.open('GET', 'http://oreumi.appspot.com/video/getVideoList', true);
+  const thumbnail = document.createElement("img");
+  video.poster = videoData.image_link;
+  thumbnail.alt = videoData.video_title;
   
-//   temp.onreadystatechange = function() {
-//     if (temp.status === 200 && temp.readyState === 4) {
-//       // 값을 잘 받아왔을 때
-//       videoList = JSON.parse(temp.responseText);
-//       return renderVideoList(videoList);
-//     } else {
-//       // 요청이 실패한 경우
-//       console.error('Error:', temp.status);
-//     }
-//   };
 
-//   temp.send();
-// }
+  const title = document.createElement("h2");
+  title.textContent = videoData.video_title;
 
+  const channel = document.createElement("p");
+  channel.textContent = videoData.video_channel;
 
+  const views = document.createElement("p");
+  views.textContent = `조회수: ${videoData.views}회`;
 
-async function getChannel(param=undefined){
-  Url = 'http://oreumi.appspot.com/channel/getChannelVideo?video_channel=oreumi'
-  const response = await fetch(Url,{
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      }
-  });
-  return response.json();
-}
-
-function getVideo(id){
-  let url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
-  return fetch(url).then(res=> res.json());
-}
-
-async function getVideo2(id){
-  url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
-  const response = await fetch(url);
-  return response.json();
-}
-
-async function getVideoList(){
-  url = 'http://oreumi.appspot.com/video/getVideoList';
-  const response = await fetch(url);
-  return response.json();
-}
-
-async function getVideoInfoList(res){
-
-  const prom = Object.keys(res).map(async key => {
-      return await getVideo2(res[key].video_id);
-  })
-  const result = await Promise.all(prom);
-
-  return result;
-}
-let channel = getChannel();
-let videoInfo = getVideoInfoList(channel);
-
-
-window.onload = function(){ // (window == 브라우저) 기본적인 html이 다 로드되면 안에있는 함수를 실행하겠다는 뜻
-  // videoUrls = getVideoInfoList(getChannel())
-  // getVideoList();
+  videoItem.appendChild(video);
+  videoItem.appendChild(thumbnail);
+  videoItem.appendChild(title);
+  videoItem.appendChild(channel);
+  videoItem.appendChild(views);
+  console.log(videoData.image_link);
+  return videoItem;
   
-  // getVideoUrl(0); 
 }
 
+// 페이지 로드 시 동영상 컨테이너를 채우는 함수를 호출합니다.
+document.addEventListener("DOMContentLoaded", populateVideoContainer);
