@@ -99,13 +99,16 @@ body{
     top: 60px;
     width: calc(100% - 250px);
     height: 60px;
+    border: 2px blue solid;
     border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #dbdbdb;
     padding: 0 20px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     overflow-x: auto;
     overflow-y: hidden;
+
 }
 
 
@@ -113,18 +116,23 @@ body{
     display: none;
 }
 
-.filters{
+/* 버튼 둥글게 */
+.filters{       
+    z-index: 1;
     margin-left: 60px; 
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 50px;
     background: #f0f0f0;
     border: 1px solid #dbdbdb;
-    text-transform: capitalize;
+    
+    /* 첫번째 대문자로 바꾸는 거 */
+    text-transform: capitalize; 
+
     margin-right: 10px;
     color: #242424;
     font-size: 15px;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 .filters.active{
