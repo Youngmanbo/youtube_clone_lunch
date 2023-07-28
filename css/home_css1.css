@@ -99,7 +99,6 @@ body{
     top: 60px;
     width: calc(100% - 250px);
     height: 60px;
-    border: 2px blue solid;
     border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #dbdbdb;
     padding: 0 20px;
@@ -123,14 +122,14 @@ body{
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 50px;
-    background: #f0f0f0;
+    background: #212121;
     border: 1px solid #dbdbdb;
     
     /* 첫번째 대문자로 바꾸는 거 */
     text-transform: capitalize; 
 
     margin-right: 10px;
-    color: #242424;
+    color: white;
     font-size: 15px;
     cursor: pointer; 
 }
@@ -160,6 +159,7 @@ section {
     min-width: 10%;
 }
 
+
 /* 은철님 코드 추가 */
 /* left-nav (s) */
 .channel-left-nav{
@@ -172,6 +172,13 @@ section {
     background: #212121;
     padding-right: 10px;
 }
+
+.channel-left-nav > p{
+    color: white;
+    margin-left:1rem;
+    margin-bottom:0.3rem;
+}
+
 
 .links{
     display: block;
