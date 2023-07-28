@@ -42,7 +42,7 @@ async function getVideoInfoList(res){
     
 }
 
-function renderVideo(info){
+async function renderVideo(info){
 
 
     let parent = document.querySelector('#channel-footer-videoList');
@@ -70,7 +70,7 @@ window.onload = function(){
     
     videoInfos.then(async data=>{
         let promises = data.map(async el => {
-            return renderVideo(el);
+            return await renderVideo(el);
         });
         Promise.all(promises);
     })
