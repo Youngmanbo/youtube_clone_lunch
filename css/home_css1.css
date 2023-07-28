@@ -122,8 +122,8 @@ body{
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 50px;
-    background: #212121;
-    border: 1px solid #dbdbdb;
+    background: #303030;
+    border: 1px solid #bdbdbd;
     
     /* 첫번째 대문자로 바꾸는 거 */
     text-transform: capitalize; 
@@ -134,9 +134,9 @@ body{
     cursor: pointer; 
 }
 
-.filters.active{
-    color: #fff;
-    background: #242424;
+.filters:focus{
+    color: black;
+    background: white;
 }
 
 
