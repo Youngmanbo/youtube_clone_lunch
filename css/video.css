@@ -1,5 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+/* 유미 수정 */
+.play-container{
+    padding-left: 2%;
+    padding-top: 3%;
+}
+
+.row{
+    display: flex;  /*내용물의 크기만큼만 가로로 정렬함+ 컬럼의 높이가 자동으로 맞음*/
+    justify-content: space-between;
+    flex-wrap: wrap; /*컨테이너가 더이상 아이템들을 한줄에 담을 공간 없을때 어케할건지 wrap은 밑으로 내려가게함*/
+}
+
+.play-video{
+    flex-basis: 69%; /*아이템의 크기 결정*/
+}
+
+.right-sidebar{
+    flex-basis: 30%;
+}
+
+.play-video video{
+    width: 100%;
+}
+
+.side-video-list{
+    display: felx;
+    justify-content:space-between;
+    margin-bottom: 8px;
+}
+
+.side-video-list img{
+    width: 100%;
+}
+.side-video-list .small-thumbnail{
+    flex-basis: 49%;
+}
+.side-video-list .vid-info{
+    flex-basis: 49%;
+}
+
+.play-video .tags a{
+    color: #0000ff;
+    font-size: 13px;
+}
+.play-video h3{
+    font-weight: 600;
+    font-size: 22px;
+}
+
+
+/*  */
+
+
 * {
     margin: 0;
     padding: 0;
