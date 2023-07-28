@@ -99,8 +99,8 @@ body{
     top: 60px;
     width: calc(100% - 250px);
     height: 60px;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
+    border-top: 1px solid rgba(219, 219, 219, 0.3);
+    border-bottom: 1px solid rgba(219, 219, 219, 0.3);
     padding: 0 20px;
     display: flex;
     flex-direction: row;
@@ -123,7 +123,7 @@ body{
     padding: 10px 20px;
     border-radius: 50px;
     background: #303030;
-    border: 1px solid #bdbdbd;
+    border: 1px solid rgba(189, 189, 189, 0.3);
     
     /* 첫번째 대문자로 바꾸는 거 */
     text-transform: capitalize; 
