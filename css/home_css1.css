@@ -37,6 +37,7 @@ body{
     display: flex;
     align-items: center;
     padding: 0 2.5vw;
+    z-index: 1;
 }
 
 /* 로고 부분 */
@@ -183,7 +184,7 @@ section {
 }
 
 .channel-left-nav > p{
-    color: white;
+    color: rgba(170, 170, 170, 0.7);
     margin-left:1rem;
     margin-bottom:0.3rem;
 }
@@ -213,7 +214,7 @@ section {
 
 .seperator{
     border: none;
-    border-bottom: 1px solid #AAAAAA;
+    border-bottom: 1px solid rgba(170, 170, 170, 0.3);
     margin: 20px 0;
 }
 /* left-nav (e) */
