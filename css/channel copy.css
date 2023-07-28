@@ -10,7 +10,6 @@
 }
 
 body {
-    position: relative;
     background-color: #000000;
     font-family: 'Roboto', sans-serif;
 }
@@ -80,7 +79,7 @@ body {
 
 #main{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 
@@ -200,6 +199,12 @@ body {
     align-items: flex-start;
   }
 /* channel-toolbar (e) */
+
+
+/*video */
+#channel-footer-videoList{
+    padding: 250px;
+}
 
 
 /* small video (s) */
