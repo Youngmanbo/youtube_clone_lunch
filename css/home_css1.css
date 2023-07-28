@@ -117,8 +117,9 @@ body{
 
 /* 버튼 둥글게 */
 .filters{       
+    display: flex;
+    justify-content: space-around;
     z-index: 1;
-    margin-left: 60px; 
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 50px;
@@ -252,12 +253,6 @@ li > span{
     margin-left: 100px;
 }
 
-/* .body-container {
-    background-color: black;
-    align-items: stretch;
-    color: white;
-    height: 80%;
-} */
 
 /* 비디오들 */
 .body-container{
