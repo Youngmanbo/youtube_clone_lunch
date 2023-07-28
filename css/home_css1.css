@@ -24,14 +24,8 @@ body{
 
 
 /* 상단 바 */
-/* #top-bar {  
-    background-color: #212121;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-} */
+
+
 
 #top-bar{
     position: fixed;
@@ -47,7 +41,9 @@ body{
 
 /* 로고 부분 */
 #home-logo{
+    position: fixed;
     display: flex;
+    left: 0%;
 }
 
 /* 검색 부분 */
@@ -56,6 +52,8 @@ body{
     width : 60%;
     justify-content: center;
     flex-direction: row;
+    position: fixed;
+    left: 20%;
 }
 
 .search{
@@ -67,14 +65,16 @@ body{
 #search-bar {
     background-color: black;
     color: white;
-    border: none;
+    border: 1px solid rgba(219, 219, 219, 0.3);
     outline: none;
-    width: 90%;
+    width: 100%;
 }/* 검색 부분 */
 
 
 /* 상단 우측 부분 */
 #home-info-div {
+    position: fixed;
+    right: 0%;
     float: right;
     display: flex;
 }
@@ -171,6 +171,12 @@ section {
     height: 100%;
     background: #212121;
     padding-right: 10px;
+    overflow-y: auto ;
+    /* 넘치면 아래로 스크롤 해서 보기 */
+}
+
+.channel-left-nav::-webkit-scrollbar{
+    display: none;
 }
 
 .channel-left-nav > p{
