@@ -1,13 +1,22 @@
-// 동영상 정보를 직접 가져와 동영상 컨테이너에 표시하는 함수
 async function populateVideoContainer() {
-  const response = await fetch("http://oreumi.appspot.com/video/getVideoList");
-  const data = await response.json();
+  const videoIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]; // 동영상 ID들을 가져와서 배열로 정의한다고 가정
   const videoContainer = document.querySelector(".body-container");
 
-  data.forEach((videoInfo) => {
-    const videoItem = createVideoItem(videoInfo);
-    videoContainer.appendChild(videoItem);
-  });
+  for (const videoId of videoIds) {
+    try {
+      const videoInfo = await getVideo(videoId);
+      const videoItem = createVideoItem(videoInfo);
+      videoContainer.appendChild(videoItem);
+    } catch (error) {
+      console.error(`Error fetching video with ID ${videoId}:`, error);
+    }
+  }
+}
+
+async function getVideo(id) {
+  const url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
+  const response = await fetch(url);
+  return response.json();
 }
 
 // 동영상 데이터를 기반으로 동영상 아이템 엘리먼트를 생성하는 함수
@@ -21,7 +30,7 @@ function createVideoItem(videoData) {
   video.preload = "metadata";
 
   const thumbnail = document.createElement("img");
-  video.poster = videoData.image_link;
+  thumbnail.poster = videoData.image_link;
   thumbnail.alt = videoData.video_title;
   
 
@@ -39,10 +48,15 @@ function createVideoItem(videoData) {
   videoItem.appendChild(title);
   videoItem.appendChild(channel);
   videoItem.appendChild(views);
-  console.log(videoData.image_link);
+  console.log(videoData.image_link)
   return videoItem;
   
 }
+// 서치바 검색기능
+const searchInput = document.querySelector('.search-bar');
+const searchBtn = document.querySelector('.search-btn');
+// 검색 경로 저장
+let searchLink = "https://www.youtube.com/results?search_query=";
 
 // 페이지 로드 시 동영상 컨테이너를 채우는 함수를 호출합니다.
 document.addEventListener("DOMContentLoaded", populateVideoContainer);
