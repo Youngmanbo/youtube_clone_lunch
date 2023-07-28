@@ -24,14 +24,8 @@ body{
 
 
 /* 상단 바 */
-/* #top-bar {  
-    background-color: #212121;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-} */
+
+
 
 #top-bar{
     position: fixed;
@@ -47,7 +41,9 @@ body{
 
 /* 로고 부분 */
 #home-logo{
+    position: fixed;
     display: flex;
+    left: 0%;
 }
 
 /* 검색 부분 */
@@ -56,25 +52,31 @@ body{
     width : 60%;
     justify-content: center;
     flex-direction: row;
+    position: fixed;
+    left: 20%;
 }
 
 .search{
     display: flex;
     flex-direction: row;
     width: 60%;
+    border: 1px solid rgba(219, 219, 219, 0.2);
 }
 
 #search-bar {
     background-color: black;
     color: white;
-    border: none;
     outline: none;
-    width: 90%;
+    width: 100%;
+    /* border: 1px solid rgba(219, 219, 219, 0.1); */
+    border: none;
 }/* 검색 부분 */
 
 
 /* 상단 우측 부분 */
 #home-info-div {
+    position: fixed;
+    right: 0%;
     float: right;
     display: flex;
 }
@@ -99,8 +101,8 @@ body{
     top: 60px;
     width: calc(100% - 250px);
     height: 60px;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
+    border-top: 1px solid rgba(219, 219, 219, 0.3);
+    border-bottom: 1px solid rgba(219, 219, 219, 0.3);
     padding: 0 20px;
     display: flex;
     flex-direction: row;
@@ -117,13 +119,14 @@ body{
 
 /* 버튼 둥글게 */
 .filters{       
+    display: flex;
+    justify-content: space-around;
     z-index: 1;
-    margin-left: 60px; 
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 50px;
-    background: #212121;
-    border: 1px solid #dbdbdb;
+    background: #303030;
+    border: 1px solid rgba(189, 189, 189, 0.3);
     
     /* 첫번째 대문자로 바꾸는 거 */
     text-transform: capitalize; 
@@ -134,9 +137,9 @@ body{
     cursor: pointer; 
 }
 
-.filters.active{
-    color: #fff;
-    background: #242424;
+.filters:focus{
+    color: black;
+    background: white;
 }
 
 
@@ -171,6 +174,12 @@ section {
     height: 100%;
     background: #212121;
     padding-right: 10px;
+    overflow-y: auto ;
+    /* 넘치면 아래로 스크롤 해서 보기 */
+}
+
+.channel-left-nav::-webkit-scrollbar{
+    display: none;
 }
 
 .channel-left-nav > p{
@@ -246,12 +255,6 @@ li > span{
     margin-left: 100px;
 }
 
-/* .body-container {
-    background-color: black;
-    align-items: stretch;
-    color: white;
-    height: 80%;
-} */
 
 /* 비디오들 */
 .body-container{
