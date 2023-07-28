@@ -79,6 +79,11 @@ body {
 
 /* 상단바 끝*/
 
+#main{
+    display:flex;
+    flex-direction: row;
+}
+
 /* left-nav (s) */
 .channel-left-nav{
     position: fixed;
@@ -195,6 +200,15 @@ body {
   }
 /* channel-toolbar (e) */
 
+
+/* video  */
+
+#channel-footer-videoList{
+    padding: 20px 270px 0 270px;
+    display: flex;
+    justify-content: space-around;
+    
+}
 
 /* small video (s) */
 #channel-small-video{
