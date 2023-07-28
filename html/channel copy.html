@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Private channel</title>
+    <link rel="stylesheet" href="../css/channel copy.css">
+    <style>
+        body{
+            margin: 0; /* 기본 마진을 제거하여 빈 공간이 없도록 합니다. */
+            padding: 0; /* 기본 패딩을 제거합니다. */
+            display: flex; /* 컨테이너를 플렉스 박스로 설정합니다. */
+            flex-direction: column; /* 자식 요소들을 세로로 정렬합니다. */
+            min-height: 100vh; /* 최소한으로 뷰포트 높이만큼 컨테이너의 높이를 설정합니다. */
+    }
+        #top-bar{
+            position: fixed;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- 상단 검색바 - 검색 나의정도 알림 등 -->
+    <header id="top-bar">
+      <div id="home-logo" >
+        <!-- 메뉴바 아이콘 -->
+        <!-- 유튜브 로고 아이콘 -->
+        <img src="../imgs/Navigations/icon.svg" alt="" >
+        <img src="../imgs/Navigations/Logo.svg" alt="" >
+      </div>
+      <div id="home-search-div">
+        <div class="search">
+          <input id="search-bar" placeholder="검색" />
+          <img src="../imgs/Navigations/search.svg" alt="" class="search-icon">
+        </div>
+        <div id="voice-search">
+          <!-- 보이스 검색 이모티콘 -->
+          <img src="../imgs/Navigations/voice-search.svg" alt="" >
+        </div>
+      </div>
+  
+      <div id="home-info-div">
+        <div id="create" >
+          <!-- 촬영 이모티콘 -->
+          <img src="../imgs/Navigations/Create.svg" alt="" >
+        </div>
+        <div id="apps" >
+          <!-- Apps 이모티콘 -->
+          <img src="../imgs/Navigations/Apps.svg" alt=""  >
+        </div>
+    
+        <div id="notifications" >
+          <!-- 알람 이모티콘 -->
+          <img src="../imgs/Navigations/Notifications.svg" alt="" >
+        </div>
+    
+        <div id="home_profile">
+          <!-- 홈 프로필 -->
+          <img src="../imgs/home/Profile-pic.svg" alt="" >
+    
+        </div>
+      </div>
+  
+    </header>
+
+    <section id="main">
+        <div class="channel-left-nav">
+            <a href="#" class="links active"><img src="../imgs/channel/icon.png" alt="">Home</a>
+            <a href="#" class="links"><img src="../imgs/channel/icon-1.png" alt="">Explore</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-2.png" alt="">Subscriptions</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/Icon-3.png" alt="">Library</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-4.png" alt="">History</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-5.png" alt="">Your Video</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-6.png" alt="">Watch Later</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-7.png" alt="">Liked Video</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-8.png" alt="">Show More</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar1.png" alt="">영민Tube</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar2.png" alt="">철이네 먹방</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar3.png" alt="">유미의 세포들</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar4.png" alt="">지호지아</a>
+            <a href="#" class="links"><img src="../imgs/channel/User-Avatar5.png" alt="">탈주닌자</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/Icon-9.png" alt="">Youtube premium</a>
+            <a href="#" class="links"><img src="../imgs/channel/Group.png" alt="">Gaming</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon-10.png" alt="">Live</a>
+            <a href="#" class="links"><img src="../imgs/channel/Icon11.png" alt="">Sports</a>
+            <hr class="seperator">
+            <a href="#" class="links"><img src="../imgs/channel/Settings.png" alt="">Settings</a>
+            <a href="#" class="links"><img src="../imgs/channel/Report history.png" alt="">Report history</a>
+            <a href="#" class="links"><img src="../imgs/channel/Help.png" alt="">Help</a>
+            <a href="#" class="links"><img src="../imgs/channel/Send feedback.png" alt="">Send feedback</a>
+            <hr class="seperator">
+        </div>
+
+        <article id="channel-videos-container">
+            <section id="channel-cover"> 
+                <!-- 상단 체널 배경 사진 -->
+                <img src="../imgs/channel/Channel-Cover.svg" alt="">
+            </section>
+
+            <header id="channel">
+                <div id="channel-title" >
+                    <div id="channel-title-profile">
+                        <img src="../imgs/channel/User-Avatar.svg" alt="">
+                    </div> 
+                    <div id="channel-title-subscribes">
+                        <button id="channel-subscribes-btn"><img src="../imgs/channel/Subscribes-Btn.svg" alt=""></button>
+                    </div>
+                </div>
+                <div id="channel-toolbar">
+
+                    <div id="channel-toolbar-HOME" class="channel-toolbar-class">
+                        <a href="#">HOME</a>
+                    </div>
+
+                    <div id="channel-toolbar-VIDEOS" class="channel-toolbar-class">
+                        <a href="#">VIDEOS</a>
+                    </div>
+
+                    <div id="channel-toolbar-PLAYLISTS" class="channel-toolbar-class">
+                        <a href="#">PLAYLISTS</a>
+                    </div>
+
+                    <div id="channel-toolbar-COMMUNITY" class="channel-toolbar-class">
+                        <a href="#">COMMUNITY</a>
+                    </div>
+
+                    <div id="channel-toolbar-CHANNELS" class="channel-toolbar-class">
+                        <a href="#">CHANNELS</a>
+                    </div>
+
+                    <div id="channel-toolbar-ABOUT" class="channel-toolbar-class">
+                        <a href="#">ABOUT</a>
+                    </div>
+
+                    <input id="channel-toolbar-search" class="channel-filters" placeholder="검색" />
+                </div>
+            </header>
+            <!-- body부분 동영상들 -->
+            <article class="channel-body-container">메인 비디오</article>
+            <footer id="channel-footer-videoList">다른 비디오 종류들</footer>
+        </article>
+
+
+    </section>
+
+    <footer>
+        하단
+    </footer>
+    <script src="../js/channel.js"></script>
+</body>
+
+</html>
