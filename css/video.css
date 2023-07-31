@@ -369,6 +369,13 @@ iframe {
     border-radius: 10px;
 }
 
+/*비디오 리스트*/
+
+.small-thumbnail > img{
+    width:60px;
+    height:60px;
+}
+
 
 @media all and (min-width: 650px) {
     .content {
