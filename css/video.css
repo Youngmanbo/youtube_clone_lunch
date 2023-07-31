@@ -192,6 +192,49 @@ iframe {
 }
 /* 검색 부분 */
 
+/* left-nav (s) */
+.channel-left-nav{
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    min-width: 240px;
+    width: 240px;
+    height: 100%;
+    background: #212121;
+    padding-right: 10px;
+}
+
+.links{
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.links img{
+    height: 25px;
+    margin-right: 20px;
+}
+
+.links:hover, .links.active{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.seperator{
+    border: none;
+    border-bottom: 1px solid #AAAAAA;
+    margin: 20px 0;
+}
+/* left-nav (e) */
+
+
 
 /* 상단 우측 부분 */
 #home-info-div {
