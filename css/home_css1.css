@@ -271,6 +271,14 @@ li > span{
     grid-template-columns: repeat(3, 1fr);
     color:white;
     background-color: #000000;
+<<<<<<< HEAD
+=======
+}
+
+video{
+    width: 100%;
+    height: 200px;
+>>>>>>> 0018689 (We can clear Fxxking project)
 }
 
 video{
