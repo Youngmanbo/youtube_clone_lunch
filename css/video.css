@@ -6,7 +6,7 @@
     padding-top: 3%;
 }
 
-.row{
+.main-section{
     display: flex;  /*내용물의 크기만큼만 가로로 정렬함+ 컬럼의 높이가 자동으로 맞음*/
     justify-content: space-between;
     flex-wrap: wrap; /*컨테이너가 더이상 아이템들을 한줄에 담을 공간 없을때 어케할건지 wrap은 밑으로 내려가게함*/
@@ -25,7 +25,7 @@
 }
 
 .side-video-list{
-    display: felx;
+    display: flex;
     justify-content:space-between;
     margin-bottom: 8px;
 }
@@ -348,6 +348,27 @@ iframe {
     height: 30px;
     width: 72px;
 }
+
+/* 댓글 */
+
+.comments{
+    display: flex;
+    flex-direction: column;
+}
+
+.container-comment{
+    padding: 10px;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.container-comment img{
+    margin-right:10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
 
 @media all and (min-width: 650px) {
     .content {
