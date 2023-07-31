@@ -49,8 +49,8 @@
     </div>
   </header>
 
-  <div class="container play-container">
-      <div class="channel-left-nav">
+  <section class="container-play-container">
+    <div class="channel-left-nav">
         <a href="#" class="links active"><img src="../imgs/channel/icon.png" alt="">Home</a>
         <a href="#" class="links"><img src="../imgs/channel/icon-1.png" alt="">Explore</a>
         <a href="#" class="links"><img src="../imgs/channel/Icon-2.png" alt="">Subscriptions</a>
@@ -79,70 +79,91 @@
         <a href="#" class="links"><img src="../imgs/channel/Send feedback.png" alt="">Send feedback</a>
         <hr class="seperator">
     </div>
-    <div class="row">
+    <div class="main-section">
       <div class="play-video">
-        <video controls autoplay>
-          <source src="" type="video/mp4">
-        </video>
-        <div class=""tags>
+        <!-- 비디오 태그 삽입 필요 play-video-container에-->
+        <div class="play-video-container">  
+        </div>
+        <div class="tags">
           <a href="">#Coding</a><a href="">#HTML</a><a href="">#CSS</a><a href="">#Javascript</a>
         </div>
         <h3>Lunch team's Fun Fun youtube clone coding</h3>
-        <div class="play-video-info">
-          <p>1225 Views &bull; 1week ago</p>
+        <div class="comments">
+          <div class="commets-header">
+            <div class="total-info">
+              <span>댓글 1.7K개</span>
+              <!-- 임시 이미지 -->
+              <span><img src="../imgs/video/share.svg" alt="">정렬기준</span> 
+            </div>
+            <div class="add-comment">
+              <input type="text" placeholder="댓글을 입력해주세요.">
+            </div>
+          </div>
+          <div class="comments-container">
+            <div class="container-comment">
+              <img src="../imgs/team/youngM.jpg" alt="">
+              <span>식사조 화이팅!!!!</span>
+            </div>
+            <div class="container-comment">
+              <img src="../imgs/team/kimziho.jpg" alt="">
+              <span>식사조 화이팅!!!!</span>
+            </div>
+            <div class="container-comment">
+              <img src="../imgs/team/nj.jpg" alt="">
+              <span>식사조 화이팅!!!!</span>
+            </div>
+            <div class="container-comment">
+              <img src="../imgs/team/ym.jpg" alt="">
+              <span>식사조 화이팅!!!!</span>
+            </div>
+          </div>
         </div>
-
       </div>
       <div class="right-sidebar">
+        <div class="side-video-tags">
+
+        </div>
         <div class="side-video-list">
-            <a href="" calss="small-thumbnail"><img src="../imgs/lunchTeam.jpg"></a>     
+            <a href="" class="small-thumbnail"><img src="../imgs/team/youngM.jpg"></a>     
             <div class="vid-info">
               <a href="">lunch team's Fun Fun youtube clone coding</a>
-              <p>Lunch Team</p>
-              <p>101k views  1week ago</p>
-              <div>
-                  <a href=""><img src="" alt=""></a>
-              </div>
+              <p>영민 tube</p>
+              <p>200M views  1week ago</p>
             </div>
         </div>
         <div class="side-video-list">
-          <a href="" calss="small-thumbnail"><img src="../imgs/lunchTeam.jpg"></a>     
+          <a href="" class="small-thumbnail"><img src="../imgs/team/nj.jpg"></a>     
           <div class="vid-info">
-            <a href="">lunch team's Fun Fun youtube clone coding</a>
-            <p>영민 tube</p>
-            <p>200M views  1week ago</p>
+            <a href="">오늘의 떡볶이 뿌시기 - 홍대</a>
+            <p>철이네 먹방</p>
+            <p>150k views  1week ago</p>
           </div>
-      </div>
-      <div class="side-video-list">
-        <a href="" calss="small-thumbnail"><img src="../imgs/lunchTeam.jpg"></a>     
-        <div class="vid-info">
-          <a href="">오늘의 떡볶이 뿌시기 - 홍대</a>
-          <p>철이네 먹방</p>
-          <p>150k views  1week ago</p>
         </div>
-      </div>
-      <div class="side-video-list">
-        <a href="" calss="small-thumbnail"><img src="../imgs/lunchTeam.jpg"></a>     
-        <div class="vid-info">
-          <a href="">세포 스토리</a>
-          <p>유미의 세포들</p>
-          <p>260M views  1week ago</p>
+        <div class="side-video-list">
+          <a href="" class="small-thumbnail">
+            <img src="../imgs/team/ym.jpg">
+          </a>     
+          <div class="vid-info">
+            <a href="">세포 스토리</a>
+            <p>유미의 세포들</p>
+            <p>260M views  1week ago</p>
+          </div>
         </div>
-      </div>
-      <div class="side-video-list">
-        <a href="" calss="small-thumbnail"><img src="../imgs/lunchTeam.jpg"></a>     
+        <div class="side-video-list">
+        <a href="" class="small-thumbnail"><img src="../imgs/team/kimziho.jpg"></a>     
         <div class="vid-info">
           <a href="">죠지아 커퓌 먹방 with 초코 크로와상</a>
           <p>지호지아 커피</p>
           <p>113k views  1week ago</p>
         </div>
-      </div>
+        </div>
+        <div class="side-oreumi-list"></div>
 
 
       </div>
     </div>
   
-  </div>
+  </section>
 
 
   
@@ -174,5 +195,6 @@
     </ul>
   </footer>
 </body>
-<script type="module" src="../js/video.js"></script>
+<script src="../js/video.js"></script>
+<script src="../js/common.js"></script>
 </html>

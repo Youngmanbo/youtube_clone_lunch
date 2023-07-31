@@ -6,7 +6,7 @@
     padding-top: 3%;
 }
 
-.row{
+.main-section{
     display: flex;  /*내용물의 크기만큼만 가로로 정렬함+ 컬럼의 높이가 자동으로 맞음*/
     justify-content: space-between;
     flex-wrap: wrap; /*컨테이너가 더이상 아이템들을 한줄에 담을 공간 없을때 어케할건지 wrap은 밑으로 내려가게함*/
@@ -25,7 +25,7 @@
 }
 
 .side-video-list{
-    display: felx;
+    display: flex;
     justify-content:space-between;
     margin-bottom: 8px;
 }
@@ -192,6 +192,49 @@ iframe {
 }
 /* 검색 부분 */
 
+/* left-nav (s) */
+.channel-left-nav{
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    min-width: 240px;
+    width: 240px;
+    height: 100%;
+    background: #212121;
+    padding-right: 10px;
+}
+
+.links{
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.links img{
+    height: 25px;
+    margin-right: 20px;
+}
+
+.links:hover, .links.active{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.seperator{
+    border: none;
+    border-bottom: 1px solid #AAAAAA;
+    margin: 20px 0;
+}
+/* left-nav (e) */
+
+
 
 /* 상단 우측 부분 */
 #home-info-div {
@@ -305,6 +348,34 @@ iframe {
     height: 30px;
     width: 72px;
 }
+
+/* 댓글 */
+
+.comments{
+    display: flex;
+    flex-direction: column;
+}
+
+.container-comment{
+    padding: 10px;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.container-comment img{
+    margin-right:10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+/*비디오 리스트*/
+
+.small-thumbnail > img{
+    width:60px;
+    height:60px;
+}
+
 
 @media all and (min-width: 650px) {
     .content {
