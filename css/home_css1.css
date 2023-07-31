@@ -14,7 +14,7 @@
 body{
     height: 100%;
     position: relative;
-    background-color: #303030;
+    background-color: #212121;
     font-family: 'roboto', sans-serif;
 }
 
@@ -164,6 +164,7 @@ section {
 }
 
 
+
 /* 은철님 코드 추가 */
 /* left-nav (s) */
 .channel-left-nav{
@@ -178,6 +179,7 @@ section {
     overflow-y: auto ;
     /* 넘치면 아래로 스크롤 해서 보기 */
 }
+
 
 .channel-left-nav::-webkit-scrollbar{
     display: none;
@@ -209,7 +211,7 @@ section {
 }
 
 .links:hover, .links.active{
-    background: rgba(0, 0, 0, 0.1);
+    background: #303030;
 }
 
 .seperator{
@@ -263,11 +265,17 @@ li > span{
     margin-top: 120px;
     margin-left: 240px;
     padding: 20px;
-    display: grid;
-    /* grid-template-columns: repeat(4, 25%); */
-    grid-gap: 20px 5px;
     overflow-x: hidden;
-    /* position: fixed; */
+    display: grid;
+    grid-gap: 20px 20px;
+    grid-template-columns: repeat(3, 1fr);
+    color:white;
+    background-color: #000000;
+}
+
+video{
+    width: 100%;
+    height: 200px;
 }
 
 
