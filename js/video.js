@@ -1,3 +1,14 @@
+async function getChannel(param='oreumi'){
+    Url=`http://oreumi.appspot.com/channel/getChannelInfo?video_channel=${param}`
+    const response=await fetch(Url,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    return response.json();
+}
+
 //vido id값
 async function getVideoList(){
     url='http://oreumi.appspot.com/video/getVideoList';
@@ -37,5 +48,6 @@ async function renderChnnelVideo(res){
 
 
 window.onload=function(){
+    let channel = getChannel();
     let videoInfos=getVideoInfoList();
 }
