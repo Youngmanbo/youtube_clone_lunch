@@ -28,26 +28,30 @@ function createVideoItem(videoData) {
   video.src = videoData.video_link;
   video.controls = true;
   video.preload = "metadata";
+  video.poster = videoData.image_link;
 
   const thumbnail = document.createElement("img");
-  thumbnail.poster = videoData.image_link;
   thumbnail.alt = videoData.video_title;
-
 
   const title = document.createElement("h2");
   title.textContent = videoData.video_title;
-
+  
   const channel = document.createElement("p");
   channel.textContent = videoData.video_channel;
 
+  
   const views = document.createElement("p");
   views.textContent = `조회수: ${videoData.views}회`;
+
 
   videoItem.appendChild(video);
   videoItem.appendChild(thumbnail);
   videoItem.appendChild(title);
   videoItem.appendChild(channel);
   videoItem.appendChild(views);
+  videoItem.addEventListener('click', (event) =>
+    goChannel(event , videoData.video_channel )
+  );
   video.addEventListener('click', goVideo);
   console.log(videoData.image_link)
   return videoItem;
@@ -99,5 +103,18 @@ function goVideo(e) {
   let temp = e.target.currentSrc.split('_');
   let idx = temp[1].split('.');
   newUrl += `?id=${idx[0]}`;
+  window.location.replace(newUrl);
+}
+
+// 비디오 밑 텍스트 클릭시 channel로 이동
+// id값으로 channel 넘김
+function goChannel(e , videoChannel) {
+  if(e.target == "video"){
+    return;
+  }
+  let curruntUrl = window.location.href;
+  let split_url = curruntUrl.split("html")[0];
+  newUrl = split_url + "html/channel.html";
+  newUrl += `?id=${videoChannel}`;
   window.location.replace(newUrl);
 }
