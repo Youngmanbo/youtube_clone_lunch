@@ -49,7 +49,7 @@ async function getVideoInfoList(res){
 async function renderVideo(info){
 
 
-    let parent = document.querySelector('#channel-footer-videoList');
+    let parent = document.querySelector('.play-video-container');
     
     // 비디오 컨테이너
 
