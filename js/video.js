@@ -49,5 +49,5 @@ async function renderChnnelVideo(res){
 
 window.onload=function(){
     let channel = getChannel();
-    let videoInfos=getVideoInfoList();
+    let videoInfos=getVideoInfoList(channel);
 }
