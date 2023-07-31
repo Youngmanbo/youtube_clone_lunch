@@ -22,11 +22,23 @@ async function getVideo(id=0){
 
 //videoList requests 함수
 
+// async function getVideoList(){
+//     url = 'http://oreumi.appspot.com/video/getVideoList';
+//     const response = await fetch(url);
+//     return response.json();
+// }
+
 async function getVideoList(){
-    url = 'http://oreumi.appspot.com/video/getVideoList';
+    const url = 'http://oreumi.appspot.com/video/getVideoList';
     const response = await fetch(url);
-    return response.json();
+    const videoList = await response.json();
+
+    // index를 기준으로 오름차순으로 정렬
+    videoList.sort((a, b) => a.index - b.index);
+
+    return videoList;
 }
+
 
 
 //videoInfoList 의 video_id값을 추출하여 한꺼번에 requests를 보내는 함수
@@ -48,52 +60,56 @@ async function getVideoInfoList(res){
 
 async function renderVideo(info){
 
+    //리스트 가져올때 index0번 빼고불러오는거 잠시 보류
+    // let id = window.location.href.split("?")[1]['video_id'];
 
-    let parent = document.querySelector('.play-video-container');
+    // if (id !=info.video_id){   }
+
+        let parent = document.querySelector('.right-sidebar');
+        
+        // 비디오 컨테이너
     
-    // 비디오 컨테이너
-
-    let videoDiv = document.createElement('div');
-    videoDiv.className = 'video-container';
+        let videoDiv = document.createElement('div');
+        videoDiv.className = 'side-video-list';
+        
+        let video = document.createElement('video');
+        video.src=info.video_link;
+        video.poster = info.image_link;
+        video.setAttribute('controls', "");
     
-    let video = document.createElement('video');
-    video.src=info.video_link;
-    video.poster = info.image_link;
-    video.setAttribute('controls', "");
+        let infoDiv = document.createElement('div');
+        infoDiv.className = 'video-info'
+        infoDiv.onclick = movePage;
+        info.value = info.video_channel;
+        
+        let titleTag = document.createElement('h3');
+        titleTag.innerText = info.video_title;
+        titleTag.value = info.video_channel;
 
-    let infoDiv = document.createElement('div');
-    infoDiv.className = 'video-info'
-    infoDiv.onclick = movePage;
-    info.value = info.video_channel;
+        let container = document.createElement('div');
+        container.className = 'view-date';
+
+        let viewTag = document.createElement('span');
+        viewTag.innerText = "조회수 " + info.views+ "회" + ' . ';
+        viewTag.value = info.video_channel;
+
+        let date = document.createElement('span');
+        date.innerText = info.upload_date;
+        date.value = info.video_channel;
+
+
+        videoDiv.appendChild(video);
+
+        infoDiv.appendChild(titleTag);
+        container.appendChild(viewTag);
+        container.appendChild(date);
+        infoDiv.appendChild(container);
+
+        videoDiv.appendChild(infoDiv);
+        parent.appendChild(videoDiv);
+
+
     
-    let titleTag = document.createElement('h3');
-    titleTag.innerText = info.video_title;
-    titleTag.value = info.video_channel;
-
-    let container = document.createElement('div');
-    container.className = 'view-date';
-
-    let viewTag = document.createElement('span');
-    viewTag.innerText = "조회수 " + info.views+ "회" + ' . ';
-    viewTag.value = info.video_channel;
-
-    let date = document.createElement('span');
-    date.innerText = info.upload_date;
-    date.value = info.video_channel;
-
-
-    videoDiv.appendChild(video);
-
-    infoDiv.appendChild(titleTag);
-    container.appendChild(viewTag);
-    container.appendChild(date);
-    infoDiv.appendChild(container);
-
-    videoDiv.appendChild(infoDiv);
-    parent.appendChild(videoDiv);
-
-
-
 }
 
 
@@ -138,7 +154,7 @@ async function renderChannelInfo(response){
 }
 
 // 메인비디오 생성 함수
-async function renderChnnelVideo(res){
+async function renderChannelVideo(res){
     let parent = document.querySelector(".play-video-container")
     let html = `
         <div class='play-video'>
@@ -172,10 +188,14 @@ window.onload = function(){
     let videoInfos = getVideoInfoList(channel);
     let channelInfo = getChannelInfo(); 
     
+    //메인영상 하나만 호출
+    getVideo(0).then(async res => {
+        renderChannelVideo(res);
+    })
+
     videoInfos.then(async data=>{
         let promises = data.map(async el => {
-            // return await renderVideo(el);
-            return await renderChnnelVideo(el);
+            return await renderVideo(el);
         });
         Promise.all(promises);
     })
