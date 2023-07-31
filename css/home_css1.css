@@ -278,6 +278,10 @@ video{
     height: 200px;
 }
 
+video{
+    width: 100%;
+    height: 200px;
+}
 
 .nav-lists {
     text-align: start;

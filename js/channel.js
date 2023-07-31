@@ -1,9 +1,9 @@
 
 
 // channel request 함수
-async function getChannel(param='oreumi'){
+async function getChannel(param = 'oreumi') {
     Url = `http://oreumi.appspot.com/channel/getChannelVideo?video_channel=${param}`
-    const response = await fetch(Url,{
+    const response = await fetch(Url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ async function getChannel(param='oreumi'){
 
 //videoInfo reqeust 함수
 
-async function getVideo(id=0){
+async function getVideo(id = 0) {
     url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
     const response = await fetch(url);
     return response.json();
@@ -22,7 +22,7 @@ async function getVideo(id=0){
 
 //videoList requests 함수
 
-async function getVideoList(){
+async function getVideoList() {
     url = 'http://oreumi.appspot.com/video/getVideoList';
     const response = await fetch(url);
     return response.json();
@@ -31,33 +31,33 @@ async function getVideoList(){
 
 //videoInfoList 의 video_id값을 추출하여 한꺼번에 requests를 보내는 함수
 
-async function getVideoInfoList(res){
+async function getVideoInfoList(res) {
 
-    
-    return res.then(data =>{
+
+    return res.then(data => {
         const promises = data.map(async data => {
-           return await getVideo(data.video_id);
+            return await getVideo(data.video_id);
         });
         return Promise.all(promises);
 
     });
-    
+
 }
 
 //channel videoList html 생성 함수
 
-async function renderVideo(info){
+async function renderVideo(info) {
 
 
     let parent = document.querySelector('#channel-footer-videoList');
-    
+
     // 비디오 컨테이너
 
     let videoDiv = document.createElement('div');
     videoDiv.className = 'video-container';
-    
+
     let video = document.createElement('video');
-    video.src=info.video_link;
+    video.src = info.video_link;
     video.poster = info.image_link;
     video.setAttribute('controls', "");
 
@@ -65,7 +65,7 @@ async function renderVideo(info){
     infoDiv.className = 'video-info'
     infoDiv.onclick = movePage;
     info.value = info.video_channel;
-    
+
     let titleTag = document.createElement('h3');
     titleTag.innerText = info.video_title;
     titleTag.value = info.video_channel;
@@ -74,7 +74,7 @@ async function renderVideo(info){
     container.className = 'view-date';
 
     let viewTag = document.createElement('span');
-    viewTag.innerText = "조회수 " + info.views+ "회" + ' . ';
+    viewTag.innerText = "조회수 " + info.views + "회" + ' . ';
     viewTag.value = info.video_channel;
 
     let date = document.createElement('span');
@@ -98,22 +98,22 @@ async function renderVideo(info){
 
 
 // channelInfo requests 함수
-async function getChannelInfo(res='oreumi'){
-  
+async function getChannelInfo(res = 'oreumi') {
+
     Url = `http://oreumi.appspot.com/channel/getChannelInfo?video_channel=${res}`
-    const response = await fetch(Url,{
+    const response = await fetch(Url, {
         method: 'POST',
         headers: {
             'accept': 'application/json',
         }
     });
     return response.json();
-    
+
 }
 
 
 // 채널 정보 html 생성 및 수정 함수
-async function renderChannelInfo(response){
+async function renderChannelInfo(response) {
 
     let parent = document.querySelector('#channel-title-profile');
     console.log(parent);
@@ -125,7 +125,7 @@ async function renderChannelInfo(response){
 
     let infoDiv = document.createElement('div');
     infoDiv.className = "channel-infos";
-    
+
     let subs = document.createElement("span")
     let channelName = document.createElement("h2");
     subs.innerText = response.subscribers + " 구독";
@@ -138,7 +138,7 @@ async function renderChannelInfo(response){
 }
 
 // 메인비디오 생성 함수
-async function renderChannelVideo(res){
+async function renderChannelVideo(res) {
     let parent = document.querySelector(".channel-body-container")
     let html = `
         <div class='channel-mainVideo'>
@@ -155,7 +155,7 @@ async function renderChannelVideo(res){
 
 // 채널 페이지 이동 
 
-function movePage(e){
+function movePage(e) {
     let curruntUrl = window.location.href;
     let sp = curruntUrl.split("?");
     newUrl = sp[0] + '?' + `channel=${e.target.value}`;
@@ -166,24 +166,59 @@ function movePage(e){
 
 //window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
 
-window.onload = function(){ 
+window.onload = function () {
     let channel = getChannel();
     let videoInfos = getVideoInfoList(channel);
-    let channelInfo = getChannelInfo(); 
+    let channelInfo = getChannelInfo();
 
-    getChannelInfo().then(async (channelInfo)=>{
+    getChannelInfo().then(async (channelInfo) => {
         renderChannelInfo(channelInfo);
     })
 
     getVideo(0).then(async res => {
         renderChannelVideo(res);
     })
-    
-    videoInfos.then(async data=>{
+
+    videoInfos.then(async data => {
         let promises = data.map(async el => {
             return await renderVideo(el);
         });
         Promise.all(promises);
     })
 
+}
+
+
+// 메뉴 클릭시 보이고 안보이게
+
+imgtag = document.getElementsByTagName('img');
+menu_logo = imgtag[0];
+menu_logo.addEventListener('click', nav_display);
+
+function nav_display() {
+    let nav = document.getElementsByClassName('channel-left-nav')[0];
+    let navStyle = getComputedStyle(nav).display;
+
+    let idChannelCover = document.getElementById('channel-cover');
+    let idChannel = document.getElementById('channel');
+    let idChannelFooterVideoList = document.getElementById('channel-footer-videoList');
+
+    let classChannelBodyContainer = document.getElementsByClassName('channel-body-container')[0];
+
+    if (navStyle == "none") {
+        nav.style.display = "block";
+        // 다른부분들 밀기
+        idChannelCover.style.marginLeft = "240px";
+        idChannel.style.marginLeft = "240px";
+        idChannelFooterVideoList.style.paddingLeft = "255px";
+        classChannelBodyContainer.style.paddingLeft = "250px";
+    } else {
+        nav.style.display = "none";
+        // 다른부분들 밀기
+        idChannelCover.style.marginLeft = "0px";
+        idChannel.style.marginLeft = "0px";
+        idChannelFooterVideoList.style.paddingLeft = "15px";
+        classChannelBodyContainer.style.paddingLeft = "10px";
+
+    }
 }

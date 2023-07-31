@@ -28,29 +28,34 @@ function createVideoItem(videoData) {
   video.src = videoData.video_link;
   video.controls = true;
   video.preload = "metadata";
+  video.poster = videoData.image_link;
 
   const thumbnail = document.createElement("img");
-  thumbnail.poster = videoData.image_link;
   thumbnail.alt = videoData.video_title;
-  
 
   const title = document.createElement("h2");
   title.textContent = videoData.video_title;
-
+  
   const channel = document.createElement("p");
   channel.textContent = videoData.video_channel;
 
+  
   const views = document.createElement("p");
   views.textContent = `조회수: ${videoData.views}회`;
+
 
   videoItem.appendChild(video);
   videoItem.appendChild(thumbnail);
   videoItem.appendChild(title);
   videoItem.appendChild(channel);
   videoItem.appendChild(views);
+  videoItem.addEventListener('click', (event) =>
+    goChannel(event , videoData.video_channel )
+  );
+  video.addEventListener('click', goVideo);
   console.log(videoData.image_link)
   return videoItem;
-  
+
 }
 // 서치바 검색기능
 const searchInput = document.querySelector('.search-bar');
@@ -60,3 +65,56 @@ let searchLink = "https://www.youtube.com/results?search_query=";
 
 // 페이지 로드 시 동영상 컨테이너를 채우는 함수를 호출합니다.
 document.addEventListener("DOMContentLoaded", populateVideoContainer);
+
+
+
+
+// 메뉴 클릭시 보이고 안보이게
+imgtag = document.getElementsByTagName('img');
+menu_logo = imgtag[0];
+menu_logo.addEventListener('click', nav_display);
+
+function nav_display() {
+  let nav = document.getElementsByClassName('channel-left-nav')[0];
+  let navStyle = getComputedStyle(nav).display;
+
+  let filter = document.getElementsByClassName("filter-lists")[0];
+  let bodyContainer = document.getElementsByClassName("body-container")[0];
+  if (navStyle == "none") {
+    nav.style.display = "block";
+    // 다른부분들 밀기
+    filter.style.left = "240px";
+    bodyContainer.style.marginLeft = "240px";
+  } else {
+    nav.style.display = "none";
+    // 다른부분들 당겨오기
+    filter.style.left = "0px";
+    bodyContainer.style.marginLeft = "0px";
+  }
+}
+
+
+// 비디오 클릭시 비디오 페이지로 이동
+// ? 뒤에 idx값 넣어서 이동
+function goVideo(e) {
+  let curruntUrl = window.location.href;
+  let split_url = curruntUrl.split("html")[0];
+  newUrl = split_url + "html/video.html";
+  let temp = e.target.currentSrc.split('_');
+  let idx = temp[1].split('.');
+  newUrl += `?id=${idx[0]}`;
+  window.location.replace(newUrl);
+}
+
+// 비디오 밑 텍스트 클릭시 channel로 이동
+// id값으로 channel 넘김
+function goChannel(e , videoChannel) {
+  if(e.target == "video"){
+    return;
+  }
+  let curruntUrl = window.location.href;
+  let split_url = curruntUrl.split("html")[0];
+  newUrl = split_url + "html/channel.html";
+  newUrl += `?id=${videoChannel}`;
+  window.location.replace(newUrl);
+}
