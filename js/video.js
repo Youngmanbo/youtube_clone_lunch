@@ -139,7 +139,7 @@ async function renderChannelInfo(response){
 
 // 메인비디오 생성 함수
 async function renderChnnelVideo(res){
-    let parent = documnet.querySelector(".play-video-container")
+    let parent = document.querySelector(".play-video-container")
     let html = `
         <div class='play-video'>
             <video src=${res.video_link} poster=${res.image_link} controls></video>
@@ -167,22 +167,15 @@ function movePage(e){
 //window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
 
 window.onload = function(){ 
-    // let channel = getChannel();
-    let videoList = getVideoList();
-    let videoInfos = getVideoInfoList(videoList);
+    let channel = getChannel();
+    // let videoList = getVideoList();
+    let videoInfos = getVideoInfoList(channel);
     let channelInfo = getChannelInfo(); 
-
-    getChannelInfo().then(async (channelInfo)=>{
-        renderChannelInfo(channelInfo);
-    })
-
-    getVideo(0).then(async res => {
-        renderChannelVideo(res);
-    })
     
     videoInfos.then(async data=>{
         let promises = data.map(async el => {
-            return await renderVideo(el);
+            // return await renderVideo(el);
+            return await renderChnnelVideo(el);
         });
         Promise.all(promises);
     })
