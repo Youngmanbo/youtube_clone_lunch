@@ -263,13 +263,17 @@ li > span{
     margin-top: 120px;
     margin-left: 240px;
     padding: 20px;
-    display: grid;
-    /* grid-template-columns: repeat(4, 25%); */
-    grid-gap: 20px 5px;
     overflow-x: hidden;
-    /* position: fixed; */
+    
+    display: grid;
+    grid-gap: 20px 20px;
+    grid-template-columns: repeat(3, 1fr);
 }
 
+video{
+    width: 100%;
+    height: 200px;
+}
 
 .nav-lists {
     text-align: start;
