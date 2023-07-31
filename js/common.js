@@ -15,9 +15,9 @@ function go_home(){
 // 메뉴 클릭시 보이고 안보이게
 function nav_display(){  
     let nav = document.getElementsByClassName('channel-left-nav')[0];
-    if (nav.style.display == "block" || nav.style.display == ""){
-        nav.style.display = "none";
-    }else{
+    if (nav.style.display == "none"){
         nav.style.display = "block";
+    }else{
+        nav.style.display = "none";
     }
 }
