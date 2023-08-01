@@ -34,6 +34,8 @@ async function createVideoItem(videoData, tags) {
   const videoItem = document.createElement("div");
   videoItem.classList.add("video-item");
   videoItem.value = videoData.video_tag;
+  videoItem.id = "video-item" + videoData.video_id;
+
   const video = document.createElement("video");
   video.src = videoData.video_link;
   video.controls = true;
@@ -130,14 +132,23 @@ function search(tags){
 
     for (var i = 0; i < videos.length; ++i) {
       var item = videos[i].value;
-      item.foreach(e =>{
-        if 
+      let flage = false;
+      item.forEach(e =>{
+        matchArray = e.match(re);
+        if (matchArray != null){
+          flage = true;
+        }
       })
+      if (flage === false){
+        let tag = document.getElementById(videos[i].id);
+        console.log(tag);
+        tag.style.display = 'none';
+      }
     }
   })
 }
 
-
+// ----------------------------------------------------------------------------
 
 let tags = [];
 
