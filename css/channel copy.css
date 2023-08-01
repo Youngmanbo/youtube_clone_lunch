@@ -3,14 +3,12 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-*:focus{
+/}
+/* *:focus{
     outline: none;
-}
+} */
 
 body {
-    position: relative;
     background-color: #000000;
     font-family: 'Roboto', sans-serif;
 }
@@ -57,7 +55,6 @@ body {
 }
 
 #voice-search {
-    float: right;
     display: flex;
     cursor: pointer;
 }
@@ -66,7 +63,6 @@ body {
 
 /* 상단 우측 부분 */
 #home-info-div {
-    float: right;
     display: flex;
     cursor: pointer;
 }
@@ -79,14 +75,16 @@ body {
 
 /* 상단바 끝*/
 
-#main{
-    width:100%;
+
+#main-section{
     display:flex;
     flex-direction: row;
 }
 
+
 /* left-nav (s) */
 .channel-left-nav{
+
     position: fixed;
     top: 56px;
     left: 0;
@@ -138,44 +136,29 @@ body {
 
 /* channel-Title (s) */
 #channel{
-    width: 100%;
-    height: 150px;
-    margin-left: 240px;
-}
-
-#channel-cover img{
-    width:100%;
+    display: flex;
+    flex-direction: column;
 }
 
 #channel-title {
-    width: 100%;
     display: flex;
-    padding-left: 10px;
-    padding-top:5px;
-    height: 100px;
-    justify-content: center;
-    align-items: center;
-
+    margin-left: 240px;
+    direction: row;
+    padding: 16px 65px 4px 65px;
 }
 
-.profile-container{
-    margin-right: 10px;
-}
-
-#channel-title-profile {
-    width:300px;
+#channel > #channel-title-profile {
     display: flex;
-    flex-direction: row;
     padding-right: 0px;
     align-items: center;
-    color: white;
 }
-
 
 #channel-title-subscribes{
     width: 124px;
     padding: 22px 4px;
+    flex-direction: column;
     height: 35px;
+    display: flex;
     align-items: center;
     cursor: pointer;
     margin-left: auto;
@@ -187,115 +170,52 @@ body {
     all:unset;
 }
 
-/*tool bar*/
-
-#channel-toolbar{
-    padding-left: 10px;
-    display: flex;
-    height: 50px;
-    justify-content: space-around;
-    align-items: center;;
-}
 
 #channel-title-profile img {
     display: flex;
-    width: 70px;
-    height: 70px;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
-}
+};
 /* channel-Title (e) */
 
 
-  
-
-
-
-/* video  <------------------------07.30----------------------- */ 
-
-/* main video */
-
-.channel-body-container{
+/* channel-toolbar (s) */
+#channel-toolbar {
     display: flex;
-    height: 300px;
-    padding-left: 250px;
-    color: white;
-    justify-content: flex-start;
-    align-items: center;
-
-}
-
-.channel-mainVideo{
-    width:450px;
-    height:300px;
-    margin-right:20px;
-}
-.channel-mainVideo video{
+    max-width: 1200px;
     width: 100%;
-    height: 100%;
-}
-.channel-mainInfo{
-    padding-top: 19px;
-    height:300px;
-}
-
-
-/*  videolist    */
-
-@media screen and (max-width : 1000px){ /*아직 작동안됨*/
-    #channel-footer-videoList{
-        display:flex;
-        flex-direction: column;
-    }
-
-}
-
-
-#channel-videos-container{ 
-    width:100%;
-    margin : 10px;
-}
-
-
-#channel-footer-videoList{
-    width:100%;
-    padding-left: 255px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 10px;
-    row-gap: 10px;
-    
-}
-
-.video-container{
+    height: 48px;
     align-items: center;
-    background-color: white;
-    border-radius: 10px;
-    
-}
-
-.video-container:nth-child(1) {
-    grid-column: 1;
+    padding: 0 65px;
+    margin-top: 10px; /* #channel-title 아래에 간격을 주기 위해 추가 */
   }
+  
+  #channel-toolbar .channel-toolbar-class {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+/* channel-toolbar (e) */
 
 
-.video-container video{
-    width:100%;
-    height:200px;
-    
+/*video */
+#channel-footer-videoList{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 30px 0 270px;
 }
-.video-info{
-    padding: 10px;
-}
 
-
-/*<------------------------------------------------------------*/
 
 /* small video (s) */
 #channel-small-video{
+    max-width: 1500px;
+    width: 100%;
     display: inline-flex;
     padding: 24px 287px 24px 65px;
     align-items: flex-start;
+    flex: wrap;
 }
 
 #channel-small-video-player{
@@ -320,11 +240,7 @@ body {
 /* small video (e) */
 
 
-
-/* playlist1 (s)
-
-
-
+/* playlist1 (s) */
 #channel-playlist1{
     display: flex;
     padding: 0px 65px;
@@ -367,8 +283,8 @@ body {
 
 .xsmall-video img{
     width: 210px;
-    height: 118px; */
-/* } */
+    height: 118px;
+}
 /* playlist1 (e) */
 
 /* @media screen and (min-width: 1800px) 창크기가 1800px아하가 되면 실행됨 */

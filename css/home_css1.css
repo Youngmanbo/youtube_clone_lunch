@@ -1,36 +1,51 @@
 /* 상단바 */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-body{
-    height: 100%;
-    background-color: #303030;
-
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+*:focus{
+    outline: none;
+}
+
+body{
+    height: 100%;
+    position: relative;
+    background-color: #303030;
+    font-family: 'roboto', sans-serif;
+}
+
+
+
+
 
 
 /* 상단 바 */
-#top-bar {  /* 기본 설정 */
-    background-color: #212121;
-    display: flex;
-    flex-direction: row;
+
+
+
+#top-bar{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    justify-content: space-between;
+    height: 60px;
+    background: #212121;
+    display: flex;
     align-items: center;
+    padding: 0 2.5vw;
+    /* z-index: 0; */
 }
 
 /* 로고 부분 */
 #home-logo{
+    position: fixed;
     display: flex;
-}/* 로고 부분 */
-
-
+    left: 0%;
+}
 
 /* 검색 부분 */
 #home-search-div {
@@ -38,25 +53,31 @@ body{
     width : 60%;
     justify-content: center;
     flex-direction: row;
+    position: fixed;
+    left: 20%;
 }
 
 .search{
     display: flex;
     flex-direction: row;
     width: 60%;
+    border: 1px solid rgba(219, 219, 219, 0.2);
 }
 
 #search-bar {
     background-color: black;
     color: white;
-    border: none;
     outline: none;
-    width: 90%;
+    width: 100%;
+    /* border: 1px solid rgba(219, 219, 219, 0.1); */
+    border: none;
 }/* 검색 부분 */
 
 
 /* 상단 우측 부분 */
 #home-info-div {
+    position: fixed;
+    right: 0%;
     float: right;
     display: flex;
 }
@@ -71,54 +92,55 @@ body{
 /* 상단바 끝*/
 
 
-
-/* 탑메뉴 시작 - html탑메뉴 필터들 완료되면 연결하기*/
-.top_manu{
-    display: flex;
-    flex-direction: row;
-    padding: 12px 12px 12px 24px;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-
-/* 은철님 코드  */
+/* top menu필터  */
 /* 필터 */
+
+/* 필터 자리 만들어짐 */
 .filter-lists{
     position: fixed;
-    left: 250px;
+    left: 240px;   
     top: 60px;
     width: calc(100% - 250px);
     height: 60px;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
+    border-top: 1px solid rgba(219, 219, 219, 0.3);
+    border-bottom: 1px solid rgba(219, 219, 219, 0.3);
     padding: 0 20px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     overflow-x: auto;
     overflow-y: hidden;
+
 }
+
 
 .filter-lists::-webkit-scrollbar{
     display: none;
 }
 
-.filters{
+/* 버튼 둥글게 */
+.filters{       
+    display: flex;
+    justify-content: space-around;
+    z-index: 1;
     flex: 0 0 auto;
     padding: 10px 20px;
     border-radius: 50px;
-    background: #f0f0f0;
-    border: 1px solid #dbdbdb;
-    text-transform: capitalize;
+    background: #303030;
+    border: 1px solid rgba(189, 189, 189, 0.3);
+    
+    /* 첫번째 대문자로 바꾸는 거 */
+    text-transform: capitalize; 
+
     margin-right: 10px;
-    color: #242424;
+    color: white;
     font-size: 15px;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
-.filters.active{
-    color: #fff;
-    background: #242424;
+.filters:focus{
+    color: black;
+    background: white;
 }
 
 
@@ -141,6 +163,8 @@ section {
     min-width: 10%;
 }
 
+
+/* 은철님 코드 추가 */
 /* left-nav (s) */
 .channel-left-nav{
     position: fixed;
@@ -151,7 +175,20 @@ section {
     height: 100%;
     background: #212121;
     padding-right: 10px;
+    overflow-y: auto ;
+    /* 넘치면 아래로 스크롤 해서 보기 */
 }
+
+.channel-left-nav::-webkit-scrollbar{
+    display: none;
+}
+
+.channel-left-nav > p{
+    color: rgba(170, 170, 170, 0.7);
+    margin-left:1rem;
+    margin-bottom:0.3rem;
+}
+
 
 .links{
     display: block;
@@ -177,7 +214,7 @@ section {
 
 .seperator{
     border: none;
-    border-bottom: 1px solid #AAAAAA;
+    border-bottom: 1px solid rgba(170, 170, 170, 0.3);
     margin: 20px 0;
 }
 /* left-nav (e) */
@@ -191,7 +228,7 @@ ul > li {
     margin-left: 10%;
 }
 
-
+   
 li{
     list-style-type: none;
     justify-content: start;
@@ -215,14 +252,24 @@ li > span{
 #videos-container {
     background-color: #212121;
     width: 100%;
+    margin-top:65px;
+    margin-left: 100px;
 }
 
-.body-container {
-    background-color: black;
-    align-items: stretch;
-    color: white;
-    height: 80%;
+
+/* 비디오들 */
+.body-container{
+    width: calc(100% - 250px);
+    margin-top: 120px;
+    margin-left: 240px;
+    padding: 20px;
+    display: grid;
+    /* grid-template-columns: repeat(4, 25%); */
+    grid-gap: 20px 5px;
+    overflow-x: hidden;
+    /* position: fixed; */
 }
+
 
 .nav-lists {
     text-align: start;
