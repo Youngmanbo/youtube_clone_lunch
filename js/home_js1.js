@@ -29,6 +29,7 @@ async function createVideoItem(videoData) {
 
   const videoContainer = document.querySelector(".body-container");
 
+
   const videoItem = document.createElement("div");
   videoItem.classList.add("video-item");
 
@@ -37,6 +38,9 @@ async function createVideoItem(videoData) {
   video.controls = true;
   video.preload = "metadata";
   video.poster = videoData.image_link;
+
+  const videoInfoTag = document.createElement("div");
+  videoInfoTag.calssName = 'video-infos'
 
   const title = document.createElement("h2");
   title.textContent = videoData.video_title;
@@ -50,12 +54,13 @@ async function createVideoItem(videoData) {
 
 
   videoItem.appendChild(video);
-  videoItem.appendChild(title);
-  videoItem.appendChild(channel);
-  videoItem.appendChild(views);
-  videoItem.addEventListener('click', (event) =>
+  videoInfoTag.appendChild(title);
+  videoInfoTag.appendChild(channel);
+  videoInfoTag.appendChild(views);
+  videoInfoTag.addEventListener('click', (event) =>
     goChannel(event , videoData.video_channel )
   );
+  videoItem.appendChild(videoInfoTag);
   video.addEventListener('click', goVideo);
   videoContainer.appendChild(videoItem)
 
@@ -98,7 +103,7 @@ function goVideo(e) {
 
   console.log(e.target.currentSrc);
   console.log(temp);
-  
+
   let idx = temp[1].split('.');
   newUrl += `?id=${idx[0]}`;
   window.location.replace(newUrl);
