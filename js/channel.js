@@ -99,7 +99,9 @@ async function renderVideo(info) {
 
 // channelInfo requests 함수
 async function getChannelInfo(res = 'oreumi') {
-
+    if (res == undefined){
+        res = 'oreumi';
+    }
     Url = `http://oreumi.appspot.com/channel/getChannelInfo?video_channel=${res}`
     const response = await fetch(Url, {
         method: 'POST',
@@ -162,39 +164,6 @@ function movePage(e) {
     window.location.replace(newUrl);
 }
 
-
-
-//window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
-
-window.onload = function () {
-    let channel = getChannel();
-    let videoInfos = getVideoInfoList(channel);
-    let channelInfo = getChannelInfo();
-
-    getChannelInfo().then(async (channelInfo) => {
-        renderChannelInfo(channelInfo);
-    })
-
-    getVideo(0).then(async res => {
-        renderChannelVideo(res);
-    })
-
-    videoInfos.then(async data => {
-        let promises = data.map(async el => {
-            return await renderVideo(el);
-        });
-        Promise.all(promises);
-    })
-
-}
-
-
-// 메뉴 클릭시 보이고 안보이게
-
-imgtag = document.getElementsByTagName('img');
-menu_logo = imgtag[0];
-menu_logo.addEventListener('click', nav_display);
-
 function nav_display() {
     let nav = document.getElementsByClassName('channel-left-nav')[0];
     let navStyle = getComputedStyle(nav).display;
@@ -221,4 +190,55 @@ function nav_display() {
         classChannelBodyContainer.style.paddingLeft = "10px";
 
     }
+}
+
+function getParam(){
+    let result = {};
+    let url = window.location.href;
+    let params = url.split("?")[1];
+    if (params == undefined){
+        return 'oreumi';
+    }
+    params = params.split("&");
+    params.forEach( e =>{
+        let param = e.split('=');
+        console.log(param);
+        result[param[0]] = param[1];
+    })
+    return result;
+
+}
+
+//window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
+
+window.onload = function () {
+
+    let params = getParam();
+    let channel = getChannel(params['channel']);
+    let videoInfos = getVideoInfoList(channel);
+    let channelInfo = getChannelInfo(params['channel']);
+
+    getChannelInfo().then(async (channelInfo) => {
+        renderChannelInfo(channelInfo);
+    })
+
+    getVideo(0).then(async res => {
+        renderChannelVideo(res);
+    })
+
+    videoInfos.then(async data => {
+        let promises = data.map(async el => {
+            return await renderVideo(el);
+        });
+        Promise.all(promises);
+    })
+
+
+    // 메뉴 클릭시 보이고 안보이게
+
+    imgtag = document.getElementsByTagName('img');
+    menu_logo = imgtag[0];
+    menu_logo.addEventListener('click', nav_display);
+
+
 }

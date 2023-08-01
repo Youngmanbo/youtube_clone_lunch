@@ -25,14 +25,15 @@ async function getVideo(id) {
 }
 
 // 동영상 데이터를 기반으로 동영상 아이템 엘리먼트를 생성하는 함수
-async function createVideoItem(videoData) {
+async function createVideoItem(videoData, tags) {
 
   const videoContainer = document.querySelector(".body-container");
 
+  tags.push(videoData.video_tag);
 
   const videoItem = document.createElement("div");
   videoItem.classList.add("video-item");
-
+  videoItem.value = videoData.video_tag;
   const video = document.createElement("video");
   video.src = videoData.video_link;
   video.controls = true;
@@ -65,13 +66,6 @@ async function createVideoItem(videoData) {
   videoContainer.appendChild(videoItem)
 
 }
-// 서치바 검색기능
-const searchInput = document.querySelector('.search-bar');
-const searchBtn = document.querySelector('.search-btn');
-// 검색 경로 저장
-let searchLink = "https://www.youtube.com/results?search_query=";
-
-
 
 function nav_display() {
   let nav = document.getElementsByClassName('channel-left-nav')[0];
@@ -118,25 +112,46 @@ function goChannel(e , videoChannel) {
   let curruntUrl = window.location.href;
   let split_url = curruntUrl.split("html")[0];
   newUrl = split_url + "html/channel.html";
-  newUrl += `?id=${videoChannel}`;
+  newUrl += `?channel=${videoChannel}`;
   window.location.replace(newUrl);
 }
 
+//검색기능
+function search(tags){
+  const searchBtn = document.querySelector(".search > img");
+  const searchInput = document.querySelector('#search-bar');
+  searchBtn.addEventListener('click', ()=>{
+    let inputValue = searchInput.value;
 
-window.onload = function(){
+    videos = document.querySelectorAll(".video-item")
+    let result = []
 
-  // 비디오 리스트 생성
-  getVideoInfoList(getVideoList()).then(async res =>{
-    let promises = res.map(async el => {
-        return await createVideoItem(el);
-   });
-    Promise.all(promises);
+    const re = new RegExp(inputValue);
+
+    for (var i = 0; i < videos.length; ++i) {
+      var item = videos[i].value;
+      item.foreach(e =>{
+        if 
+      })
+    }
   })
-  
-  
-  // 메뉴 클릭시 보이고 안보이게
-  imgtag = document.getElementsByTagName('img');
-  menu_logo = imgtag[0];
-  menu_logo.addEventListener('click', nav_display);
-
 }
+
+
+
+let tags = [];
+
+// 비디오 리스트 생성
+getVideoInfoList(getVideoList()).then(async res =>{
+  let promises = res.map(async el => {
+      return await createVideoItem(el, tags);
+  });
+  Promise.all(promises);
+})
+search(tags);
+
+// 메뉴 클릭시 보이고 안보이게
+imgtag = document.getElementsByTagName('img');
+menu_logo = imgtag[0];
+menu_logo.addEventListener('click', nav_display);
+
