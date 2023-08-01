@@ -192,6 +192,8 @@ function nav_display() {
     }
 }
 
+//도메인에서 paremeter 추출 함수
+
 function getParam(){
     let result = {};
     let url = window.location.href;
