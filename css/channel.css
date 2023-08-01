@@ -102,6 +102,11 @@ body {
     height: 100%;
     background: #212121;
     padding-right: 10px;
+    overflow-y: auto ;
+}
+
+.channel-left-nav::-webkit-scrollbar{
+    display: none;
 }
 
 .links{
