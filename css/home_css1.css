@@ -80,6 +80,7 @@ body{
     right: 0%;
     float: right;
     display: flex;
+    cursor: pointer;
 }
 
 #home_profile img{
@@ -89,7 +90,9 @@ body{
 #home_profile {
     margin-top: 0.4rem;
     margin-right: 1rem;
-    margin-left: 0.6rem;
+    margin-left: 0.4rem;
+    cursor: pointer;
+
 }/* 상단 우측 부분 */
 
 
@@ -104,7 +107,7 @@ body{
     position: fixed;
     left: 240px;   
     top: 60px;
-    width: calc(100% - 250px);
+    width: 100%;
     height: 60px;
     border-top: 1px solid rgba(219, 219, 219, 0.3);
     border-bottom: 1px solid rgba(219, 219, 219, 0.3);
@@ -255,17 +258,11 @@ li > span{
 }
 
 
-#videos-container {
-    background-color: #212121;
-    width: 100%;
-    margin-top:65px;
-    margin-left: 100px;
-}
 
 
 /* 비디오들 */
 .body-container{
-    width: calc(100% - 250px);
+    width: 100%;
     margin-top: 120px;
     margin-left: 240px;
     padding: 20px;
@@ -277,18 +274,21 @@ li > span{
     background-color: #000000;
 }
 
-video{
-    width: 100%;
-    height: 200px;
+.video-item{
+    padding-left: 5rem;
+    padding-bottom: 5rem;
 }
 
 video{
-    width: 100%;
+    width: 90%;
     height: 200px;
+}
+
+video[poster]{
+    height: 100%;
+    width: 100%;
 }
 
 .nav-lists {
     text-align: start;
 }
-
-/* 네비게이션 끝*/
