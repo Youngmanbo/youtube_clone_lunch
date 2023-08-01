@@ -64,7 +64,6 @@ body{
     color: white;
     outline: none;
     width: 100%;
-    /* border: 1px solid rgba(219, 219, 219, 0.1); */
     border: none;
 }/* 검색 부분 */
 
@@ -262,7 +261,7 @@ li > span{
     overflow-x: hidden;
     display: grid;
     grid-gap: 20px 20px;
-    grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px,1fr));
     color:white;
     background-color: #000000;
 }
@@ -272,14 +271,10 @@ li > span{
     padding-bottom: 5rem;
 }
 
-video{
-    width: 90%;
-    height: 200px;
-}
-
 video[poster]{
     height: 100%;
     width: 100%;
+    border-radius: 0.8rem;
 }
 
 .nav-lists {
