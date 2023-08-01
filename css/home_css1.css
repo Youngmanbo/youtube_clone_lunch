@@ -18,11 +18,6 @@ body{
     font-family: 'roboto', sans-serif;
 }
 
-
-
-
-
-
 /* 상단 바 */
 
 
@@ -258,8 +253,6 @@ li > span{
 }
 
 
-
-
 /* 비디오들 */
 .body-container{
     width: 100%;
@@ -272,14 +265,6 @@ li > span{
     grid-template-columns: repeat(3, 1fr);
     color:white;
     background-color: #000000;
-<<<<<<< HEAD
-=======
-}
-
-video{
-    width: 100%;
-    height: 200px;
->>>>>>> 0018689 (We can clear Fxxking project)
 }
 
 .video-item{
