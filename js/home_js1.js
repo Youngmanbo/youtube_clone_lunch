@@ -25,11 +25,9 @@ async function getVideo(id) {
 }
 
 // 동영상 데이터를 기반으로 동영상 아이템 엘리먼트를 생성하는 함수
-async function createVideoItem(videoData, tags) {
+async function createVideoItem(videoData) {
 
   const videoContainer = document.querySelector(".body-container");
-
-  tags.push(videoData.video_tag);
 
   const videoItem = document.createElement("div");
   videoItem.classList.add("video-item");
@@ -61,7 +59,7 @@ async function createVideoItem(videoData, tags) {
   videoInfoTag.appendChild(channel);
   videoInfoTag.appendChild(views);
   videoInfoTag.addEventListener('click', (event) =>
-    goChannel(event , videoData.video_channel )
+    goChannel(event , videoData.video_channel, videoData.video_id)
   );
   videoItem.appendChild(videoInfoTag);
   video.addEventListener('click', goVideo);
@@ -97,9 +95,6 @@ function goVideo(e) {
   newUrl = split_url + "html/video.html";
   let temp = e.target.currentSrc.split('_');
 
-  console.log(e.target.currentSrc);
-  console.log(temp);
-
   let idx = temp[1].split('.');
   newUrl += `?id=${idx[0]}`;
   window.location.replace(newUrl);
@@ -107,7 +102,7 @@ function goVideo(e) {
 
 // 비디오 밑 텍스트 클릭시 channel로 이동
 // id값으로 channel 넘김
-function goChannel(e , videoChannel) {
+function goChannel(e , videoChannel, videoId) {
   if(e.target == "video"){
     return;
   }
@@ -115,31 +110,34 @@ function goChannel(e , videoChannel) {
   let split_url = curruntUrl.split("html")[0];
   newUrl = split_url + "html/channel.html";
   newUrl += `?channel=${videoChannel}`;
+  newUrl += `&id=${videoId}`
   window.location.replace(newUrl);
 }
 
-//검색기능
+//검색기능 ? 필터
 function search(tags){
   const searchBtn = document.querySelector(".search > img");
   const searchInput = document.querySelector('#search-bar');
   searchBtn.addEventListener('click', ()=>{
     let inputValue = searchInput.value;
 
-    videos = document.querySelectorAll(".video-item")
+    let videos = document.querySelectorAll(".video-item")
     let result = []
 
-    const re = new RegExp(inputValue);
+
 
     for (var i = 0; i < videos.length; ++i) {
       var item = videos[i].value;
-      let flage = false;
+      let flag = false;
+
       item.forEach(e =>{
-        matchArray = e.match(re);
+        const re = new RegExp(e);
+        matchArray = inputValue.match(re);
         if (matchArray != null){
-          flage = true;
+          flag = true;
         }
       })
-      if (flage === false){
+      if (flag === false){
         let tag = document.getElementById(videos[i].id);
         console.log(tag);
         tag.style.display = 'none';
@@ -148,6 +146,84 @@ function search(tags){
   })
 }
 
+
+async function getSearchList(res, words) {
+
+
+  return res.then(async data => {
+      let filterData = data.filter = (d =>{
+        console.log(words);
+        tags = d.video_tag;
+        let flag = false;
+        tags.forEach(e =>{
+          let re = new RegExp(e);
+          if (words.math(re) != null){
+            flag = true;
+          }
+        return flag;
+        })
+      })
+      console.log(data);
+      console.log(filterData);
+      let promises = filterData.map(async res => {
+        return await getVideo(res.video_id);
+      })
+      Promise.all(promises);
+
+  });
+
+}
+
+
+function search2(){
+  const searchBtn = document.querySelector(".search > img");
+  const searchInput = document.querySelector('#search-bar');
+
+  
+
+  searchBtn.addEventListener('click', ()=>{
+    let videos = document.querySelectorAll(".video-item")
+    for (var i=0; i <= videos.length; i++){
+    }
+    let value = searchInput.value;
+    let videoList = getVideoList();
+    getSearchList(videoList, value).then(async res =>{
+      let promises = res.map(async e => {
+        return await createVideoItem(e);
+      })
+      Promise.all(promises);
+    })
+
+  })
+}
+
+
+function search3(){
+  const searchBtn = document.querySelector(".search > img");
+  const searchInput = document.querySelector('#search-bar');
+
+  
+
+  searchBtn.addEventListener('click', ()=>{
+    let videos = document.querySelectorAll(".video-item")
+    for (var i=0; i <= videos.length; i++){
+    }
+    let value = searchInput.value;
+    let videoList = getVideoList()
+    let list = videoList.then(res => { res;
+    })
+    console.log(list);
+  })
+}
+
+function go_home(){
+  let curruntUrl = window.location.href;
+  let split_url = curruntUrl.split("html")[0];
+  newUrl = split_url + "html/home.html";
+  window.location.replace(newUrl);
+}
+
+
 // ----------------------------------------------------------------------------
 
 let tags = [];
@@ -155,11 +231,11 @@ let tags = [];
 // 비디오 리스트 생성
 getVideoInfoList(getVideoList()).then(async res =>{
   let promises = res.map(async el => {
-      return await createVideoItem(el, tags);
+      return await createVideoItem(el);
   });
   Promise.all(promises);
 })
-search(tags);
+search3(tags);
 
 // 메뉴 클릭시 보이고 안보이게
 imgtag = document.getElementsByTagName('img');

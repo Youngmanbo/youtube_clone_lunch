@@ -64,13 +64,94 @@
 
 }
 
-/* 사이드 영상 조절 중임 미완성 */
+/* 사이드 영상 조절 */
 .right-sidebar video {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 40%;
+    max-height: 40%;
+}
+/*  */
+
+
+/* 좋아요 싫어요 등 아이콘들 한줄에 배치  */
+.user-logo img{
+    height: 50px;
+    margin-left: 4rem;
+    margin-top: 1rem;
+    border-radius: 50%;
 }
 
+.behavior-box {
+    display: flex;
+    justify-content:space-between;
+}
+
+.Subscribes-Btn{
+    color: black;
+    padding:10px;
+}
+
+
+
 /*  */
+
+
+/* 상단 우측 부분 */
+#home-info-div {
+    position: fixed;
+    right: 0%;
+    float: right;
+    display: flex;
+    cursor: pointer;
+}
+
+#home_profile img{
+    height: 30px;
+}
+
+#home_profile {
+    margin-top: 0.4rem;
+    margin-right: 1rem;
+    margin-left: 0.4rem;
+    cursor: pointer;
+    
+
+}/* 상단 우측 부분 */
+
+
+
+/* 구독 및 아이콘들 */
+
+/* HTML 요소들을 flex 컨테이너로 설정 */
+.behavior-box {
+    display: flex;
+    align-items: center; /* 요소들을 세로로 중앙 정렬 */
+  }
+  
+  /* user-logo와 behavior 요소들을 한 줄에 정렬 */
+  .user-logo,
+  .behavior {
+    display: flex;
+    align-items: center; /* 요소들을 세로로 중앙 정렬 */
+  }
+  
+
+  
+  /* 버튼 디자인 조정 */
+  .Subscribes-Btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-left: 10px; /* 필요한 간격을 설정해줍니다. */
+  }
+  
+
+/*  */
+
+
+
+
 
 
 * {

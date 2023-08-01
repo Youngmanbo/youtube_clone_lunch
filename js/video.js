@@ -58,12 +58,12 @@ async function getVideoInfoList(res){
 
 //channel videoList html 생성 함수
 
-async function renderVideo(info){
+async function renderVideo(info, id){
 
     //리스트 가져올때 index0번 빼고불러오는거 잠시 보류
     // let id = window.location.href.split("?")[1]['video_id'];
 
-    // if (id !=info.video_id){   }
+     if (id !=info.video_id){ 
 
         let parent = document.querySelector('.right-sidebar');
         
@@ -109,7 +109,7 @@ async function renderVideo(info){
         parent.appendChild(videoDiv);
 
 
-    
+     }
 }
 
 
@@ -161,7 +161,7 @@ async function renderChannelVideo(res){
             <video src=${res.video_link} poster=${res.image_link} controls></video>
         <div>
         <div class='video-mainInfo'>
-            <h3>${res.video_title}</h3>
+            <h3>${res.video_title}</h3><br>
             <h6>${res.views} ${res.upload_date}</h6>
         </div>
         `
@@ -178,29 +178,54 @@ function movePage(e){
 }
 
 
-
-//window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
-
-window.onload = function(){ 
-    let channel = getChannel();
-    // let videoList = getVideoList();
-    let videoInfos = getVideoInfoList(channel);
-    let channelInfo = getChannelInfo(); 
-    
-    //메인영상 하나만 호출
-    getVideo(0).then(async res => {
-        renderChannelVideo(res);
+function getParam(){
+    let result = {};
+    let url = window.location.href;
+    let params = url.split("?")[1];
+    if (params == undefined){
+        return '0';
+    }
+    params = params.split("&");
+    params.forEach( e =>{
+        let param = e.split('=');
+        console.log(param);
+        result[param[0]] = param[1];
     })
-
-    videoInfos.then(async data=>{
-        let promises = data.map(async el => {
-            return await renderVideo(el);
-        });
-        Promise.all(promises);
-    })
+    return result;
 
 }
 
+
+
+
+
+
+//<---------------------------함수실행부------------------------------------->
+
+
+let channel = getChannel();
+// let videoList = getVideoList();
+let videoInfos = getVideoInfoList(channel);
+let channelInfo = getChannelInfo(); 
+
+let param = getParam();
+
+
+
+//메인영상 하나만 호출
+getVideo(param['id']).then(async res => {
+    renderChannelVideo(res);
+})
+
+videoInfos.then(async data=>{
+    let promises = data.map(async el => {
+        return await renderVideo(el, param['id']);
+    });
+    Promise.all(promises);
+})
+
+let home = document.querySelector(".links");
+home.addEventListener('click', go_home);
 
 
 
