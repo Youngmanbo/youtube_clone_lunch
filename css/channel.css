@@ -241,7 +241,7 @@ a {
     color: white;
     justify-content: flex-start;
     align-items: center;
-
+    margin-bottom: 3rem;
 }
 
 .channel-mainVideo{
