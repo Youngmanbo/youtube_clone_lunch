@@ -63,6 +63,8 @@ async function renderVideo(info) {
     video.src = info.video_link;
     video.poster = info.image_link;
     video.setAttribute('controls', "");
+    video.setAttribute('autoplay', "");
+    video.addEventListener('click', goVideo);
 
     let infoDiv = document.createElement('div');
     infoDiv.className = 'video-info'
@@ -217,6 +219,17 @@ function getParam(){
     return result;
 
 }
+//---------- 비디오 누루면 비디오 채널로 이동------------
+function goVideo(e) {
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("html")[0];
+    newUrl = split_url + "html/video.html";
+    let temp = e.target.currentSrc.split('_');
+  
+    let idx = temp[1].split('.');
+    newUrl += `?id=${idx[0]}`;
+    window.location.replace(newUrl);
+  }
 
 
 function go_home(){

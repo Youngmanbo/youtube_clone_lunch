@@ -71,11 +71,15 @@ async function renderVideo(info, id){
     
         let videoDiv = document.createElement('div');
         videoDiv.className = 'side-video-list';
+        videoDiv.addEventListener('click', (e)=>{
+            changeMain(e);
+        });
         
         let video = document.createElement('video');
         video.src=info.video_link;
         video.poster = info.image_link;
         video.setAttribute('controls', "");
+        video.setAttribute('autoplay', "");
     
         let infoDiv = document.createElement('div');
         infoDiv.className = 'video-info'
@@ -188,13 +192,32 @@ function getParam(){
     params = params.split("&");
     params.forEach( e =>{
         let param = e.split('=');
-        console.log(param);
         result[param[0]] = param[1];
     })
     return result;
 
 }
 
+//클릭하면 메인영상으로 변경
+
+function changeMain(e){
+
+    e.preventDefault(); // 재생 금지
+
+    window.scrollTo(0,0); //브라우저 최상단으로 이동
+
+    let currentSrc = e.target.src;
+    let currentImg = e.target.poster;
+    
+    let mainVideoTag = document.querySelector(".play-video > video")
+    let tempSrc = mainVideoTag.src;
+    let tempImg = mainVideoTag.poster;
+
+    mainVideoTag.setAttribute('src', currentSrc);
+    mainVideoTag.setAttribute('poster', currentImg);
+    e.target.setAttribute('src', tempSrc);
+    e.target.setAttribute('poster', tempImg);
+}
 
 
 
@@ -223,9 +246,6 @@ videoInfos.then(async data=>{
     });
     Promise.all(promises);
 })
-
-let home = document.querySelector(".links");
-home.addEventListener('click', go_home);
 
 
 

@@ -39,6 +39,7 @@ async function createVideoItem(videoData) {
   video.controls = true;
   video.preload = "metadata";
   video.poster = videoData.image_link;
+  video.setAttribute('autoplay', "");
 
   const videoInfoTag = document.createElement("div");
   videoInfoTag.calssName = 'video-infos'
