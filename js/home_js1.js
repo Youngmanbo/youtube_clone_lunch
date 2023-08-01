@@ -1,19 +1,3 @@
-async function populateVideoContainer() {
-  const videoIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]; // 동영상 ID들을 가져와서 배열로 정의한다고 가정
-  const videoContainer = document.querySelector(".body-container");
-
-  for (const videoId of videoIds) {
-    try {
-      const videoInfo = await getVideo(videoId);
-      const videoItem = createVideoItem(videoInfo);
-      videoContainer.appendChild(videoItem);
-    } catch (error) {
-      console.error(`Error fetching video with ID ${videoId}:`, error);
-    }
-  }
-}
-
-
 async function getVideoInfoList(res) {
 
 
@@ -41,7 +25,10 @@ async function getVideo(id) {
 }
 
 // 동영상 데이터를 기반으로 동영상 아이템 엘리먼트를 생성하는 함수
-function createVideoItem(videoData) {
+async function createVideoItem(videoData) {
+
+  const videoContainer = document.querySelector(".body-container");
+
   const videoItem = document.createElement("div");
   videoItem.classList.add("video-item");
 
@@ -50,9 +37,6 @@ function createVideoItem(videoData) {
   video.controls = true;
   video.preload = "metadata";
   video.poster = videoData.image_link;
-
-  const thumbnail = document.createElement("img");
-  thumbnail.alt = videoData.video_title;
 
   const title = document.createElement("h2");
   title.textContent = videoData.video_title;
@@ -66,7 +50,6 @@ function createVideoItem(videoData) {
 
 
   videoItem.appendChild(video);
-  videoItem.appendChild(thumbnail);
   videoItem.appendChild(title);
   videoItem.appendChild(channel);
   videoItem.appendChild(views);
@@ -74,8 +57,7 @@ function createVideoItem(videoData) {
     goChannel(event , videoData.video_channel )
   );
   video.addEventListener('click', goVideo);
-  console.log(videoData.image_link)
-  return videoItem;
+  videoContainer.appendChild(videoItem)
 
 }
 // 서치바 검색기능
@@ -84,16 +66,7 @@ const searchBtn = document.querySelector('.search-btn');
 // 검색 경로 저장
 let searchLink = "https://www.youtube.com/results?search_query=";
 
-// 페이지 로드 시 동영상 컨테이너를 채우는 함수를 호출합니다.
-document.addEventListener("DOMContentLoaded", populateVideoContainer);
 
-
-
-
-// 메뉴 클릭시 보이고 안보이게
-imgtag = document.getElementsByTagName('img');
-menu_logo = imgtag[0];
-menu_logo.addEventListener('click', nav_display);
 
 function nav_display() {
   let nav = document.getElementsByClassName('channel-left-nav')[0];
@@ -122,6 +95,10 @@ function goVideo(e) {
   let split_url = curruntUrl.split("html")[0];
   newUrl = split_url + "html/video.html";
   let temp = e.target.currentSrc.split('_');
+
+  console.log(e.target.currentSrc);
+  console.log(temp);
+  
   let idx = temp[1].split('.');
   newUrl += `?id=${idx[0]}`;
   window.location.replace(newUrl);
@@ -143,5 +120,18 @@ function goChannel(e , videoChannel) {
 
 window.onload = function(){
 
+  // 비디오 리스트 생성
+  getVideoInfoList(getVideoList()).then(async res =>{
+    let promises = res.map(async el => {
+        return await createVideoItem(el);
+   });
+    Promise.all(promises);
+  })
   
+  
+  // 메뉴 클릭시 보이고 안보이게
+  imgtag = document.getElementsByTagName('img');
+  menu_logo = imgtag[0];
+  menu_logo.addEventListener('click', nav_display);
+
 }
