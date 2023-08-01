@@ -116,7 +116,7 @@ body {
 }
 
 .links:hover, .links.active{
-    background: rgba(0, 0, 0, 0.1);
+    background: #303030;
 }
 
 .seperator{
@@ -155,7 +155,7 @@ body {
     height: 100px;
     justify-content: center;
     align-items: center;
-
+    background-color: #212121;
 }
 
 .profile-container{
@@ -195,6 +195,7 @@ body {
     height: 50px;
     justify-content: space-around;
     align-items: center;;
+    background-color: #212121;
 }
 
 #channel-title-profile img {
@@ -222,7 +223,7 @@ body {
     color: white;
     justify-content: flex-start;
     align-items: center;
-
+    border-bottom: 1px solid #AAAAAA;
 }
 
 .channel-mainVideo{
