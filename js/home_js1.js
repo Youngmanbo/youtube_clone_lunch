@@ -13,6 +13,27 @@ async function populateVideoContainer() {
   }
 }
 
+
+async function getVideoInfoList(res) {
+
+
+  return res.then(data => {
+      const promises = data.map(async data => {
+          return await getVideo(data.video_id);
+      });
+      return Promise.all(promises);
+
+  });
+
+}
+
+async function getVideoList() {
+  url = 'http://oreumi.appspot.com/video/getVideoList';
+  const response = await fetch(url);
+  return response.json();
+}
+
+
 async function getVideo(id) {
   const url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
   const response = await fetch(url);
@@ -117,4 +138,10 @@ function goChannel(e , videoChannel) {
   newUrl = split_url + "html/channel.html";
   newUrl += `?id=${videoChannel}`;
   window.location.replace(newUrl);
+}
+
+
+window.onload = function(){
+
+  
 }
