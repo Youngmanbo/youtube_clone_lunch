@@ -132,16 +132,17 @@ function search(tags){
 
     for (var i = 0; i < videos.length; ++i) {
       var item = videos[i].value;
-      item.foreach(e =>{
-        let flage = false;
+      let flage = false;
+      item.forEach(e =>{
         matchArray = e.match(re);
-        if (matchArray.length > 1){
+        if (matchArray != null){
           flage = true;
         }
       })
       if (flage === false){
-        let tag =document.getElementById(videos[i].id);
-        tag.styel.display = 'none';
+        let tag = document.getElementById(videos[i].id);
+        console.log(tag);
+        tag.style.display = 'none';
       }
     }
   })
