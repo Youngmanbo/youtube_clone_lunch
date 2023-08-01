@@ -89,10 +89,57 @@
     color: black;
     padding:10px;
 }
+.behavior-icon-more img{
+    width: 30px;
+}
+/*  */
 
+
+
+/*사이드바 영상 글부분*/
+.video-info h3{
+    display: inline-block;
+    
+}
+
+.view-date {
+    display: inline-block;
+    margin-left: 3rem;
+    
+    
+}
+
+
+/**/
+
+
+
+/* 댓글라인  */
+.total-info{
+    margin-left: 1rem;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.total-info span{
+    padding-right: 2rem;
+}
+
+.add-comment{
+    margin-left: 1rem;
+    margin-bottom:2rem;
+}
+
+.add-comment input{
+    height: 50px;
+    width: 1000px;
+    background-color: black;
+}
 
 
 /*  */
+
+
 
 
 /* 상단 우측 부분 */
