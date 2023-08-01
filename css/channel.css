@@ -65,6 +65,11 @@ body {
 
 
 /* 상단 우측 부분 */
+
+#home_profile img{
+    height: 30px;
+}
+
 #home-info-div {
     float: right;
     display: flex;
@@ -73,6 +78,8 @@ body {
 
 #home_profile {
     margin-right: 1.5rem;
+    margin-top: 0.4rem;
+    margin-left: 0.4rem;
     cursor: pointer;
 }/* 상단 우측 부분 */
 
