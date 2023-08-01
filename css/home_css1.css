@@ -18,11 +18,6 @@ body{
     font-family: 'roboto', sans-serif;
 }
 
-
-
-
-
-
 /* 상단 바 */
 
 
@@ -69,7 +64,6 @@ body{
     color: white;
     outline: none;
     width: 100%;
-    /* border: 1px solid rgba(219, 219, 219, 0.1); */
     border: none;
 }/* 검색 부분 */
 
@@ -258,8 +252,6 @@ li > span{
 }
 
 
-
-
 /* 비디오들 */
 .body-container{
     width: 100%;
@@ -269,17 +261,9 @@ li > span{
     overflow-x: hidden;
     display: grid;
     grid-gap: 20px 20px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(500px,1fr));
     color:white;
     background-color: #000000;
-<<<<<<< HEAD
-=======
-}
-
-video{
-    width: 100%;
-    height: 200px;
->>>>>>> 0018689 (We can clear Fxxking project)
 }
 
 .video-item{
@@ -287,16 +271,16 @@ video{
     padding-bottom: 5rem;
 }
 
-video{
-    width: 90%;
-    height: 200px;
-}
-
 video[poster]{
     height: 100%;
     width: 100%;
+    border-radius: 0.8rem;
 }
 
 .nav-lists {
     text-align: start;
+}
+
+.video-item > div > h2,p{
+    cursor: pointer; 
 }
