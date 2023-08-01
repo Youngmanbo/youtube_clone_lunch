@@ -198,6 +198,8 @@ function getParam(){
 
 
 
+
+
 //<---------------------------함수실행부------------------------------------->
 
 
@@ -222,7 +224,8 @@ videoInfos.then(async data=>{
     Promise.all(promises);
 })
 
-
+let home = document.querySelector(".links");
+home.addEventListener('click', go_home);
 
 
 

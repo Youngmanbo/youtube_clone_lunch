@@ -59,7 +59,7 @@ async function createVideoItem(videoData) {
   videoInfoTag.appendChild(channel);
   videoInfoTag.appendChild(views);
   videoInfoTag.addEventListener('click', (event) =>
-    goChannel(event , videoData.video_channel )
+    goChannel(event , videoData.video_channel, videoData.video_id)
   );
   videoItem.appendChild(videoInfoTag);
   video.addEventListener('click', goVideo);
@@ -102,7 +102,7 @@ function goVideo(e) {
 
 // 비디오 밑 텍스트 클릭시 channel로 이동
 // id값으로 channel 넘김
-function goChannel(e , videoChannel) {
+function goChannel(e , videoChannel, videoId) {
   if(e.target == "video"){
     return;
   }
@@ -110,6 +110,7 @@ function goChannel(e , videoChannel) {
   let split_url = curruntUrl.split("html")[0];
   newUrl = split_url + "html/channel.html";
   newUrl += `?channel=${videoChannel}`;
+  newUrl += `&id=${videoId}`
   window.location.replace(newUrl);
 }
 
@@ -197,6 +198,32 @@ function search2(){
 }
 
 
+function search3(){
+  const searchBtn = document.querySelector(".search > img");
+  const searchInput = document.querySelector('#search-bar');
+
+  
+
+  searchBtn.addEventListener('click', ()=>{
+    let videos = document.querySelectorAll(".video-item")
+    for (var i=0; i <= videos.length; i++){
+    }
+    let value = searchInput.value;
+    let videoList = getVideoList()
+    let list = videoList.then(res => { res;
+    })
+    console.log(list);
+  })
+}
+
+function go_home(){
+  let curruntUrl = window.location.href;
+  let split_url = curruntUrl.split("html")[0];
+  newUrl = split_url + "html/home.html";
+  window.location.replace(newUrl);
+}
+
+
 // ----------------------------------------------------------------------------
 
 let tags = [];
@@ -208,7 +235,7 @@ getVideoInfoList(getVideoList()).then(async res =>{
   });
   Promise.all(promises);
 })
-search2(tags);
+search3(tags);
 
 // 메뉴 클릭시 보이고 안보이게
 imgtag = document.getElementsByTagName('img');
