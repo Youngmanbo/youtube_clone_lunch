@@ -161,8 +161,7 @@ async function renderChannelVideo(res){
             <video src=${res.video_link} poster=${res.image_link} controls></video>
         <div>
         <div class='video-mainInfo'>
-            <h5>${res.video_tag}</h5><br></br>
-            <h3>${res.video_title}</h3><br></br>
+            <h3>${res.video_title}</h3>
             <h6>${res.views} ${res.upload_date}</h6>
         </div>
         `
