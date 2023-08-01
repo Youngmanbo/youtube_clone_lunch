@@ -262,7 +262,7 @@ li > span{
     overflow-x: hidden;
     display: grid;
     grid-gap: 20px 20px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
     color:white;
     background-color: #000000;
 }
@@ -284,4 +284,8 @@ video[poster]{
 
 .nav-lists {
     text-align: start;
+}
+
+.video-item > div > h2,p{
+    cursor: pointer; 
 }
