@@ -32,7 +32,7 @@ body{
     display: flex;
     align-items: center;
     padding: 0 2.5vw;
-    /* z-index: 0; */
+    z-index: 1;
 }
 
 /* 로고 부분 */
@@ -111,7 +111,8 @@ body{
     align-items: center;
     overflow-x: auto;
     overflow-y: hidden;
-
+    background-color: #212121;
+    z-index: 1;
 }
 
 
