@@ -82,10 +82,14 @@ body{
     display: flex;
 }
 
+#home_profile img{
+    height: 30px;
+}
+
 #home_profile {
     margin-top: 0.4rem;
-    margin-top: 0.4rem;
-    margin-right: 1.5rem;
+    margin-right: 1rem;
+    margin-left: 0.6rem;
 }/* 상단 우측 부분 */
 
 
