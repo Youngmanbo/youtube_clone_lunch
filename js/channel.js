@@ -148,6 +148,13 @@ async function renderChannelInfo(response) {
 
 }
 
+// 반응형 구독버튼
+const button = document.getElementById('channel-subscribes-btn');
+
+button.addEventListener('click', () => {
+  alert('구독중');
+});
+
 // 메인비디오 생성 함수
 async function renderChannelVideo(res) {
     let parent = document.querySelector(".channel-body-container")
