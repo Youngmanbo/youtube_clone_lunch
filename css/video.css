@@ -64,9 +64,15 @@
     margin-left: 3rem;
     margin-top: 5rem;
 }
-.video-mainInfo h5,h3,h6{
-    margin-left: 1rem;
+.video-mainInfo{
+    margin-left: 3rem;
 }
+
+.video-mainInfo h6 {
+    color: #6b6b6b;
+    font-size: 14px;
+}
+
 .comments{
     margin-left: 3rem;
 }
@@ -112,14 +118,21 @@
 
 .video-info h3{
     display: inline-block;
-    font-size: 18px;
+    font-size: 20px;
+    margin-left: 1rem;
 }
 
 .view-date {
     display: inline-block;
     margin-left: 1rem;
-    
-    
+}
+
+.view-date span{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin-top: 3px;
+    color: #6b6b6b;
 }
 
 
@@ -130,12 +143,15 @@
 /* 댓글라인  */
 .total-info{
     margin-left: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding-bottom: 1rem;
+    align-items: center;
+    align-content: center;
 }
 
 .total-info span{
     padding-right: 2rem;
+    font-size: 18px;
 }
 
 .add-comment{
@@ -295,18 +311,38 @@
   }
 
   .user-logo img{
+    margin-right: 10px;
     height: 60px;
     border-radius: 50%;
     cursor: pointer;
-    margin-right: 800px;
   }
   
+.info-channel{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.info-channel-master p{
+    display: block;
+    font-size: 18px;
+}
+
+.info-channel-info {
+    margin-top: 10px;
+    margin-left: 68px;
+    margin-right: 10px;
+}
+
   /* 버튼 디자인 조정 */
   .Subscribes-Btn {
     background-color: #ff0000;
+    font : bold;
+    font-size: 20px;
     color: #fff;
     border: none;
-    padding: 8px 16px;
+    padding: 16px 20px;
     border-radius: 4px;
     cursor: pointer;
   }
@@ -389,11 +425,6 @@ textarea {
     border: 1px solid #e2e2e2;
     line-height: 2;
     font-size: .75rem;
-}
-
-span {
-    color: #767676;
-    font-size: .6875rem;
 }
 
 strong {
@@ -500,21 +531,37 @@ iframe {
 
 .footer-links{
     display: flex;
+    font-size: 8px;
     border-top: 1px solid #e2e2e2;
-    padding-top: .5rem;
+    padding-top: 0.5rem;
     margin-left: 1rem;
     margin-right: 1rem;
-    padding-left: 0;
+    padding-left: 3rem;
     padding-right: 0;
+}
+
+.footer-links li{
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: space-between;
+    margin-right: 45px;
 }
 
 .footer-links2{
     display: flex;
-    padding-bottom: 30px;
+    font-size: 8px;
+    padding-bottom: 0.5rem;
     margin-left: 1rem;
     margin-right: 1rem;
-    padding-left: 0;
+    padding-left: 3rem;
     padding-right: 0;
+}
+
+.footer-links2 li{
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: space-between;
+    margin-right: 45px;
 }
 
 .content{
@@ -587,6 +634,11 @@ iframe {
     margin-right: 7px;
 }
 
+.Time{
+    color: #6b6b6b;
+    font-size: 14px;
+}
+
 .sub {
     display: flex;
 }
@@ -639,11 +691,11 @@ iframe {
 }
 
 .comment-cancle{
-    background-color: black;
+    background-color: rgb(73, 73, 73);
     border: none;
     cursor: pointer ;
-    padding: 5px 8px 5px 8px;
-    border-radius: 40%;
+    padding: 7px 7px 7px 7px;
+    border-radius: 10px;
     color:white;
 }
 
@@ -652,11 +704,11 @@ iframe {
 }
 
 .comment-add{
-    background-color: black;
+    background-color: rgb(73, 73, 73);
     border: none;
     cursor: pointer ;
-    padding: 5px 8px 5px 8px;
-    border-radius: 40%;
+    padding: 7px 7px 7px 7px;
+    border-radius: 10px;
     color:white;
 }
 
@@ -670,13 +722,13 @@ iframe {
 }
 
 .userinfo{
-    display: flex;
+    display: block;
     align-items: center;
+    align-content: center;
 }
 
 .container-comment{
     padding: 10px;
-    display:flex;
     align-items: center;
 }
 
@@ -824,10 +876,6 @@ video{
         justify-content: space-between; /* 반응형에서 이미지와 버튼을 양쪽 끝에 배치하기 위해 추가합니다. */
       }
     
-      .user-logo img {
-        margin-right: 700px;
-      }
-
       .Subscribes-Btn {
         margin-left: 0; /* 버튼의 margin-left를 초기화하여 왼쪽 정렬됩니다. */
       }
