@@ -274,6 +274,35 @@ a {
 
 }
 
+/*플레이버튼*/
+
+.playlist_box{
+    padding-left: 255px;
+}
+
+.playlist__title{
+    border: none;
+    border-bottom: 1px solid #AAAAAA;
+    margin-right: 20px;
+    padding-left: 20px;
+    opacity: 0.5;
+}
+.playlist__info > button {
+    all:unset;
+    margin-top : 10px;
+    margin-bottom: 10px;
+    display:flex;
+    align-items: center;
+    color:white;
+    background-color: red;
+    border-radius: 5px;
+    padding-right: 8px;
+
+}
+.playlist__info > button:active{
+    transform: scale(0.98);
+}
+
 
 #channel-videos-container{ 
     width:100%;
@@ -283,7 +312,6 @@ a {
 
 #channel-footer-videoList{
     width:100%;
-    padding-left: 255px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
