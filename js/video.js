@@ -131,6 +131,20 @@ async function getChannelInfo(res='oreumi'){
     
 }
 
+// 반응형 구독버튼
+const buttons = document.getElementsByClassName('Subscribes-Btn');
+
+for (const button of buttons) {
+  button.addEventListener('click', () => {
+    if (button.classList.contains('subscribed')) {
+      button.textContent = 'SUBSCRIBES';
+      button.classList.remove('subscribed');
+    } else {
+      button.textContent = 'SUBSCRIBING';
+      button.classList.add('subscribed');
+    }
+  });
+}
 
 // 채널 정보 html 생성 및 수정 함수
 async function renderChannelInfo(response){
