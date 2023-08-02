@@ -287,9 +287,13 @@ video[poster]{
     cursor: pointer; 
 }
 .profile_channel_img{
-    width:40px;
-    height:40px;
+    width:60px;
+    height:70px;
 }
 .video-item > div{
     display:flex;
+    align-items: center;
+}
+.channel-img-div{
+    margin-right:9px;
 }
