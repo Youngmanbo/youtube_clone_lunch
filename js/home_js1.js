@@ -68,6 +68,8 @@ async function createVideoItem(videoData) {
   video.preload = "metadata";
   video.poster = videoData.image_link;
   // video.setAttribute('autoplay', "");
+  const videoDiv = document.createElement("div");
+  videoDiv.className= 'video-div';
 
   const videoInfoTag = document.createElement("div");
   videoInfoTag.calssName = 'video-infos'
@@ -75,6 +77,8 @@ async function createVideoItem(videoData) {
   const title = document.createElement("h2");
   title.textContent = videoData.video_title;
 
+  const channelImgDiv = document.createElement("div");
+  channelImgDiv.className = 'channel-img-div';
   const channelImg = document.createElement("img");
   channelImg.src = channelInfo.channel_profile;
   channelImg.classList.add('profile_channel_img');
@@ -88,10 +92,12 @@ async function createVideoItem(videoData) {
 
 
   videoItem.appendChild(video);
-  videoInfoTag.appendChild(title);
-  videoInfoTag.appendChild(channelImg);
-  videoInfoTag.appendChild(channel);
-  videoInfoTag.appendChild(views);
+  videoInfoTag.appendChild(channelImgDiv);
+  channelImgDiv.appendChild(channelImg);
+  videoInfoTag.appendChild(videoDiv);
+  videoDiv.appendChild(title);
+  videoDiv.appendChild(channel);
+  videoDiv.appendChild(views);
   videoInfoTag.addEventListener('click', (event) =>
     goChannel(event, videoData.video_channel, videoData.video_id)
   );
@@ -209,7 +215,7 @@ menu_logo.addEventListener('click', nav_display);
 let searchBtn = document.getElementsByClassName('search-icon')[0]; // 검색 버튼
 let searchBox = document.getElementById('search-bar');  // 검색 창
 searchBtn.addEventListener('click', search);
-// searchBox.addEventListener('keypress', enter_search); // enter 시 search
+searchBox.addEventListener('keypress', enterSearch); // enter 시 search
 
 function search() {
   searchText = document.getElementById('search-bar').value.toLowerCase();
@@ -221,7 +227,33 @@ function search() {
       let searchVideoList = videoList.filter((video) =>
         video.video_title.toLowerCase().includes(searchText)
       );
-      createVideosItem(searchVideoList);
+      if(searchVideoList.length == 0){
+        alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
+      }else{
+        createVideosItem(searchVideoList);
+      }
+    });
+  }
+}
+
+function enterSearch(e){
+  searchText = document.getElementById('search-bar').value.toLowerCase();
+  if(e.keyCode != 13){
+    return ;
+  }
+  alert(searchText);
+  if (searchText == "") { // 검색하는게 text가 비어있을때
+    return;
+  } else {
+    getVideoList().then((videoList) => {
+      let searchVideoList = videoList.filter((video) =>
+        video.video_title.toLowerCase().includes(searchText)
+      );
+      if(searchVideoList.length == 0){
+        alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
+      }else{
+        createVideosItem(searchVideoList);
+      }
     });
   }
 }
@@ -235,6 +267,7 @@ async function createVideosItem(videoDatas) {
 
   for (let i = 0; i < videoInfoList.length; i++) {
     let videoData = videoInfoList[i];
+    let channelInfo = await getChannelInfo(videoData.video_channel);
     const videoContainer = document.querySelector(".body-container");
 
     const videoItem = document.createElement("div");
@@ -247,6 +280,10 @@ async function createVideosItem(videoDatas) {
     video.controls = true;
     video.preload = "metadata";
     video.poster = videoData.image_link;
+
+    const channelImg = document.createElement("img");
+    channelImg.src = channelInfo.channel_profile;
+    channelImg.classList.add('profile_channel_img');
 
     const videoInfoTag = document.createElement("div");
     videoInfoTag.calssName = 'video-infos'
@@ -264,6 +301,7 @@ async function createVideosItem(videoDatas) {
 
     videoItem.appendChild(video);
     videoInfoTag.appendChild(title);
+    videoInfoTag.appendChild(channelImg);
     videoInfoTag.appendChild(channel);
     videoInfoTag.appendChild(views);
     videoInfoTag.addEventListener('click', (event) =>
