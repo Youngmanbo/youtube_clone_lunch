@@ -329,11 +329,14 @@
 }
 
 .info-channel-name{
-    font-size: 21px;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .info-channel-sub{
     font-size: 17px;
+    color: #6b6b6b;
+    cursor: pointer;
 }
 
 .info-channel-info {
