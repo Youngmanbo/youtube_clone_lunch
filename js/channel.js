@@ -31,6 +31,15 @@ async function getVideoList() {
     return response.json();
 }
 
+// 조회수를 간략하게 표현하는 함수
+function formatViews(views) {
+    if (views >= 1000000) {
+      return (views / 1000000).toFixed(1) + 'M';
+    } else if (views >= 1000) {
+      return (views / 1000).toFixed(1) + 'K';
+    }
+    return views;
+  }
 
 //videoInfoList 의 video_id값을 추출하여 한꺼번에 requests를 보내는 함수
 
@@ -50,56 +59,48 @@ async function getVideoInfoList(res) {
 //channel videoList html 생성 함수
 
 async function renderVideo(info) {
-
-
     let parent = document.querySelector('#channel-footer-videoList');
-
+  
     // 비디오 컨테이너
-
     let videoDiv = document.createElement('div');
     videoDiv.className = 'video-container';
-
+  
     let video = document.createElement('video');
     video.src = info.video_link;
     video.poster = info.image_link;
     video.setAttribute('controls', "");
-    video.setAttribute('autoplay', "");
-    video.addEventListener('click', goVideo);
 
     let infoDiv = document.createElement('div');
-    infoDiv.className = 'video-info'
+    infoDiv.className = 'video-info';
     infoDiv.onclick = movePage;
     info.value = info.video_channel;
-
+  
     let titleTag = document.createElement('h3');
     titleTag.innerText = info.video_title;
     titleTag.value = info.video_channel;
-
+  
     let container = document.createElement('div');
     container.className = 'view-date';
-
+  
+    // 조회수를 간략하게 표시
     let viewTag = document.createElement('span');
-    viewTag.innerText = "조회수 " + info.views + "회" + ' . ';
+    viewTag.innerText = "조회수 " + formatViews(info.views) + ' . ';
     viewTag.value = info.video_channel;
-
+  
     let date = document.createElement('span');
     date.innerText = info.upload_date;
     date.value = info.video_channel;
-
-
+  
     videoDiv.appendChild(video);
-
+  
     infoDiv.appendChild(titleTag);
     container.appendChild(viewTag);
     container.appendChild(date);
     infoDiv.appendChild(container);
-
+  
     videoDiv.appendChild(infoDiv);
     parent.appendChild(videoDiv);
-
-
-
-}
+  }
 
 
 // channelInfo requests 함수
@@ -107,9 +108,6 @@ async function getChannelInfo(res = 'oreumi') {
     console.log(res);
 
 
-    if (res == undefined) {
-        res = 'oreumi';
-    }
     Url = `http://oreumi.appspot.com/channel/getChannelInfo?video_channel=${res}`
     const response = await fetch(Url, {
         method: 'POST',
@@ -125,21 +123,23 @@ async function getChannelInfo(res = 'oreumi') {
 // 채널 정보 html 생성 및 수정 함수
 async function renderChannelInfo(response) {
 
-
     let parent = document.querySelector('#channel-title-profile');
-    console.log(parent);
+  
     let channelCover = document.querySelector("#channel-cover > img");
     channelCover.src = response.channel_banner;
-
+  
     let channelProfile = document.querySelector('#channel-title-profile > .profile-container > img');
     channelProfile.src = response.channel_profile;
-
+  
     let infoDiv = document.createElement('div');
     infoDiv.className = "channel-infos";
-
-    let subs = document.createElement("span")
+  
+    let subs = document.createElement("span");
     let channelName = document.createElement("h2");
-    subs.innerText = response.subscribers + " 구독";
+    let totalViews = response.videos.reduce((acc, video) => acc + video.views, 0);
+  
+    subs.innerText = formatViews(response.subscribers) + " 구독, 총 조회수 " + formatViews(totalViews);
+    channelName.innerText = response.channel_name;
 
     infoDiv.appendChild(channelName);
     infoDiv.appendChild(subs);
@@ -151,13 +151,13 @@ async function renderChannelInfo(response) {
 const button = document.getElementById('channel-subscribes-btn');
 
 button.addEventListener('click', () => {
-    if (button.classList.contains('subscribed')) {
-        button.textContent = 'SUBSCRIBE';
-        button.classList.remove('subscribed');
-    } else {
-        button.textContent = 'SUBSCRIBING';
-        button.classList.add('subscribed');
-    }
+  if (button.classList.contains('subscribed')) {
+    button.textContent = 'SUBSCRIBE';
+    button.classList.remove('subscribed');
+  } else {
+    button.textContent = 'SUBSCRIBING';
+    button.classList.add('subscribed');
+  }
 });
 
 // 메인비디오 생성 함수
@@ -185,7 +185,40 @@ function movePage(e) {
     window.location.replace(newUrl);
 }
 
-function reloadPage() { // 새로고침 시 제자리로
+
+
+//window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
+
+window.onload = function () {
+    let channel = getChannel();
+    let videoInfos = getVideoInfoList(channel);
+    let channelInfo = getChannelInfo();
+
+    getChannelInfo().then(async (channelInfo) => {
+        renderChannelInfo(channelInfo);
+    })
+
+    getVideo(0).then(async res => {
+        renderChannelVideo(res);
+    })
+
+    videoInfos.then(async data => {
+        let promises = data.map(async el => {
+            return await renderVideo(el);
+        });
+        Promise.all(promises);
+    })
+
+}
+
+
+// 메뉴 클릭시 보이고 안보이게
+
+imgtag = document.getElementsByTagName('img');
+menu_logo = imgtag[0];
+menu_logo.addEventListener('click', nav_display);
+
+function nav_display() {
     let nav = document.getElementsByClassName('channel-left-nav')[0];
     let navStyle = getComputedStyle(nav).display;
 
@@ -229,77 +262,3 @@ function nav_display() {
 
     }
 }
-
-//도메인에서 paremeter 추출 함수
-
-function getParam() {
-    let result = {};
-    let url = window.location.href;
-    let params = url.split("?")[1];
-    if (params == undefined) {
-        return 'oreumi';
-    }
-    params = params.split("&");
-    params.forEach(e => {
-        let param = e.split('=');
-        console.log(param);
-        result[param[0]] = param[1];
-    })
-    return result;
-
-}
-//---------- 비디오 누루면 비디오 채널로 이동------------
-function goVideo(e) {
-    let curruntUrl = window.location.href;
-    let split_url = curruntUrl.split("html")[0];
-    newUrl = split_url + "html/video.html";
-    let temp = e.target.currentSrc.split('_');
-
-    let idx = temp[1].split('.');
-    newUrl += `?id=${idx[0]}`;
-    window.location.replace(newUrl);
-}
-
-
-function go_home() {
-    let curruntUrl = window.location.href;
-    let split_url = curruntUrl.split("html")[0];
-    newUrl = split_url + "html/home.html";
-    window.location.replace(newUrl);
-}
-
-//window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
-
-
-
-let params = getParam();
-let channel = getChannel(params['channel']);
-let videoInfos = getVideoInfoList(channel);
-
-getChannelInfo(params['channel']).then(async (chinfo) => {
-    renderChannelInfo(chinfo);
-})
-
-getVideo(params['id']).then(async res => {
-    renderChannelVideo(res);
-})
-
-videoInfos.then(async data => {
-    let promises = data.map(async el => {
-        return await renderVideo(el);
-    });
-    Promise.all(promises);
-})
-
-let home = document.querySelector(".links");
-home.addEventListener('click', go_home);
-
-
-// 메뉴 클릭시 보이고 안보이게
-
-imgtag = document.getElementsByTagName('img');
-menu_logo = imgtag[0];
-menu_logo.addEventListener('click', nav_display);
-
-// 새로고침 시 nav 다시 나오기에 다른 div들 위치 조정
-window.addEventListener('beforeunload', reloadPage);
