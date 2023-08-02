@@ -652,7 +652,7 @@ iframe {
     }
     .play-video > video{
         margin: 0;
-        padding:0;
+        padding-right:10px;
     }
     .right-sidebar{
         display: flex;

@@ -282,6 +282,14 @@ video[poster]{
     text-align: start;
 }
 
+
 .video-item > div > h2,p{
     cursor: pointer; 
+}
+.profile_channel_img{
+    width:40px;
+    height:40px;
+}
+.video-item > div{
+    display:flex;
 }
