@@ -69,7 +69,7 @@ async function createVideoItem(videoData) {
   video.poster = videoData.image_link;
   // video.setAttribute('autoplay', "");
   const videoDiv = document.createElement("div");
-  videoDiv.className= 'video-div';
+  videoDiv.className = 'video-div';
 
   const videoInfoTag = document.createElement("div");
   videoInfoTag.calssName = 'video-infos'
@@ -219,40 +219,96 @@ searchBox.addEventListener('keypress', enterSearch); // enter 시 search
 
 function search() {
   searchText = document.getElementById('search-bar').value.toLowerCase();
-  alert(searchText);
   if (searchText == "") { // 검색하는게 text가 비어있을때
     return;
   } else {
     getVideoList().then((videoList) => {
-      let searchVideoList = videoList.filter((video) =>
+      let totalList = [];
+
+      let searchTitle = videoList.filter((video) =>       // 제목검색
         video.video_title.toLowerCase().includes(searchText)
       );
-      if(searchVideoList.length == 0){
+
+      let searchChannel = videoList.filter((video) =>     // 체널명 검색
+        video.video_channel.toLowerCase().includes(searchText)
+      );
+
+      let searchDetail = videoList.filter((video) =>      // 디테일 검색
+        video.video_detail.toLowerCase().includes(searchText)
+      );
+
+
+      let searchTag = videoList.filter((video) => {       // 태그 검색
+        for(let i = 0 ; i < video.video_tag.length ; i++){
+          video.video_tag[i].toLowerCase().includes(searchText)
+        }
+      });
+      // 태그 검색은 왜 안될까
+
+      // 검색한 거 합치기
+      totalList = totalList.concat(searchTitle);
+      totalList = totalList.concat(searchChannel);
+      totalList = totalList.concat(searchDetail);
+      totalList = totalList.concat(searchTag);
+
+      // 중복된 검색 지우기
+      totalList = totalList.filter((item, pos) => totalList.indexOf(item) === pos);  
+
+
+      if (totalList.length == 0) {
         alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
-      }else{
-        createVideosItem(searchVideoList);
+      } else {
+        createVideosItem(totalList);
       }
     });
   }
 }
 
-function enterSearch(e){
+function enterSearch(e) {  // 엔터키 검색
   searchText = document.getElementById('search-bar').value.toLowerCase();
-  if(e.keyCode != 13){
-    return ;
+  if (e.keyCode != 13) {  // 엔터키가 아니라면 exit
+    return;
   }
-  alert(searchText);
   if (searchText == "") { // 검색하는게 text가 비어있을때
     return;
   } else {
     getVideoList().then((videoList) => {
-      let searchVideoList = videoList.filter((video) =>
+      let totalList = [];
+
+      let searchTitle = videoList.filter((video) =>       // 제목검색
         video.video_title.toLowerCase().includes(searchText)
       );
-      if(searchVideoList.length == 0){
+
+      let searchChannel = videoList.filter((video) =>     // 체널명 검색
+        video.video_channel.toLowerCase().includes(searchText)
+      );
+
+      let searchDetail = videoList.filter((video) =>      // 디테일 검색
+        video.video_detail.toLowerCase().includes(searchText)
+      );
+
+
+      let searchTag = videoList.filter((video) => {       // 태그 검색
+        for(let i = 0 ; i < video.video_tag.length ; i++){
+          video.video_tag[i].toLowerCase().includes(searchText)
+        }
+      });
+      // 태그 검색은 왜 안될까
+
+      // 검색한 거 합치기
+      totalList = totalList.concat(searchTitle);
+      totalList = totalList.concat(searchChannel);
+      totalList = totalList.concat(searchDetail);
+      totalList = totalList.concat(searchTag);
+
+      // 중복된 검색 지우기
+      totalList = totalList.filter((item, pos) => totalList.indexOf(item) === pos);  
+
+
+      if (totalList.length == 0) {
         alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
-      }else{
-        createVideosItem(searchVideoList);
+      } else {
+        createVideosItem(totalList);
       }
     });
   }
@@ -281,15 +337,20 @@ async function createVideosItem(videoDatas) {
     video.preload = "metadata";
     video.poster = videoData.image_link;
 
-    const channelImg = document.createElement("img");
-    channelImg.src = channelInfo.channel_profile;
-    channelImg.classList.add('profile_channel_img');
+    const videoDiv = document.createElement("div");
+    videoDiv.className = 'video-div';
 
     const videoInfoTag = document.createElement("div");
     videoInfoTag.calssName = 'video-infos'
 
     const title = document.createElement("h2");
     title.textContent = videoData.video_title;
+
+    const channelImgDiv = document.createElement("div");
+    channelImgDiv.className = 'channel-img-div';
+    const channelImg = document.createElement("img");
+    channelImg.src = channelInfo.channel_profile;
+    channelImg.classList.add('profile_channel_img');
 
     const channel = document.createElement("p");
     channel.textContent = videoData.video_channel;
@@ -300,10 +361,12 @@ async function createVideosItem(videoDatas) {
 
 
     videoItem.appendChild(video);
-    videoInfoTag.appendChild(title);
-    videoInfoTag.appendChild(channelImg);
-    videoInfoTag.appendChild(channel);
-    videoInfoTag.appendChild(views);
+    videoInfoTag.appendChild(channelImgDiv);
+    channelImgDiv.appendChild(channelImg);
+    videoInfoTag.appendChild(videoDiv);
+    videoDiv.appendChild(title);
+    videoDiv.appendChild(channel);
+    videoDiv.appendChild(views);
     videoInfoTag.addEventListener('click', (event) =>
       goChannel(event, videoData.video_channel, videoData.video_id)
     );
