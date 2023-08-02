@@ -148,18 +148,17 @@ async function renderChannelInfo(response) {
 
 }
 
-// 반응형 구독버튼
 const button = document.getElementById('channel-subscribes-btn');
 
 button.addEventListener('click', () => {
-    if (button.classList.contains('subscribed')) {
-      button.textContent = 'subscribes';
-      button.classList.remove('subscribed');
-    } else {
-      button.textContent = 'subscribing';
-      button.classList.add('subscribed');
-    }
-  });
+  if (button.classList.contains('subscribed')) {
+    button.textContent = 'SUBSCRIBE';
+    button.classList.remove('subscribed');
+  } else {
+    button.textContent = 'SUBSCRIBING';
+    button.classList.add('subscribed');
+  }
+});
 
 // 메인비디오 생성 함수
 async function renderChannelVideo(res) {
