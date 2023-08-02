@@ -259,6 +259,7 @@ function search() {
         alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
       } else {
         createVideosItem(totalList);
+        document.getElementById('search-bar').value = "";
       }
     });
   }
@@ -308,7 +309,8 @@ function enterSearch(e) {  // 엔터키 검색
       if (totalList.length == 0) {
         alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
       } else {
-        createVideosItem(totalList);
+        Promise.all(createVideosItem(totalList));
+        document.getElementById('search-bar').value = "";
       }
     });
   }
