@@ -23,6 +23,7 @@ body {
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
 }
 
 /* 로고 부분 */
@@ -274,13 +275,6 @@ a {
 
 /*  videolist    */
 
-@media screen and (max-width : 1000px){ /*아직 작동안됨*/
-    #channel-footer-videoList{
-        display:flex;
-        flex-direction: column;
-    }
-
-}
 
 /*플레이버튼*/
 
@@ -321,7 +315,7 @@ a {
 #channel-footer-videoList{
     width:100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
     column-gap: 10px;
     row-gap: 10px;
     color: white;
@@ -394,4 +388,45 @@ a {
 
 .channel-toolbar-class{
     padding: 10px;
+}
+#channel-title-subscribes{
+    display: flex;
+    align-items: center;
+}
+
+
+@media screen and (max-width:1024px) {
+    .channel-left-nav{
+        display: none;
+    }
+    #channel {
+        margin: 0;
+    }
+    .channel-body-container{
+        margin: 0;
+        padding: 0;
+    }
+    .playlist_box{
+        padding: 0;
+    }
+    #channel-cover{
+        margin: 0;
+    }
+    .channel-mainInfo{
+        display: flex;
+        align-items:center;
+        flex-direction: column;
+    }
+    #channel-title-profile img{
+        display: none;
+    }
+    #channel-videos-container{
+        margin-top: 60px;
+    }
+    #channel-title-subscribes{
+        display: flex;
+        align-items: center;
+        margin-right:50px;
+    }
+    
 }
