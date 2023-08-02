@@ -326,7 +326,14 @@
 
 .info-channel-master p{
     display: block;
-    font-size: 18px;
+}
+
+.info-channel-name{
+    font-size: 21px;
+}
+
+.info-channel-sub{
+    font-size: 17px;
 }
 
 .info-channel-info {
