@@ -148,6 +148,18 @@ async function renderChannelInfo(response) {
 
 }
 
+const button = document.getElementById('channel-subscribes-btn');
+
+button.addEventListener('click', () => {
+  if (button.classList.contains('subscribed')) {
+    button.textContent = 'SUBSCRIBE';
+    button.classList.remove('subscribed');
+  } else {
+    button.textContent = 'SUBSCRIBING';
+    button.classList.add('subscribed');
+  }
+});
+
 // 메인비디오 생성 함수
 async function renderChannelVideo(res) {
     let parent = document.querySelector(".channel-body-container")
