@@ -156,7 +156,7 @@ button.addEventListener('click', () => {
       button.textContent = 'subscribes';
       button.classList.remove('subscribed');
     } else {
-      button.textContent = 'already subscribes';
+      button.textContent = 'subscribing';
       button.classList.add('subscribed');
     }
   });
