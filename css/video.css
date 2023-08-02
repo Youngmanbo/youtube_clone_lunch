@@ -529,6 +529,15 @@ iframe {
     width: 400px;
 }
 
+.side-video-tags{
+    background-color: #4e4e4e;
+    padding: 8px;
+    color: #ffffff;
+    border-radius: 10px;
+    border: #bebebe solid 1px;
+    cursor: pointer;
+}
+
 .aside-span {
     display: block;
 }
@@ -657,10 +666,14 @@ iframe {
     flex-direction: column;
 }
 
+.userinfo{
+    display: flex;
+    align-items: center;
+}
+
 .container-comment{
     padding: 10px;
     display:flex;
-    justify-content: flex-start;
     align-items: center;
 }
 
