@@ -529,13 +529,16 @@ iframe {
     width: 400px;
 }
 
-.side-video-tags{
+.side-video-tags-all{
+    display: flex;
     background-color: #4e4e4e;
     padding: 8px;
     color: #ffffff;
     border-radius: 10px;
     border: #bebebe solid 1px;
     cursor: pointer;
+    margin-bottom: 10px;
+    align-items: flex-start;
 }
 
 .aside-span {
