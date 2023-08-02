@@ -8,8 +8,8 @@
 
 .main-section{
     display: flex;  /*내용물의 크기만큼만 가로로 정렬함+ 컬럼의 높이가 자동으로 맞음*/
-    justify-content: space-between;
-    flex-wrap: wrap; /*컨테이너가 더이상 아이템들을 한줄에 담을 공간 없을때 어케할건지 wrap은 밑으로 내려가게함*/
+    width: 100%;  /*컨테이너가 더이상 아이템들을 한줄에 담을 공간 없을때 어케할건지 wrap은 밑으로 내려가게함*/
+    justify-content: center;
 }
 
 .play-video{
@@ -17,7 +17,8 @@
 }
 
 .right-sidebar{
-    flex-basis: 30%;
+    width:40%;
+    /* flex-basis: 30%; */
 }
 
 .play-video video{
@@ -26,7 +27,6 @@
 
 .side-video-list{
     display: flex;
-    justify-content:space-between;
     margin-bottom: 8px;
 }
 
@@ -97,6 +97,13 @@
 
 
 /*사이드바 영상 글부분*/
+
+.video-info{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 .video-info h3{
     display: inline-block;
     
@@ -498,6 +505,30 @@ iframe {
 }
 
 /* 댓글 */
+
+.add-comment{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.add-comment > span > img{
+    width:40px;
+    height:40px;
+    margin-right:10px;
+}
+
+.add-comment > input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color:#007bff;
+    padding-left: 10px;
+}
+
+.add-comment :hover{
+    border-color:#0000ff;
+}
 
 .comments{
     display: flex;
