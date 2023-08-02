@@ -195,6 +195,8 @@
     outline: none;
     width: 100%;
     border: none;
+    height: 100%;
+    padding-left: 10px;
 }/* 검색 부분 */
 
 
@@ -217,7 +219,8 @@
     margin-left: 0.4rem;
     cursor: pointer;
 
-}/* 상단 우측 부분 */
+}
+/* 상단 우측 부분 */
 
 
 
@@ -633,32 +636,36 @@ iframe {
 }
 
 
-@media all and (min-width: 650px) {
-    .content {
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
+@media all and (max-width: 1024px) {
+
+    .main-section{
+        width:100%;
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
-    .aside {
-      width: 350px;
-      flex: none;
+    .main-section > .play-video{
+        padding:0;
     }
-    .main { 
-      width: 640px;
-      flex: none;
-      margin-right: 8px;
+    .play-video > video{
+        padding:0;
     }
-    iframe {
-      width: 640px;
-      height: 350px;
+    .right-sidebar{
+        width: 100%;
     }
-    .btn-upload,
-    .btn-notifications,
-    .comments {
-      display: block;
+    .side-video-list{
+        display:flex;
+        justify-content: center;
     }
-  }
+    .comments{
+        display:none;
+    }
+    .play-video-container{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+    }
+}
 * {
     margin: 0;
     padding: 0;
