@@ -31,6 +31,15 @@ async function getVideoList() {
     return response.json();
 }
 
+// 조회수를 간략하게 표현하는 함수
+function formatViews(views) {
+    if (views >= 1000000) {
+      return (views / 1000000).toFixed(1) + 'M';
+    } else if (views >= 1000) {
+      return (views / 1000).toFixed(1) + 'K';
+    }
+    return views;
+  }
 
 //videoInfoList 의 video_id값을 추출하여 한꺼번에 requests를 보내는 함수
 
@@ -50,56 +59,50 @@ async function getVideoInfoList(res) {
 //channel videoList html 생성 함수
 
 async function renderVideo(info) {
-
-
     let parent = document.querySelector('#channel-footer-videoList');
-
+  
     // 비디오 컨테이너
-
     let videoDiv = document.createElement('div');
     videoDiv.className = 'video-container';
-
+  
     let video = document.createElement('video');
     video.src = info.video_link;
     video.poster = info.image_link;
     video.setAttribute('controls', "");
     video.setAttribute('autoplay', "");
     video.addEventListener('click', goVideo);
-
+  
     let infoDiv = document.createElement('div');
-    infoDiv.className = 'video-info'
+    infoDiv.className = 'video-info';
     infoDiv.onclick = movePage;
     info.value = info.video_channel;
-
+  
     let titleTag = document.createElement('h3');
     titleTag.innerText = info.video_title;
     titleTag.value = info.video_channel;
-
+  
     let container = document.createElement('div');
     container.className = 'view-date';
-
+  
+    // 조회수를 간략하게 표시
     let viewTag = document.createElement('span');
-    viewTag.innerText = "조회수 " + info.views + "회" + ' . ';
+    viewTag.innerText = "조회수 " + formatViews(info.views) + ' . ';
     viewTag.value = info.video_channel;
-
+  
     let date = document.createElement('span');
     date.innerText = info.upload_date;
     date.value = info.video_channel;
-
-
+  
     videoDiv.appendChild(video);
-
+  
     infoDiv.appendChild(titleTag);
     container.appendChild(viewTag);
     container.appendChild(date);
     infoDiv.appendChild(container);
-
+  
     videoDiv.appendChild(infoDiv);
     parent.appendChild(videoDiv);
-
-
-
-}
+  }
 
 
 // channelInfo requests 함수
@@ -124,29 +127,29 @@ async function getChannelInfo(res = 'oreumi') {
 
 // 채널 정보 html 생성 및 수정 함수
 async function renderChannelInfo(response) {
-
-
     let parent = document.querySelector('#channel-title-profile');
-    console.log(parent);
+  
     let channelCover = document.querySelector("#channel-cover > img");
     channelCover.src = response.channel_banner;
-
+  
     let channelProfile = document.querySelector('#channel-title-profile > .profile-container > img');
     channelProfile.src = response.channel_profile;
-
+  
     let infoDiv = document.createElement('div');
     infoDiv.className = "channel-infos";
-
-    let subs = document.createElement("span")
+  
+    let subs = document.createElement("span");
     let channelName = document.createElement("h2");
-    subs.innerText = response.subscribers + " 구독";
+    let totalViews = response.videos.reduce((acc, video) => acc + video.views, 0);
+  
+    subs.innerText = formatViews(response.subscribers) + " 구독, 총 조회수 " + formatViews(totalViews);
+    channelName.innerText = response.channel_name;
 
     infoDiv.appendChild(channelName);
     infoDiv.appendChild(subs);
 
     parent.appendChild(infoDiv);
-
-}
+  }
 
 const button = document.getElementById('channel-subscribes-btn');
 
