@@ -141,10 +141,25 @@
                     <input id="channel-toolbar-search" class="channel-filters" placeholder="검색" />
                 </div>
             </header>
+            
             <!-- body부분 동영상들 -->
             <article class="channel-body-container"></article>
-            <footer id="channel-footer-videoList"></footer>
-        </article>
+            <!-- 재생버튼 및 border -->
+              <div id="playlist_box" class="playlist_box">
+                <div id="playlist__info" class="playlist__info">
+                  <div class="playlist__title">재생목록</div>
+                  <button>
+                      <div>
+                          <img src="../imgs/channel/play.png" alt="">
+                      </div>
+                      <div>PLAY ALL</div>
+                  </button>
+                </div>
+                <!-- 하단에 비디오 리스트 -->
+                <footer id="channel-footer-videoList"></footer>
+            </div>
+              
+          </article>
 
 
     </section>
