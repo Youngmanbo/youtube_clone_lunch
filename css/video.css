@@ -156,7 +156,7 @@
 
 .add-comment{
     margin-left: 1rem;
-    margin-bottom:2rem;
+    margin-bottom:1rem;
     margin-right:90px;
 }
 
@@ -630,11 +630,25 @@ iframe {
 
 .username{
     font-weight: 500;
-    color: #167ac6;
+    color: #ffffff;
     margin-right: 7px;
+    font-weight: bold;
 }
 
 .Time{
+    color: #6b6b6b;
+    font-size: 14px;
+}
+
+.default-comments{
+    margin-top: 0.2rem;
+}
+
+.user-info-container{
+    display: flex;
+}
+
+.user-info-container span{
     color: #6b6b6b;
     font-size: 14px;
 }
@@ -724,6 +738,11 @@ iframe {
     display: flex;
     align-items: center;
     align-content: center;
+}
+
+.middle-comments{
+    display: flex;
+    flex-direction: column;
 }
 
 .container-comment{
@@ -821,6 +840,11 @@ video{
         display:none;
     }
 
+    .video-mainInfo{
+        margin-top: 1rem;
+        margin-left: 0.2rem;
+    }
+
     .main-section{
         width:100%;
         display:flex;
@@ -830,6 +854,11 @@ video{
     .main-section > .play-video{
         padding:0;
     }
+
+    .play-video{
+        width: 98%;
+    }
+
     .play-video > video{
         padding-top:60px;
         margin: 0;
@@ -839,6 +868,7 @@ video{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
         width: 100%;
+        margin-top: 2rem;
     }
     .side-video-list{
         padding-left: 10px;
@@ -848,16 +878,20 @@ video{
         justify-content: center;
         align-items: center;
     }
+
+    .side-video-tags{
+        visibility: hidden;
+    }
+
     .side-video-list > video{
-        width:100%;
+        width:95%;
+        border :rgba(192, 192, 192, 0.1) solid 1px;
     }
     .side-video-list > .video-info{
-        width:400px;
+        width:450px;
         height:120px;
     }
-    .comments{
-        display:none;
-    }
+
     .play-video-container > .play-video{
         display: flex;
         flex-direction: column;
@@ -865,18 +899,32 @@ video{
 
     }
     .video-info > h3{
-        margin-bottom: 10px;
-        font-size: 30px;
+        margin-bottom: 5px;
+        font-size: 24px;
     }
 
     .user-logo {
-        width: 100%;
-        padding: 10px;
-        margin-left: 0;
+        width: 95%;
+        padding: 20px 0px 20px 0px;
+        margin-left: 1rem;
         justify-content: space-between; /* 반응형에서 이미지와 버튼을 양쪽 끝에 배치하기 위해 추가합니다. */
       }
     
       .Subscribes-Btn {
         margin-left: 0; /* 버튼의 margin-left를 초기화하여 왼쪽 정렬됩니다. */
+        margin-right: 0.5rem;
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
       }
+
+    .comments{
+        margin-left: 0.2rem;
+    }
+
+    .footer-links{
+        margin-left: 0;
+    }
+    .footer-links2{
+        margin-left: 0;
+    }
 }
