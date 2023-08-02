@@ -93,6 +93,14 @@ body {
 }
 
 /* left-nav (s) */
+
+
+
+.channel-left-nav > p{
+    color: rgba(170, 170, 170, 0.7);
+    margin-left:1rem;
+    margin-bottom:0.3rem;
+}
 .channel-left-nav{
     position: fixed;
     top: 56px;
@@ -338,7 +346,7 @@ a {
     
 }
 .video-info{
-    padding: 10px;
+    padding: 18px;
 }
 
 
