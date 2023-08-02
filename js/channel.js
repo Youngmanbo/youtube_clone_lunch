@@ -15,6 +15,9 @@ async function getChannel(param = 'oreumi') {
 //videoInfo reqeust 함수
 
 async function getVideo(id = 0) {
+    if (id == undefined){
+        id = 0;
+    }
     url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
     const response = await fetch(url);
     return response.json();
@@ -60,6 +63,8 @@ async function renderVideo(info) {
     video.src = info.video_link;
     video.poster = info.image_link;
     video.setAttribute('controls', "");
+    video.setAttribute('autoplay', "");
+    video.addEventListener('click', goVideo);
 
     let infoDiv = document.createElement('div');
     infoDiv.className = 'video-info'
@@ -99,7 +104,12 @@ async function renderVideo(info) {
 
 // channelInfo requests 함수
 async function getChannelInfo(res = 'oreumi') {
+    console.log(res);
 
+
+    if (res == undefined){
+        res = 'oreumi';
+    }
     Url = `http://oreumi.appspot.com/channel/getChannelInfo?video_channel=${res}`
     const response = await fetch(Url, {
         method: 'POST',
@@ -114,6 +124,7 @@ async function getChannelInfo(res = 'oreumi') {
 
 // 채널 정보 html 생성 및 수정 함수
 async function renderChannelInfo(response) {
+
 
     let parent = document.querySelector('#channel-title-profile');
     console.log(parent);
@@ -136,6 +147,18 @@ async function renderChannelInfo(response) {
     parent.appendChild(infoDiv);
 
 }
+
+const button = document.getElementById('channel-subscribes-btn');
+
+button.addEventListener('click', () => {
+  if (button.classList.contains('subscribed')) {
+    button.textContent = 'SUBSCRIBE';
+    button.classList.remove('subscribed');
+  } else {
+    button.textContent = 'SUBSCRIBING';
+    button.classList.add('subscribed');
+  }
+});
 
 // 메인비디오 생성 함수
 async function renderChannelVideo(res) {
@@ -161,39 +184,6 @@ function movePage(e) {
     newUrl = sp[0] + '?' + `channel=${e.target.value}`;
     window.location.replace(newUrl);
 }
-
-
-
-//window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
-
-window.onload = function () {
-    let channel = getChannel();
-    let videoInfos = getVideoInfoList(channel);
-    let channelInfo = getChannelInfo();
-
-    getChannelInfo().then(async (channelInfo) => {
-        renderChannelInfo(channelInfo);
-    })
-
-    getVideo(0).then(async res => {
-        renderChannelVideo(res);
-    })
-
-    videoInfos.then(async data => {
-        let promises = data.map(async el => {
-            return await renderVideo(el);
-        });
-        Promise.all(promises);
-    })
-
-}
-
-
-// 메뉴 클릭시 보이고 안보이게
-
-imgtag = document.getElementsByTagName('img');
-menu_logo = imgtag[0];
-menu_logo.addEventListener('click', nav_display);
 
 function nav_display() {
     let nav = document.getElementsByClassName('channel-left-nav')[0];
@@ -222,3 +212,75 @@ function nav_display() {
 
     }
 }
+
+//도메인에서 paremeter 추출 함수
+
+function getParam(){
+    let result = {};
+    let url = window.location.href;
+    let params = url.split("?")[1];
+    if (params == undefined){
+        return 'oreumi';
+    }
+    params = params.split("&");
+    params.forEach( e =>{
+        let param = e.split('=');
+        console.log(param);
+        result[param[0]] = param[1];
+    })
+    return result;
+
+}
+//---------- 비디오 누르면 비디오 채널로 이동------------
+function goVideo(e) {
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("html")[0];
+    newUrl = split_url + "html/video.html";
+    let temp = e.target.currentSrc.split('_');
+  
+    let idx = temp[1].split('.');
+    newUrl += `?id=${idx[0]}`;
+    window.location.replace(newUrl);
+  }
+
+
+function go_home(){
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("html")[0];
+    newUrl = split_url + "html/home.html";
+    window.location.replace(newUrl);
+}
+
+//window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
+window.onload = async () => {
+    let params = getParam();
+    let channel = getChannel(params['channel']);
+    let videoInfos = getVideoInfoList(channel);
+  
+    getChannelInfo(params['channel']).then(async (chinfo) => {
+      renderChannelInfo(chinfo);
+    })
+  
+    videoInfos.then(async data => {
+      // 조회수를 기준으로 내림차순으로 비디오 데이터를 정렬
+      data.sort((a, b) => b.views - a.views);
+  
+      let mainVideo = data[0]; // 가장 조회수가 높은 비디오를 메인 비디오로 설정
+      renderChannelVideo(mainVideo);
+  
+      let promises = data.map(async el => {
+        return await renderVideo(el);
+      });
+      Promise.all(promises);
+    })
+  
+    let home = document.querySelector(".links");
+    home.addEventListener('click', go_home);
+  }
+// 메뉴 클릭시 보이고 안보이게
+
+imgtag = document.getElementsByTagName('img');
+menu_logo = imgtag[0];
+menu_logo.addEventListener('click', nav_display);
+
+
