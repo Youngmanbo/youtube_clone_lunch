@@ -717,17 +717,17 @@ iframe {
 }
 
 .comments{
-    display: flex;
-    flex-direction: column;
+    display: block;
 }
 
 .userinfo{
-    display: block;
+    display: flex;
     align-items: center;
     align-content: center;
 }
 
 .container-comment{
+    display: flex;
     padding: 10px;
     align-items: center;
 }
