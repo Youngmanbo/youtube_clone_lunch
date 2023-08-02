@@ -316,6 +316,7 @@ function enterSearch(e) {  // 엔터키 검색
   }
 }
 
+// 검색 후 동영상 추가
 async function createVideosItem(videoDatas) {
   clear_videoList();
   let videolist = videoDatas.map((vid) =>

@@ -15,7 +15,7 @@ async function getChannel(param = 'oreumi') {
 //videoInfo reqeust 함수
 
 async function getVideo(id = 0) {
-    if (id == undefined){
+    if (id == undefined) {
         id = 0;
     }
     url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
@@ -107,7 +107,7 @@ async function getChannelInfo(res = 'oreumi') {
     console.log(res);
 
 
-    if (res == undefined){
+    if (res == undefined) {
         res = 'oreumi';
     }
     Url = `http://oreumi.appspot.com/channel/getChannelInfo?video_channel=${res}`
@@ -151,13 +151,13 @@ async function renderChannelInfo(response) {
 const button = document.getElementById('channel-subscribes-btn');
 
 button.addEventListener('click', () => {
-  if (button.classList.contains('subscribed')) {
-    button.textContent = 'SUBSCRIBE';
-    button.classList.remove('subscribed');
-  } else {
-    button.textContent = 'SUBSCRIBING';
-    button.classList.add('subscribed');
-  }
+    if (button.classList.contains('subscribed')) {
+        button.textContent = 'SUBSCRIBE';
+        button.classList.remove('subscribed');
+    } else {
+        button.textContent = 'SUBSCRIBING';
+        button.classList.add('subscribed');
+    }
 });
 
 // 메인비디오 생성 함수
@@ -185,7 +185,7 @@ function movePage(e) {
     window.location.replace(newUrl);
 }
 
-function nav_display() {
+function reloadPage() { // 새로고침 시 제자리로
     let nav = document.getElementsByClassName('channel-left-nav')[0];
     let navStyle = getComputedStyle(nav).display;
 
@@ -194,20 +194,37 @@ function nav_display() {
     let idChannelFooterVideoList = document.getElementById('channel-footer-videoList');
 
     let classChannelBodyContainer = document.getElementsByClassName('channel-body-container')[0];
+    let playListBox = document.getElementById('playlist_box');
+
+    idChannelCover.style.marginLeft = "240px";
+    idChannel.style.marginLeft = "240px";
+    playListBox.style.paddingLeft = "255px";
+    classChannelBodyContainer.style.paddingLeft = "250px";
+}
+
+function nav_display() {
+    let nav = document.getElementsByClassName('channel-left-nav')[0];
+    let navStyle = getComputedStyle(nav).display;
+
+    let idChannelCover = document.getElementById('channel-cover');
+    let idChannel = document.getElementById('channel');
+
+    let classChannelBodyContainer = document.getElementsByClassName('channel-body-container')[0];
+    let playListBox = document.getElementById('playlist_box');
 
     if (navStyle == "none") {
         nav.style.display = "block";
         // 다른부분들 밀기
         idChannelCover.style.marginLeft = "240px";
         idChannel.style.marginLeft = "240px";
-        idChannelFooterVideoList.style.paddingLeft = "255px";
+        playListBox.style.paddingLeft = "255px";
         classChannelBodyContainer.style.paddingLeft = "250px";
     } else {
         nav.style.display = "none";
         // 다른부분들 밀기
         idChannelCover.style.marginLeft = "0px";
         idChannel.style.marginLeft = "0px";
-        idChannelFooterVideoList.style.paddingLeft = "15px";
+        playListBox.style.paddingLeft = "15px";
         classChannelBodyContainer.style.paddingLeft = "10px";
 
     }
@@ -215,15 +232,15 @@ function nav_display() {
 
 //도메인에서 paremeter 추출 함수
 
-function getParam(){
+function getParam() {
     let result = {};
     let url = window.location.href;
     let params = url.split("?")[1];
-    if (params == undefined){
+    if (params == undefined) {
         return 'oreumi';
     }
     params = params.split("&");
-    params.forEach( e =>{
+    params.forEach(e => {
         let param = e.split('=');
         console.log(param);
         result[param[0]] = param[1];
@@ -237,14 +254,14 @@ function goVideo(e) {
     let split_url = curruntUrl.split("html")[0];
     newUrl = split_url + "html/video.html";
     let temp = e.target.currentSrc.split('_');
-  
+
     let idx = temp[1].split('.');
     newUrl += `?id=${idx[0]}`;
     window.location.replace(newUrl);
-  }
+}
 
 
-function go_home(){
+function go_home() {
     let curruntUrl = window.location.href;
     let split_url = curruntUrl.split("html")[0];
     newUrl = split_url + "html/home.html";
@@ -284,4 +301,5 @@ imgtag = document.getElementsByTagName('img');
 menu_logo = imgtag[0];
 menu_logo.addEventListener('click', nav_display);
 
-
+// 새로고침 시 nav 다시 나오기에 다른 div들 위치 조정
+window.addEventListener('beforeunload', reloadPage);
