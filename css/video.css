@@ -635,48 +635,7 @@ iframe {
     height:60px;
 }
 
-/*화면 비율이 작아졌을때 처리*/
-@media all and (max-width: 1024px) {
-    #search-bar{
-        display:none;
-    }
 
-    .main-section{
-        width:100%;
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .main-section > .play-video{
-        padding:0;
-    }
-    .play-video > video{
-        margin: 0;
-        padding-right:10px;
-    }
-    .right-sidebar{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-    .side-video-list{
-        display:flex;
-        justify-content: center;
-    }
-    .side-video-list > .video-info{
-        width:200px;
-        height:150px;
-    }
-    .comments{
-        display:none;
-    }
-    .play-video-container > .play-video{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-
-    }
-}
 * {
     margin: 0;
     padding: 0;
@@ -693,6 +652,7 @@ header {
     border-color:#303030;
     color: white;
     height: 56px;
+    z-index: 1;
 }
 .navigations{
     display: flex;
@@ -752,4 +712,50 @@ video{
     display:flex;
     justify-content: space-between;
     flex-direction: row;
+}
+
+
+/*화면 비율이 작아졌을때 처리*/
+@media all and (max-width: 1024px) {
+    #search-bar{
+        display:none;
+    }
+
+    .main-section{
+        width:100%;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .main-section > .play-video{
+        padding:0;
+    }
+    .play-video > video{
+        padding-top:60px;
+        margin: 0;
+        padding-right:10px;
+    }
+    .right-sidebar{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .side-video-list{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .side-video-list > .video-info{
+        width:200px;
+        height:150px;
+    }
+    .comments{
+        display:none;
+    }
+    .play-video-container > .play-video{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+    }
 }
