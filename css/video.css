@@ -710,8 +710,8 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
+    margin-right:5px;
+}   
 .icons{
     display: flex;
     flex-direction: row;
