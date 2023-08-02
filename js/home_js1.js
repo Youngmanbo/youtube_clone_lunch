@@ -18,11 +18,42 @@ async function getVideoList() {
 async function getVideo(id) {
   const url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
   const response = await fetch(url);
-  return response.json();
+  return await response.json();
 }
+
+
+let channelCache = {};
+
+// 채널 정보
+async function getChannelInfo(channelName) {
+  // 캐시에 채널 정보가 있는지 확인
+  if (channelCache[channelName]) {
+    return channelCache[channelName];
+  }
+
+  let url = `http://oreumi.appspot.com/channel/getChannelInfo`;
+
+  let response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ video_channel: channelName }),
+  });
+
+  let channelData = await response.json();
+
+  // 캐시에 채널 정보 저장
+  channelCache[channelName] = channelData;
+
+  return channelData;
+}
+
 
 // 동영상 데이터를 기반으로 동영상 아이템 엘리먼트를 생성하는 함수
 async function createVideoItem(videoData) {
+
+  let channelInfo = await getChannelInfo(videoData.video_channel);
 
   const videoContainer = document.querySelector(".body-container");
 
@@ -44,6 +75,10 @@ async function createVideoItem(videoData) {
   const title = document.createElement("h2");
   title.textContent = videoData.video_title;
 
+  const channelImg = document.createElement("img");
+  channelImg.src = channelInfo.channel_profile;
+  channelImg.classList.add('profile_channel_img');
+
   const channel = document.createElement("p");
   channel.textContent = videoData.video_channel;
 
@@ -54,6 +89,7 @@ async function createVideoItem(videoData) {
 
   videoItem.appendChild(video);
   videoInfoTag.appendChild(title);
+  videoInfoTag.appendChild(channelImg);
   videoInfoTag.appendChild(channel);
   videoInfoTag.appendChild(views);
   videoInfoTag.addEventListener('click', (event) =>
@@ -192,8 +228,13 @@ function search() {
 
 async function createVideosItem(videoDatas) {
   clear_videoList();
-  for (i in videoDatas) {
-    let videoData = videoDatas[i];
+  let videolist = videoDatas.map((vid) =>
+    getVideo(vid.video_id)
+  );
+  let videoInfoList = await Promise.all(videolist);
+
+  for (let i = 0; i < videoInfoList.length; i++) {
+    let videoData = videoInfoList[i];
     const videoContainer = document.querySelector(".body-container");
 
     const videoItem = document.createElement("div");
@@ -206,7 +247,6 @@ async function createVideosItem(videoDatas) {
     video.controls = true;
     video.preload = "metadata";
     video.poster = videoData.image_link;
-    // video.setAttribute('autoplay', "");
 
     const videoInfoTag = document.createElement("div");
     videoInfoTag.calssName = 'video-infos'
@@ -233,11 +273,12 @@ async function createVideosItem(videoDatas) {
     video.addEventListener('click', goVideo);
     videoContainer.appendChild(videoItem)
   }
+
 }
 
-function clear_videoList(){ //비디오들 화면 다 지우기
+function clear_videoList() { //비디오들 화면 다 지우기
   let videoItems = document.getElementsByClassName('body-container')[0];
-  while(videoItems.hasChildNodes()){
+  while (videoItems.hasChildNodes()) {
     videoItems.removeChild(videoItems.firstChild);
   }
 }
