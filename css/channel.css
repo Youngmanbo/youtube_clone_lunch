@@ -35,6 +35,7 @@ body {
 #channel-subscribes-btn{
     background-color: #ff0000;
     text-align: center;
+    padding: 12px 12px 12px 12px;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -213,9 +214,6 @@ body {
     
 }
 
-#channel-subscribes-btn{
-    all:unset;
-}
 
 /*tool bar*/
 a {
