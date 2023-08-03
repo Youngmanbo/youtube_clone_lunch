@@ -1,4 +1,4 @@
-
+let channelTitleImg = "";
 
 // channel request 함수
 async function getChannel(param) {
@@ -134,6 +134,7 @@ async function renderChannelInfo(response) {
 
     let channelProfile = document.querySelector('#channel-title-profile > .profile-container > img');
     channelProfile.src = response.channel_profile;
+    channelTitleImg = response.channel_profile;
 
     let infoDiv = document.createElement('div');
     infoDiv.className = "channel-infos";
@@ -158,6 +159,14 @@ button.addEventListener('click', () => {
     buttonText = button.innerHTML;
     if(buttonText == 'SUBSCRIBES'){
         button.innerHTML = 'SUBSCRIBING';
+        let sub = document.getElementById('escape').parentElement;
+        let aTag = document.createElement('a');
+        aTag.className = 'links';
+        let imgTag = document.createElement('img');
+        imgTag.src = channelTitleImg;
+        aTag.appendChild(imgTag);
+        aTag.append(getParam());
+        sub.parentNode.insertBefore(aTag, sub.nextSibling);
     }else{
         button.innerHTML = 'SUBSCRIBES';
     }
