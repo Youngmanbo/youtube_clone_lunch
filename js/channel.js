@@ -1,7 +1,7 @@
 
 
 // channel request 함수
-async function getChannel(param = 'oreumi') {
+async function getChannel(param) {
     Url = `http://oreumi.appspot.com/channel/getChannelVideo?video_channel=${param}`
     const response = await fetch(Url, {
         method: 'POST',
@@ -104,7 +104,7 @@ async function renderVideo(info) {
 
 
 // channelInfo requests 함수
-async function getChannelInfo(res = 'oreumi') {
+async function getChannelInfo(res) {
     console.log(res);
 
 
@@ -190,11 +190,13 @@ function movePage(e) {
 //window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
 
 window.onload = function () {
-    let channel = getChannel();
+    let channel = getChannel(getParam());
     let videoInfos = getVideoInfoList(channel);
-    let channelInfo = getChannelInfo();
+    // let channelInfo = getChannelInfo(getParam());
 
-    getChannelInfo().then(async (channelInfo) => {
+    
+
+    getChannelInfo(getParam()).then(async (channelInfo) => {
         renderChannelInfo(channelInfo);
     })
 
@@ -261,4 +263,13 @@ function nav_display() {
         classChannelBodyContainer.style.paddingLeft = "10px";
 
     }
+}
+
+// channel 매개변수 값 가져오기
+function getParam(){
+    let result = {};
+    let url = new URL(window.location.href);
+    let param = url.searchParams;
+    return  param.get('channel');
+
 }
