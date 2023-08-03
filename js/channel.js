@@ -1,4 +1,4 @@
-
+let channelTitleImg = "";
 
 // channel request 함수
 async function getChannel(param) {
@@ -34,12 +34,12 @@ async function getVideoList() {
 // 조회수를 간략하게 표현하는 함수
 function formatViews(views) {
     if (views >= 1000000) {
-      return (views / 1000000).toFixed(1) + 'M';
+        return (views / 1000000).toFixed(1) + 'M';
     } else if (views >= 1000) {
-      return (views / 1000).toFixed(1) + 'K';
+        return (views / 1000).toFixed(1) + 'K';
     }
     return views;
-  }
+}
 
 //videoInfoList 의 video_id값을 추출하여 한꺼번에 requests를 보내는 함수
 
@@ -60,11 +60,11 @@ async function getVideoInfoList(res) {
 
 async function renderVideo(info) {
     let parent = document.querySelector('#channel-footer-videoList');
-  
+
     // 비디오 컨테이너
     let videoDiv = document.createElement('div');
     videoDiv.className = 'video-container';
-  
+
     let video = document.createElement('video');
     video.src = info.video_link;
     video.poster = info.image_link;
@@ -74,33 +74,37 @@ async function renderVideo(info) {
     infoDiv.className = 'video-info';
     infoDiv.onclick = movePage;
     info.value = info.video_channel;
-  
+
     let titleTag = document.createElement('h3');
     titleTag.innerText = info.video_title;
     titleTag.value = info.video_channel;
-  
+
     let container = document.createElement('div');
     container.className = 'view-date';
-  
+
     // 조회수를 간략하게 표시
     let viewTag = document.createElement('span');
     viewTag.innerText = "조회수 " + formatViews(info.views) + ' . ';
     viewTag.value = info.video_channel;
-  
+
     let date = document.createElement('span');
     date.innerText = info.upload_date;
     date.value = info.video_channel;
-  
+
     videoDiv.appendChild(video);
-  
+
     infoDiv.appendChild(titleTag);
     container.appendChild(viewTag);
     container.appendChild(date);
     infoDiv.appendChild(container);
-  
+
     videoDiv.appendChild(infoDiv);
     parent.appendChild(videoDiv);
-  }
+
+    videoDiv.addEventListener('click', (event) =>
+        goVideo(event, info.video_channel, info.video_id)
+    );
+}
 
 
 // channelInfo requests 함수
@@ -124,21 +128,22 @@ async function getChannelInfo(res) {
 async function renderChannelInfo(response) {
 
     let parent = document.querySelector('#channel-title-profile');
-  
+
     let channelCover = document.querySelector("#channel-cover > img");
     channelCover.src = response.channel_banner;
-  
+
     let channelProfile = document.querySelector('#channel-title-profile > .profile-container > img');
     channelProfile.src = response.channel_profile;
-  
+    channelTitleImg = response.channel_profile;
+
     let infoDiv = document.createElement('div');
     infoDiv.className = "channel-infos";
-  
+
     let subs = document.createElement("span");
     let channelName = document.createElement("h2");
     // let totalViews = response.videos.reduce((acc, video) => acc + video.views, 0);
-  
-    subs.innerText = formatViews(response.subscribers) + " 구독" ;//+ formatViews(totalViews);
+
+    subs.innerText = formatViews(response.subscribers) + " 구독";//+ formatViews(totalViews);
     channelName.innerText = response.channel_name;
 
     infoDiv.appendChild(channelName);
@@ -151,14 +156,22 @@ async function renderChannelInfo(response) {
 const button = document.getElementById('channel-subscribes-btn');
 
 button.addEventListener('click', () => {
-    button
-  if (button.classList.contains('subscribed')) {
-    button.textContent = 'SUBSCRIBE';
-    button.classList.remove('subscribed');
-  } else {
-    button.textContent = 'SUBSCRIBING';
-    button.classList.add('subscribed');
-  }
+    buttonText = button.innerHTML;
+    if(buttonText == 'SUBSCRIBES'){
+        button.innerHTML = 'SUBSCRIBING';
+        let sub = document.getElementById('escape').parentElement;
+        let aTag = document.createElement('a');
+        aTag.className = 'links';
+        let imgTag = document.createElement('img');
+        imgTag.src = channelTitleImg;
+        aTag.appendChild(imgTag);
+        aTag.append(getParam());
+        aTag.setAttribute('id','newsubs');
+        sub.parentNode.insertBefore(aTag, sub.nextSibling);
+    }else{
+        button.innerHTML = 'SUBSCRIBES';
+        document.getElementById('newsubs').remove();
+    }
 });
 
 // 메인비디오 생성 함수
@@ -192,18 +205,19 @@ function movePage(e) {
 
 window.onload = function () {
     let parameter = getParam();
+    
     let channel = getChannel(parameter);
     let videoInfos = getVideoInfoList(channel);
     // let channelInfo = getChannelInfo(getParam());
-    
+
 
     getChannelInfo(parameter).then(async (channelInfo) => {
         renderChannelInfo(channelInfo);
     })
 
-    getChannel(parameter).then((videoList) =>{      // 체널 중에 views 가장 높은 동영상 
+    getChannel(parameter).then((videoList) => {      // 체널 중에 views 가장 높은 동영상 
         let mostView = videoList.reduce((prev, curr) => {
-            return prev.views > curr.views ? prev:curr;
+            return prev.views > curr.views ? prev : curr;
         });
         getVideo(mostView.video_id).then(async res => {
             renderChannelVideo(res);
@@ -272,9 +286,57 @@ function nav_display() {
 }
 
 // channel 매개변수 값 가져오기
-function getParam(){
+function getParam() {
     let url = new URL(window.location.href);
     let param = url.searchParams;
-    return  param.get('channel');
+    let parameter = param.get('channel');
+    if (parameter == null || parameter == undefined) {
+        parameter = 'oreumi';
+    }
+    return parameter;
+}
 
+//메인 동영상 클릭시 해당 video.html 이동
+document.getElementsByClassName('channel-body-container')[0].addEventListener('click', goMainVideo);
+function goMainVideo(e) {
+    let tagName = e.target.localName;
+    if (tagName == 'video' || tagName == 'h3' || tagName == 'h4') {
+        let curruntUrl = window.location.href;
+        let split_url = curruntUrl.split("html")[0];
+        newUrl = split_url + "html/video.html";
+        let videoTag = document.getElementsByClassName('channel-mainVideo')[0].childNodes[1];
+        let temp = videoTag.currentSrc.split('_')
+        let idx = temp[1].split('.');
+        newUrl += `?id=${idx[0]}`;
+        window.location.replace(newUrl);
+    }
+}
+
+
+function goVideo(event, videoChannel, videoId) {
+    let tagName = event.target.localName;
+    if (tagName == 'video' || tagName == 'h3' || tagName == 'span') {
+        let curruntUrl = window.location.href;
+        let split_url = curruntUrl.split("html")[0];
+        newUrl = split_url + "html/video.html";
+        newUrl += `?channel=${videoChannel}`;
+        newUrl += `&id=${videoId}`;
+        window.location.replace(newUrl);
+    }
+}
+
+
+document.getElementById('playAll-btn').addEventListener('click', playAll);
+
+function playAll() {
+    let videoChannel = getParam();
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("html")[0];
+    newUrl = split_url + "html/video.html";
+    let videoTag = document.getElementsByClassName('video-container')[0].childNodes[0];
+    let temp = videoTag.currentSrc.split('_')
+    let idx = temp[1].split('.');
+    newUrl += `?channel=${videoChannel}`;
+    newUrl += `&id=${idx[0]}`;
+    window.location.replace(newUrl);
 }
