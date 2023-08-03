@@ -79,7 +79,7 @@ async function renderVideo(info, id){
         video.src=info.video_link;
         video.poster = info.image_link;
         video.setAttribute('controls', "");
-        video.setAttribute('autoplay', "");
+        // video.setAttribute('autoplay', "");
     
         let infoDiv = document.createElement('div');
         infoDiv.className = 'video-info'
