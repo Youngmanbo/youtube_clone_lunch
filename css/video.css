@@ -72,10 +72,12 @@
 
 /* 좋아요 싫어요 등 아이콘들 한줄에 배치  */
 .user-logo img{
-    height: 50px;
+    height: 60px;
     margin-left: 4rem;
     margin-top: 1rem;
     border-radius: 50%;
+    cursor: pointer;
+    align-self: flex-start;
 }
 
 .behavior-box {
@@ -266,25 +268,33 @@
     align-items: center; /* 요소들을 세로로 중앙 정렬 */
   }
   
+  .user-logo-info{
+    flex: 1;
+  }
+
   .user-logo{
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 20px;
     padding-bottom: 20px;
     border-top: rgba(219, 219, 219, 0.2) solid 0.2px;
     border-bottom: rgba(219, 219, 219, 0.2) solid 0.2px;
+    width: 1050px;
+    margin-left: 65px;
   }
 
   
   /* 버튼 디자인 조정 */
   .Subscribes-Btn {
+    align-self: flex-end;
     background-color: #007bff;
     color: #fff;
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
     margin-left: 10px; /* 필요한 간격을 설정해줍니다. */
+    cursor: pointer;
   }
 
 /*  */
