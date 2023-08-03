@@ -151,6 +151,7 @@ async function renderChannelInfo(response) {
 const button = document.getElementById('channel-subscribes-btn');
 
 button.addEventListener('click', () => {
+    button
   if (button.classList.contains('subscribed')) {
     button.textContent = 'SUBSCRIBE';
     button.classList.remove('subscribed');
@@ -202,9 +203,9 @@ window.onload = function () {
 
     getChannel(parameter).then((videoList) =>{      // 체널 중에 views 가장 높은 동영상 
         let mostView = videoList.reduce((prev, curr) => {
-            return prev.views > curr.views ? prev.video_id:curr.video_id;
+            return prev.views > curr.views ? prev:curr;
         });
-        getVideo(mostView).then(async res => {
+        getVideo(mostView.video_id).then(async res => {
             renderChannelVideo(res);
         });
     })
@@ -272,7 +273,6 @@ function nav_display() {
 
 // channel 매개변수 값 가져오기
 function getParam(){
-    let result = {};
     let url = new URL(window.location.href);
     let param = url.searchParams;
     return  param.get('channel');
