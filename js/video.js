@@ -249,103 +249,99 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 
-    function getRandomPhotoPath(){
-        const photoPaths=[
-            "../imgs/team/ec.jpg",
-            "../imgs/team/kimziho.jpg",
-            "../imgs/team/lunchTeam.jpg",
-            "../imgs/team/nj.jpg",
-            "../imgs/team/ym.jpg",
-            "../imgs/team/youngM.jpg"
-        ];
+        function getRandomPhotoPath(){
+            const photoPaths=[
+                "../imgs/team/ec.jpg",
+                "../imgs/team/kimziho.jpg",
+                "../imgs/team/lunchTeam.jpg",
+                "../imgs/team/nj.jpg",
+                "../imgs/team/ym.jpg",
+                "../imgs/team/youngM.jpg"
+            ];
 
-            const randomIndex = Math.floor(Math.random() * photoPaths.length);
-            return photoPaths[randomIndex];
-        }
+                const randomIndex = Math.floor(Math.random() * photoPaths.length);
+                return photoPaths[randomIndex];
+            }
 
     
 
 
 
-    function addComment(){
-        const commentText = commentInput.value;
-        if(commentText.trim()===""){
-            return;
+        function addComment(){
+            const commentText = commentInput.value;
+            if(commentText.trim()===""){
+                return;
+            }
+            // 요부분 다시 수정하기
+            const commentContainer =document.createElement("div"); //<div class="comment">댓글들 </div>
+            commentContainer.classList.add("container-comment");
+
+            // const userImage=document.createElement("img");
+            // userImage.src=getRandomPhotoPath();
+            // userImage.alt="";
+
+            const username=document.createElement("div");
+            username.classList.add("username");
+            username.textContent="Lunch Group";
+
+
+            const timestamp=document.createElement("div");
+            //timestamp.textContent=" 3 minutes ago";
+            const currentTime=new Date();
+            timestamp.textContent=getTimeAgoString(currentTime);
+
+            const commentContent = document.createElement("div");
+            commentContent.textContent = commentText;
+
+            commentContainer.appendChild(userImage.cloneNode(true));
+            commentContainer.appendChild(username);
+            commentContainer.appendChild(timestamp);
+            commentContainer.appendChild(commentContent);
+
+            commentList.appendChild(commentContainer);
+
+            //댓글 오름차순
+            commentList.insertBefore(commentContainer, commentList.firstChild);
+
+            commentInput.value="";
+            userImage.src=getRandomPhotoPath();
+
         }
-        // 요부분 다시 수정하기
-        const commentContainer =document.createElement("div"); //<div class="comment">댓글들 </div>
-        commentContainer.classList.add("container-comment");
+        // 취소버튼
+        commentCancelButton.addEventListener("click", function(){
+            commentInput.value="";
+        });
 
-        // const userImage=document.createElement("img");
-        // userImage.src=getRandomPhotoPath();
-        // userImage.alt="";
+        //이미지가 로드되기 전에 js가 실행되서 => 이미지가 로드된 후에 js코드가 실행되게 하려고 이거 만듬
+        userImage.onload = function(){
+            const initialImageLoad = userImage.onload;
+            userImage.onload=null;
+            
+            if (initialUmageLoad){
+                initialUmageLoad();
+            }
+        };
 
-        const username=document.createElement("div");
-        username.classList.add("username");
-        username.textContent="Lunch Group";
-
-
-        const timestamp=document.createElement("div");
-        //timestamp.textContent=" 3 minutes ago";
-        const currentTime=new Date();
-        timestamp.textContent=getTimeAgoString(currentTime);
-
-        const commentContent = document.createElement("div");
-        commentContent.textContent = commentText;
-
-        commentContainer.appendChild(userImage.cloneNode(true));
-        commentContainer.appendChild(username);
-        commentContainer.appendChild(timestamp);
-        commentContainer.appendChild(commentContent);
-
-        commentList.appendChild(commentContainer);
-
-        //댓글 오름차순
-        commentList.insertBefore(commentContainer, commentList.firstChild);
-
-        commentInput.value="";
         userImage.src=getRandomPhotoPath();
 
-    }
-    // 취소버튼
-    commentCancelButton.addEventListener("click", function(){
-        commentInput.value="";
-    });
+        function getTimeAgoString(timestamp){
+            const currentTime = new Date();
+            const diffMillis=currentTime - timestamp;
 
-    //이미지가 로드되기 전에 js가 실행되서 => 이미지가 로드된 후에 js코드가 실행되게 하려고 이거 만듬
-    userImage.onload = function(){
-        const initialImageLoad = userImage.onload;
-        userImage.onload=null;
-        
-        if (initialUmageLoad){
-            initialUmageLoad();
+            const minutes = Math.floor(diffMillis / 60000);
+            if (minutes<1){
+                return "방금 전";
+            }else if (minutes < 60){
+                return `${minutes}분 전`;
+            }else if (minutes < 1440){
+                const hours=Math.floor(minutes/60);
+                return `${hours}시간 전`;
+            }else{
+                const days=Math.floor(minutes/1440);
+                return `${days}일 전`;
+            }
+
         }
-    };
-
-    userImage.src=getRandomPhotoPath();
-
-function getTimeAgoString(timestamp){
-    const currentTime = new Date();
-    const diffMillis=currentTime - timestamp;
-
-    const minutes = Math.floor(diffMillis / 60000);
-    if (minutes<1){
-        return "방금 전";
-    }else if (minutes < 60){
-        return `${minutes}분 전`;
-    }else if (minutes < 1440){
-        const hours=Math.floor(minutes/60);
-        return `${hours}시간 전`;
-    }else{
-        const days=Math.floor(minutes/1440);
-        return `${days}일 전`;
-    }
-
-}
-
-
-
-
 
 });
 
