@@ -14,7 +14,7 @@ async function getChannel(param) {
 
 //videoInfo reqeust 함수
 
-async function getVideo(id = 0) {
+async function getVideo(id) {
     if (id == undefined) {
         id = 0;
     }
@@ -136,9 +136,9 @@ async function renderChannelInfo(response) {
   
     let subs = document.createElement("span");
     let channelName = document.createElement("h2");
-    let totalViews = response.videos.reduce((acc, video) => acc + video.views, 0);
+    // let totalViews = response.videos.reduce((acc, video) => acc + video.views, 0);
   
-    subs.innerText = formatViews(response.subscribers) + " 구독, 총 조회수 " + formatViews(totalViews);
+    subs.innerText = formatViews(response.subscribers) + " 구독" ;//+ formatViews(totalViews);
     channelName.innerText = response.channel_name;
 
     infoDiv.appendChild(channelName);
@@ -190,18 +190,23 @@ function movePage(e) {
 //window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
 
 window.onload = function () {
-    let channel = getChannel(getParam());
+    let parameter = getParam();
+    let channel = getChannel(parameter);
     let videoInfos = getVideoInfoList(channel);
     // let channelInfo = getChannelInfo(getParam());
-
     
 
-    getChannelInfo(getParam()).then(async (channelInfo) => {
+    getChannelInfo(parameter).then(async (channelInfo) => {
         renderChannelInfo(channelInfo);
     })
 
-    getVideo(0).then(async res => {
-        renderChannelVideo(res);
+    getChannel(parameter).then((videoList) =>{      // 체널 중에 views 가장 높은 동영상 
+        let mostView = videoList.reduce((prev, curr) => {
+            return prev.views > curr.views ? prev.video_id:curr.video_id;
+        });
+        getVideo(mostView).then(async res => {
+            renderChannelVideo(res);
+        });
     })
 
     videoInfos.then(async data => {
