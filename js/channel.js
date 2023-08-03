@@ -155,7 +155,12 @@ async function renderChannelInfo(response) {
 const button = document.getElementById('channel-subscribes-btn');
 
 button.addEventListener('click', () => {
-    console.log(button);
+    buttonText = button.innerHTML;
+    if(buttonText == 'SUBSCRIBES'){
+        button.innerHTML = 'SUBSCRIBING';
+    }else{
+        button.innerHTML = 'SUBSCRIBES';
+    }
 });
 
 // 메인비디오 생성 함수
