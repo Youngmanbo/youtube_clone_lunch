@@ -71,13 +71,6 @@
 
 
 /* 좋아요 싫어요 등 아이콘들 한줄에 배치  */
-.user-logo img{
-    height: 50px;
-    margin-left: 4rem;
-    margin-top: 1rem;
-    border-radius: 50%;
-}
-
 .behavior-box {
     display: flex;
     justify-content:space-between;
@@ -266,25 +259,37 @@
     align-items: center; /* 요소들을 세로로 중앙 정렬 */
   }
   
+  .user-logo-info{
+    flex: 1;
+  }
+
   .user-logo{
     display: flex;
     align-items: center;
-    flex-direction: row;
-    margin-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 0px 20px 0px;
     border-top: rgba(219, 219, 219, 0.2) solid 0.2px;
     border-bottom: rgba(219, 219, 219, 0.2) solid 0.2px;
+    width: 1000px;
+    margin-top: 20px;
+    margin-left: 65px;
   }
 
+  .user-logo img{
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
   
   /* 버튼 디자인 조정 */
   .Subscribes-Btn {
-    background-color: #007bff;
+    background-color: #ff0000;
     color: #fff;
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
-    margin-left: 10px; /* 필요한 간격을 설정해줍니다. */
+    cursor: pointer;
+    margin-left: auto;
   }
 
 /*  */
@@ -608,8 +613,10 @@ iframe {
     border-top: none;
     border-left: none;
     border-right: none;
+    border-bottom: solid 0.5px;
     border-color:#6b6b6b;
     padding-left: 10px;
+    width: 950px;
 }
 
 .add-comment-input :hover{
@@ -808,4 +815,15 @@ video{
         margin-bottom: 10px;
         font-size: 20px;
     }
+
+    .user-logo {
+        width: 100%;
+        padding: 10px;
+        margin-left: 0;
+        justify-content: space-between; /* 반응형에서 이미지와 버튼을 양쪽 끝에 배치하기 위해 추가합니다. */
+      }
+    
+      .Subscribes-Btn {
+        margin-left: 0; /* 버튼의 margin-left를 초기화하여 왼쪽 정렬됩니다. */
+      }
 }
