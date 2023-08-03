@@ -35,6 +35,7 @@ body {
 #channel-subscribes-btn{
     background-color: #ff0000;
     text-align: center;
+    padding: 12px 12px 12px 12px;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -55,6 +56,8 @@ body {
     flex-direction: row;
     width: 60%;
     cursor: pointer;
+    border: 1px solid rgba(219, 219, 219, 0.2);
+    margin-right: 10px;
 }
 
 #search-bar {
@@ -62,7 +65,7 @@ body {
     color: white;
     border: none;
     outline: none;
-    width: 90%;
+    width: 100%;
 }
 
 #voice-search {
@@ -140,6 +143,7 @@ body {
 }
 
 .links img{
+    width: 25px;
     height: 25px;
     margin-right: 20px;
 }
@@ -213,9 +217,6 @@ body {
     
 }
 
-#channel-subscribes-btn{
-    all:unset;
-}
 
 /*tool bar*/
 a {
@@ -392,6 +393,7 @@ a {
     outline: none;
     height: 70%;
     width: 20%;
+    border: 1px solid rgba(242, 248, 252, 0.2);
 }
 
 .channel-toolbar-class{

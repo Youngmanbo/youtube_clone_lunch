@@ -53,7 +53,7 @@
     margin-top: 5rem;
 }
 .video-mainInfo h5,h3,h6{
-    margin-left: 3rem;
+    margin-left: 1rem;
 }
 .comments{
     margin-left: 3rem;
@@ -65,7 +65,9 @@
 
 /* 사이드 영상 조절 */
 .side-video-list video {
-    width:60%;
+    width:30%;
+    border: darkgrey solid 0.1px;
+    margin-bottom: 10px;
 }
 /*  */
 
@@ -98,12 +100,12 @@
 
 .video-info h3{
     display: inline-block;
-    
+    font-size: 18px;
 }
 
 .view-date {
     display: inline-block;
-    margin-left: 3rem;
+    margin-left: 1rem;
     
     
 }
@@ -179,6 +181,8 @@
     flex-direction: row;
     width: 60%;
     border: 1px solid rgba(219, 219, 219, 0.2);
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 #search-bar {
@@ -189,7 +193,13 @@
     border: none;
     height: 100%;
     padding-left: 10px;
-}/* 검색 부분 */
+}
+#voice-search {
+    float: right;
+    display: flex;
+    cursor: pointer;
+}
+/* 검색 부분 */
 
 
 /* 상단 우측 부분 */
@@ -259,12 +269,10 @@
     align-items: center; /* 요소들을 세로로 중앙 정렬 */
   }
   
-  .user-logo-info{
-    flex: 1;
-  }
 
   .user-logo{
-    display: flex;
+    display:inline-flex;
+    justify-content: space-between;
     align-items: center;
     padding: 20px 0px 20px 0px;
     border-top: rgba(219, 219, 219, 0.2) solid 0.2px;
@@ -278,7 +286,7 @@
     height: 60px;
     border-radius: 50%;
     cursor: pointer;
-    margin-right: 1rem;
+    margin-right: 800px;
   }
   
   /* 버튼 디자인 조정 */
@@ -289,7 +297,6 @@
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: auto;
   }
 
 /*  */
@@ -409,33 +416,7 @@ iframe {
 
 
 /* 검색 부분 */
-#home-search-div {
-    display: flex;
-    width : 60%;
-    justify-content: center;
-    flex-direction: row;
-}
 
-.search{
-    display: flex;
-    flex-direction: row;
-    width: 60%;
-    cursor: pointer;
-}
-
-#search-bar {
-    background-color: black;
-    color: white;
-    border: none;
-    outline: none;
-    width: 90%;
-}
-
-#voice-search {
-    float: right;
-    display: flex;
-    cursor: pointer;
-}
 /* 검색 부분 */
 
 /* left-nav (s) */
@@ -465,6 +446,7 @@ iframe {
 }
 
 .links img{
+    width: 25px;
     height: 25px;
     margin-right: 20px;
 }
@@ -707,18 +689,7 @@ header {
     align-items: center;
     padding: 10px;
 }
-.search-bar{
-    background-color: white;
-    height: 25px;
-}
-
-.search{
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right:5px;
-}   
+   
 .icons{
     display: flex;
     flex-direction: row;
@@ -813,7 +784,7 @@ video{
     }
     .video-info > h3{
         margin-bottom: 10px;
-        font-size: 20px;
+        font-size: 30px;
     }
 
     .user-logo {
@@ -823,6 +794,10 @@ video{
         justify-content: space-between; /* 반응형에서 이미지와 버튼을 양쪽 끝에 배치하기 위해 추가합니다. */
       }
     
+      .user-logo img {
+        margin-right: 700px;
+      }
+
       .Subscribes-Btn {
         margin-left: 0; /* 버튼의 margin-left를 초기화하여 왼쪽 정렬됩니다. */
       }

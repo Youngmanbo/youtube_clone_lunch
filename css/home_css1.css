@@ -61,6 +61,12 @@ body{
     flex-direction: row;
     width: 60%;
     border: 1px solid rgba(219, 219, 219, 0.2);
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#voice-search img{
+    cursor: pointer;
 }
 
 #search-bar {
@@ -71,6 +77,7 @@ body{
     border: none;
     padding-left: 10px;
 }/* 검색 부분 */
+
 
 
 /* 상단 우측 부분 */
@@ -213,6 +220,7 @@ section {
 }
 
 .links img{
+    width: 25px;
     height: 25px;
     margin-right: 20px;
 }
