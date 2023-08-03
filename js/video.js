@@ -236,12 +236,13 @@ function changeMain(e){
 
 //댓글 기능
 document.addEventListener("DOMContentLoaded", function(){
-    const writeComment = document.querySelectorAll('.writeComment'); //input태그 class만든거라서 html추가해야함
-    const commentButton = document.querySelectorAll('.commentButton'); //butten태그 클래스 html추가해야함
-    const newCommentList=document.querySelectorAll('.newCommentList'); //댓글을 추가할 div태그 html추가해야함
-    
-    commentButton.addEventListener("click", addComment);
-    writeComment.addEventListener("keydown", function(event){ //event는 뭐지?
+    const commentInput = document.querySelector('.add-comment-input input'); //input태그 class만든거라서 html추가해야함
+    const commentAddButton = document.querySelector('.comment-add'); //butten태그
+    const commentCancleButton=document.querySelector('.comment-cancle'); //취소버튼
+    const commentList=document.querySelector(".comment-list"); //댓글 추가시 list
+
+    commentAddButton.addEventListener("click", addComment);
+    commentInput.addEventListener("keydown", function(event){ 
         if(event.key === "Enter"){
             addComment();
         }
@@ -250,19 +251,23 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     function addComment(){
-        const commentText = writeComment.value;
+        const commentText = commentInput.value;
         if(commentText.trim()===""){
             return;
         }
-
-        const  commentElement =document.createElement("div");
+        // 요부분 다시 수정하기
+        const commentElement =document.createElement("div");
         commentElement.classList.add("comment");
         commentElement.textContent=commentText;
 
         commentList.appendChild(commentElement);
 
-        writeCommentInput.value="";
+        commentInput.value="";
     }
+    commentCancelButton.addEventListener("click", function(){
+        commentInput.value="";
+    });
+
 });
 
 
