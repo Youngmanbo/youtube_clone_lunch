@@ -192,6 +192,9 @@ function movePage(e) {
 
 window.onload = function () {
     let parameter = getParam();
+    if(parameter==null){
+        parameter = 'oreumi';
+    }
     let channel = getChannel(parameter);
     let videoInfos = getVideoInfoList(channel);
     // let channelInfo = getChannelInfo(getParam());
