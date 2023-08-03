@@ -166,9 +166,11 @@ button.addEventListener('click', () => {
         imgTag.src = channelTitleImg;
         aTag.appendChild(imgTag);
         aTag.append(getParam());
+        aTag.setAttribute('id','newsubs');
         sub.parentNode.insertBefore(aTag, sub.nextSibling);
     }else{
         button.innerHTML = 'SUBSCRIBES';
+        document.getElementById('newsubs').remove();
     }
 });
 
