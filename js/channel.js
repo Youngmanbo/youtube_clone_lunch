@@ -196,9 +196,7 @@ function movePage(e) {
 
 window.onload = function () {
     let parameter = getParam();
-    if (parameter == null || parameter == undefined) {
-        parameter = 'oreumi';
-    }
+    
     let channel = getChannel(parameter);
     let videoInfos = getVideoInfoList(channel);
     // let channelInfo = getChannelInfo(getParam());
@@ -282,8 +280,11 @@ function nav_display() {
 function getParam() {
     let url = new URL(window.location.href);
     let param = url.searchParams;
-    return param.get('channel');
-
+    let parameter = param.get('channel');
+    if (parameter == null || parameter == undefined) {
+        parameter = 'oreumi';
+    }
+    return parameter;
 }
 
 //메인 동영상 클릭시 해당 video.html 이동
@@ -315,9 +316,18 @@ function goVideo(event, videoChannel, videoId) {
     }
 }
 
-// videoInfoTag.addEventListener('click', (event) =>
-// goChannel(event, videoData.video_channel, videoData.video_id)
-// );
 
+document.getElementById('playAll-btn').addEventListener('click', playAll);
 
-// document.getElementById('playAll-btn').addEventListener('click', goVideo);
+function playAll() {
+    let videoChannel = getParam();
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("html")[0];
+    newUrl = split_url + "html/video.html";
+    let videoTag = document.getElementsByClassName('video-container')[0].childNodes[0];
+    let temp = videoTag.currentSrc.split('_')
+    let idx = temp[1].split('.');
+    newUrl += `?channel=${videoChannel}`;
+    newUrl += `&id=${idx[0]}`;
+    window.location.replace(newUrl);
+}
