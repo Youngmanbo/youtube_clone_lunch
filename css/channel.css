@@ -32,12 +32,13 @@ body {
     cursor: pointer;
 }/* 로고 부분 */
 
-.channel-subscribes-btn{
+#channel-subscribes-btn{
     background-color: #ff0000;
+    text-align: center;
+    padding: 12px 12px 12px 12px;
     color: #fff;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
@@ -213,9 +214,6 @@ body {
     
 }
 
-#channel-subscribes-btn{
-    all:unset;
-}
 
 /*tool bar*/
 a {
