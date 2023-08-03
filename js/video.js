@@ -234,6 +234,55 @@ function changeMain(e){
 }
 
 
+//댓글 기능
+document.addEventListener("DOMContentLoaded", function(){
+    const writeComment = document.querySelectorAll('.writeComment'); //input태그 class만든거라서 html추가해야함
+    const commentButton = document.querySelectorAll('.commentButton'); //butten태그 클래스 html추가해야함
+    const newCommentList=document.querySelectorAll('.newCommentList'); //댓글을 추가할 div태그 html추가해야함
+    
+    commentButton.addEventListener("click", addComment);
+    writeComment.addEventListener("keydown", function(event){ //event는 뭐지?
+        if(event.key === "Enter"){
+            addComment();
+        }
+    });
+
+
+
+    function addComment(){
+        const commentText = writeComment.value;
+        if(commentText.trim()===""){
+            return;
+        }
+
+        const  commentElement =document.createElement("div");
+        commentElement.classList.add("comment");
+        commentElement.textContent=commentText;
+
+        commentList.appendChild(commentElement);
+
+        writeCommentInput.value="";
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
