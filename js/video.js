@@ -189,7 +189,7 @@ async function renderChannelVideo(res){
 
     let html = `
         <div class='play-video'>
-            <video src=${res.video_link} poster=${res.image_link} controls></video>
+            <video src=${res.video_link} poster=${res.image_link} controls muted autoplay></video>
         <div>
         <div class='video-mainInfo'>
             <h3>${res.video_title}</h3><br>
