@@ -9,9 +9,14 @@ async function getVideoInfoList(res) {
 }
 
 async function getVideoList() {
-    url = 'http://oreumi.appspot.com/video/getVideoList';
-    const response = await fetch(url);
-    return await response.json();
+  // if (sessionStorage.getItem("videoList")){
+  //   return sessionStorage.getItem("videoList");
+  // }
+  url = 'http://oreumi.appspot.com/video/getVideoList';
+  const response = await fetch(url)
+  sessionStorage.setItem('videoList', response);
+  return await response.json();
+
 }
 
 
@@ -204,6 +209,7 @@ getVideoInfoList(getVideoList()).then(async res => {
   let promises = res.map(async el => {
     return await createVideoItem(el);
   });
+
   Promise.all(promises);
 })
 
@@ -331,6 +337,25 @@ function enterSearch(e) {  // 엔터키 검색
     });
   }
 }
+
+
+//nav on off
+
+function nav_display() {
+  let nav = document.getElementsByClassName('channel-left-nav')[0];
+  let navStyle = getComputedStyle(nav).display;
+
+  if (navStyle == "none") {
+    nav.style.display = "block";
+    nav.style.zIndex = 1000; 
+  } else {
+    nav.style.display = "none";
+  }
+}
+// 메뉴 클릭시 보이고 안보이게
+imgtag = document.getElementsByTagName('img');
+menu_logo = imgtag[0];
+menu_logo.addEventListener('click', nav_display);
 
 // 검색 후 동영상 추가
 async function createVideosItem(videoDatas) {
