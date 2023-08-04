@@ -181,7 +181,7 @@ async function renderChannelVideo(res) {
 
     let html = `
         <div class='channel-mainVideo'>
-            <video src=${res.video_link} poster=${res.image_link} controls></video>
+            <video src=${res.video_link} poster=${res.image_link} id='channel-main-video-id' controls></video>
         </div>
         <div class='channel-mainInfo'>
             <h3>${res.video_title}</h3><br></br>
@@ -306,7 +306,7 @@ function goMainVideo(e) {
         let curruntUrl = window.location.href;
         let split_url = curruntUrl.split("html")[0];
         newUrl = split_url + "html/video.html";
-        let videoTag = document.getElementsByClassName('channel-mainVideo')[0].childNodes[1];
+        let videoTag = document.getElementById('channel-main-video-id');
         let temp = videoTag.currentSrc.split('_')
         let idx = temp[1].split('.');
         newUrl += `?id=${idx[0]}`;
