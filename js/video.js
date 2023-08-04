@@ -164,12 +164,13 @@ for (const button of buttons) {
 async function renderChannelInfo(response){
 
     let detail = "식사조 화이팅!"
+    let sub = formatViews(response.subscribers) + '명';
     let html = `
         <div class="info-channel">
             <img src="${response.channel_profile}" alt="">
             <div class="info-channel-master">
                 <p>${response.channel_name}</p>
-                <p>${response.subscribers}</p>
+                <p>${sub}</p>
             </div>
         </div>
         <div class="info-channel-info">
@@ -255,7 +256,7 @@ let param = getParam();
 let channel = getChannel(param['channel']);
 // let videoList = getVideoList();
 let videoInfos = getVideoInfoList(channel);
-let channelInfo = getChannelInfo(); 
+let channelInfo = getChannelInfo(param['channel']); 
 
 
 //메인영상 하나만 호출
