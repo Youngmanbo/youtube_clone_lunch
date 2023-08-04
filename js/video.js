@@ -164,7 +164,7 @@ for (const button of buttons) {
 async function renderChannelInfo(response){
 
     let detail = "식사조 화이팅!"
-    let sub = formatViews(response.subscribers) + '명';
+    let sub = formatViews(response.subscribers) + ' SUBSCRIBER';
     let html = `
         <div class="info-channel">
             <img src="${response.channel_profile}" alt="">
@@ -189,7 +189,7 @@ async function renderChannelVideo(res){
 
     let html = `
         <div class='play-video'>
-            <video src=${res.video_link} poster=${res.image_link} controls></video>
+            <video src=${res.video_link} poster=${res.image_link} controls muted autoplay></video>
         <div>
         <div class='video-mainInfo'>
             <h3>${res.video_title}</h3><br>
@@ -205,7 +205,7 @@ function movePage(e){
     let curruntUrl = window.location.href;
     let sp = curruntUrl.split("?");
     newUrl = sp[0] + '?' + `channel=${e.target.value}`;
-    window.location.replace(newUrl);
+    window.location.href = newUrl;
 }
 
 
@@ -242,6 +242,8 @@ function changeMain(e){
 
     mainVideoTag.setAttribute('src', currentSrc);
     mainVideoTag.setAttribute('poster', currentImg);
+    mainVideoTag.play();
+
     e.target.setAttribute('src', tempSrc);
     e.target.setAttribute('poster', tempImg);
 }

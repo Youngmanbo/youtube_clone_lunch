@@ -178,10 +178,11 @@ button.addEventListener('click', () => {
 async function renderChannelVideo(res) {
     let parent = document.querySelector(".channel-body-container")
     let formatview = formatViews(res.views);
+    let link = res.video_link + '?autoplay=1&loop=1';
 
     let html = `
         <div class='channel-mainVideo'>
-            <video src=${res.video_link} poster=${res.image_link} controls></video>
+            <video src=${link} poster=${res.image_link} id='channel-main-video-id' controls autoplay muted></video>
         </div>
         <div class='channel-mainInfo'>
             <h3>${res.video_title}</h3><br></br>
@@ -198,42 +199,44 @@ function movePage(e) {
     let curruntUrl = window.location.href;
     let sp = curruntUrl.split("?");
     newUrl = sp[0] + '?' + `channel=${e.target.value}`;
-    window.location.replace(newUrl);
+    window.location.href = newUrl;
 }
 
 
 
 //window.onload == 브라우저의 html이 로드 된다음에 function 아래를 실행해라.
 
-window.onload = function () {
-    let parameter = getParam();
-    
-    let channel = getChannel(parameter);
-    let videoInfos = getVideoInfoList(channel);
-    // let channelInfo = getChannelInfo(getParam());
+
+let parameter = getParam();
+
+let channel = getChannel(parameter);
+let videoInfos = getVideoInfoList(channel);
+// let channelInfo = getChannelInfo(getParam());
 
 
-    getChannelInfo(parameter).then(async (channelInfo) => {
-        renderChannelInfo(channelInfo);
-    })
+getChannelInfo(parameter).then(async (channelInfo) => {
+    renderChannelInfo(channelInfo);
+})
 
-    getChannel(parameter).then((videoList) => {      // 체널 중에 views 가장 높은 동영상 
-        let mostView = videoList.reduce((prev, curr) => {
-            return prev.views > curr.views ? prev : curr;
-        });
-        getVideo(mostView.video_id).then(async res => {
-            renderChannelVideo(res);
-        });
-    })
+getChannel(parameter).then((videoList) => {      // 체널 중에 views 가장 높은 동영상 
+    let mostView = videoList.reduce((prev, curr) => {
+        return prev.views > curr.views ? prev : curr;
+    });
+    getVideo(mostView.video_id).then(async res => {
+        renderChannelVideo(res);
+    });
+})
 
-    videoInfos.then(async data => {
-        let promises = data.map(async el => {
-            return await renderVideo(el);
-        });
-        Promise.all(promises);
-    })
+console.log(document.querySelector(".channel-mainVideo > video"));
 
-}
+videoInfos.then(async data => {
+    let promises = data.map(async el => {
+        return await renderVideo(el);
+    });
+    Promise.all(promises);
+})
+
+
 
 
 // 메뉴 클릭시 보이고 안보이게
@@ -242,22 +245,6 @@ imgtag = document.getElementsByTagName('img');
 menu_logo = imgtag[0];
 menu_logo.addEventListener('click', nav_display);
 
-function nav_display() {
-    let nav = document.getElementsByClassName('channel-left-nav')[0];
-    let navStyle = getComputedStyle(nav).display;
-
-    let idChannelCover = document.getElementById('channel-cover');
-    let idChannel = document.getElementById('channel');
-    let idChannelFooterVideoList = document.getElementById('channel-footer-videoList');
-
-    let classChannelBodyContainer = document.getElementsByClassName('channel-body-container')[0];
-    let playListBox = document.getElementById('playlist_box');
-
-    idChannelCover.style.marginLeft = "240px";
-    idChannel.style.marginLeft = "240px";
-    playListBox.style.paddingLeft = "255px";
-    classChannelBodyContainer.style.paddingLeft = "250px";
-}
 
 function nav_display() {
     let nav = document.getElementsByClassName('channel-left-nav')[0];
@@ -306,11 +293,11 @@ function goMainVideo(e) {
         let curruntUrl = window.location.href;
         let split_url = curruntUrl.split("html")[0];
         newUrl = split_url + "html/video.html";
-        let videoTag = document.getElementsByClassName('channel-mainVideo')[0].childNodes[1];
+        let videoTag = document.getElementById('channel-main-video-id');
         let temp = videoTag.currentSrc.split('_')
         let idx = temp[1].split('.');
         newUrl += `?id=${idx[0]}`;
-        window.location.replace(newUrl);
+        window.location.href = newUrl;
     }
 }
 
@@ -323,7 +310,7 @@ function goVideo(event, videoChannel, videoId) {
         newUrl = split_url + "html/video.html";
         newUrl += `?channel=${videoChannel}`;
         newUrl += `&id=${videoId}`;
-        window.location.replace(newUrl);
+        window.location.href = newUrl;
     }
 }
 
@@ -340,5 +327,5 @@ function playAll() {
     let idx = temp[1].split('.');
     newUrl += `?channel=${videoChannel}`;
     newUrl += `&id=${idx[0]}`;
-    window.location.replace(newUrl);
+    window.location.href = newUrl;
 }
