@@ -164,7 +164,7 @@ for (const button of buttons) {
 async function renderChannelInfo(response){
 
     let detail = "식사조 화이팅!"
-    let sub = formatViews(response.subscribers) + '명';
+    let sub = formatViews(response.subscribers) + ' SUBSCRIBER';
     let html = `
         <div class="info-channel">
             <img src="${response.channel_profile}" alt="">

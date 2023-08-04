@@ -242,22 +242,6 @@ imgtag = document.getElementsByTagName('img');
 menu_logo = imgtag[0];
 menu_logo.addEventListener('click', nav_display);
 
-function nav_display() {
-    let nav = document.getElementsByClassName('channel-left-nav')[0];
-    let navStyle = getComputedStyle(nav).display;
-
-    let idChannelCover = document.getElementById('channel-cover');
-    let idChannel = document.getElementById('channel');
-    let idChannelFooterVideoList = document.getElementById('channel-footer-videoList');
-
-    let classChannelBodyContainer = document.getElementsByClassName('channel-body-container')[0];
-    let playListBox = document.getElementById('playlist_box');
-
-    idChannelCover.style.marginLeft = "240px";
-    idChannel.style.marginLeft = "240px";
-    playListBox.style.paddingLeft = "255px";
-    classChannelBodyContainer.style.paddingLeft = "250px";
-}
 
 function nav_display() {
     let nav = document.getElementsByClassName('channel-left-nav')[0];
