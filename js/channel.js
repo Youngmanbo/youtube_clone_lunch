@@ -68,7 +68,6 @@ async function renderVideo(info) {
     let video = document.createElement('video');
     video.src = info.video_link;
     video.poster = info.image_link;
-    video.setAttribute('controls', "");
 
     let infoDiv = document.createElement('div');
     infoDiv.className = 'video-info';
@@ -182,7 +181,7 @@ async function renderChannelVideo(res) {
 
     let html = `
         <div class='channel-mainVideo'>
-            <video src=${link} poster=${res.image_link} id='channel-main-video-id' controls autoplay muted></video>
+            <video src=${link} poster=${res.image_link} id='channel-main-video-id' autoplay muted></video>
         </div>
         <div class='channel-mainInfo'>
             <h3>${res.video_title}</h3><br></br>
@@ -191,6 +190,12 @@ async function renderChannelVideo(res) {
         </div>    
     `
     parent.innerHTML = html;
+    let mVideo = document.querySelector(".channel-mainVideo");
+    console.log(res);
+    mVideo.addEventListener('click', (e)=>{
+        console.log(res.video_channel);
+        goVideo(e, res.video_channel, res.video_id);
+    })
 }
 
 // 채널 페이지 이동 
@@ -226,8 +231,6 @@ getChannel(parameter).then((videoList) => {      // 체널 중에 views 가장 �
         renderChannelVideo(res);
     });
 })
-
-console.log(document.querySelector(".channel-mainVideo > video"));
 
 videoInfos.then(async data => {
     let promises = data.map(async el => {
@@ -286,7 +289,7 @@ function getParam() {
 }
 
 //메인 동영상 클릭시 해당 video.html 이동
-document.getElementsByClassName('channel-body-container')[0].addEventListener('click', goMainVideo);
+
 function goMainVideo(e) {
     let tagName = e.target.localName;
     if (tagName == 'video' || tagName == 'h3' || tagName == 'h4') {
@@ -295,8 +298,9 @@ function goMainVideo(e) {
         newUrl = split_url + "html/video.html";
         let videoTag = document.getElementById('channel-main-video-id');
         let temp = videoTag.currentSrc.split('_')
-        let idx = temp[1].split('.');
-        newUrl += `?id=${idx[0]}`;
+        let idx = parameter['id'];
+        newUrl += `?id=${idx}`;
+        newUrl += `&channel=${parameter['channel']}`;
         window.location.href = newUrl;
     }
 }
