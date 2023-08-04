@@ -20,6 +20,7 @@ async function getVideoList() {
 }
 
 
+
 async function getVideo(id) {
   const url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
   const response = await fetch(url);
