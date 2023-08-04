@@ -9,9 +9,9 @@ async function getVideoInfoList(res) {
 }
 
 async function getVideoList() {
-  url = 'http://oreumi.appspot.com/video/getVideoList';
-  const response = await fetch(url);
-  return await response.json();
+    url = 'http://oreumi.appspot.com/video/getVideoList';
+    const response = await fetch(url);
+    return await response.json();
 }
 
 
