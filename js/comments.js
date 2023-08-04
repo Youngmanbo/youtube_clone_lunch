@@ -81,8 +81,8 @@ document.addEventListener("DOMContentLoaded", function(){
             const initialImageLoad = userImage.onload;
             userImage.onload=null;
             
-            if (initialUmageLoad){
-                initialUmageLoad();
+            if (initialImageLoad){
+                initialImageLoad();
             }
         };
 

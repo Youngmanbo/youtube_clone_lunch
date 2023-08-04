@@ -58,6 +58,17 @@ async function getVideoInfoList(res){
 
 //channel videoList html 생성 함수
 
+
+function formatViews(views) {
+    if (views >= 1000000) {
+        return (views / 1000000).toFixed(1) + 'M';
+    } else if (views >= 1000) {
+        return (views / 1000).toFixed(1) + 'K';
+    }
+    return views;
+}
+
+
 async function renderVideo(info, id){
 
     //리스트 가져올때 index0번 빼고불러오는거 잠시 보류
@@ -94,7 +105,8 @@ async function renderVideo(info, id){
         container.className = 'view-date';
 
         let viewTag = document.createElement('span');
-        viewTag.innerText = "조회수 " + info.views+ "회" + ' . ';
+        let formatView = formatViews(info.views);
+        viewTag.innerText = "조회수 " + formatView+ "회" + ' . ';
         viewTag.value = info.video_channel;
 
         let date = document.createElement('span');
@@ -174,13 +186,15 @@ async function renderChannelInfo(response){
 // 메인비디오 생성 함수
 async function renderChannelVideo(res){
     let parent = document.querySelector(".play-video-container")
+    let formatView = formatViews(res.views);
+
     let html = `
         <div class='play-video'>
             <video src=${res.video_link} poster=${res.image_link} controls></video>
         <div>
         <div class='video-mainInfo'>
             <h3>${res.video_title}</h3><br>
-            <h6>${res.views} ${res.upload_date}</h6>
+            <h6>${formatView} ${res.upload_date}</h6>
         </div>
         `
         parent.innerHTML=html;
@@ -236,34 +250,15 @@ function changeMain(e){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //<---------------------------함수실행부------------------------------------->
 
 
-let channel = getChannel();
+let param = getParam();
+let channel = getChannel(param['channel']);
 // let videoList = getVideoList();
 let videoInfos = getVideoInfoList(channel);
 let channelInfo = getChannelInfo(); 
 
-let param = getParam();
 
 
 
