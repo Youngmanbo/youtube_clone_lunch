@@ -242,6 +242,8 @@ function changeMain(e){
 
     mainVideoTag.setAttribute('src', currentSrc);
     mainVideoTag.setAttribute('poster', currentImg);
+    mainVideoTag.play();
+
     e.target.setAttribute('src', tempSrc);
     e.target.setAttribute('poster', tempImg);
 }
