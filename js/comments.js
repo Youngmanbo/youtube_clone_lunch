@@ -43,6 +43,12 @@ document.addEventListener("DOMContentLoaded", function(){
             // userImage.src=getRandomPhotoPath();
             // userImage.alt="";
 
+            const commentUserInfoContainer = document.createElement("div")
+            commentUserInfoContainer.className = 'user-info-container';
+
+            const userContainer = document.createElement('div');
+            userContainer.className = 'user-container'
+
             const username=document.createElement("div");
             username.classList.add("username");
             username.textContent="Lunch Group";
@@ -57,10 +63,14 @@ document.addEventListener("DOMContentLoaded", function(){
             commentContent.className = 'default-comments';
             commentContent.textContent = commentText;
 
+
+            commentUserInfoContainer.appendChild(username);
+            commentUserInfoContainer.appendChild(timestamp);
+            userContainer.appendChild(commentUserInfoContainer);
+            userContainer.appendChild(commentContent);
+
             commentContainer.appendChild(userImage.cloneNode(true));
-            commentContainer.appendChild(username);
-            commentContainer.appendChild(timestamp);
-            commentContainer.appendChild(commentContent);
+            commentContainer.appendChild(userContainer)
 
             commentList.appendChild(commentContainer);
 
