@@ -211,10 +211,6 @@ async function renderChannelVideo(res){
         </div>
         `
     parent.innerHTML=html;
-    infoTag = document.querySelector('.video-mainInfo');
-    infoTag.addEventListener('click', e => {
-        goChannel(e, res.video_channel, res.video_id);
-    })
 }
 
 // 채널 페이지 이동 
