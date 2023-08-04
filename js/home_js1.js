@@ -142,7 +142,7 @@ function goVideo(e, channel) {
   let idx = temp[1].split('.');
   newUrl += `?id=${idx[0]}`;
   newUrl += `&channel=${channel}`;
-  window.location.replace(newUrl);
+  window.location.href = newUrl;
 }
 
 // 비디오 밑 텍스트 클릭시 channel로 이동
@@ -156,7 +156,7 @@ function goChannel(e, videoChannel, videoId) {
   newUrl = split_url + "html/channel.html";
   newUrl += `?channel=${videoChannel}`;
   newUrl += `&id=${videoId}`
-  window.location.replace(newUrl);
+  window.location.href = newUrl;
 }
 
 async function getSearchList(res, words) {
@@ -191,7 +191,7 @@ function go_home() {
   let curruntUrl = window.location.href;
   let split_url = curruntUrl.split("html")[0];
   newUrl = split_url + "html/home.html";
-  window.location.replace(newUrl);
+  window.location.href = newUrl;
 }
 
 

@@ -205,7 +205,7 @@ function movePage(e){
     let curruntUrl = window.location.href;
     let sp = curruntUrl.split("?");
     newUrl = sp[0] + '?' + `channel=${e.target.value}`;
-    window.location.replace(newUrl);
+    window.location.href = newUrl;
 }
 
 

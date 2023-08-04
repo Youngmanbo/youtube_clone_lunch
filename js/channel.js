@@ -198,7 +198,7 @@ function movePage(e) {
     let curruntUrl = window.location.href;
     let sp = curruntUrl.split("?");
     newUrl = sp[0] + '?' + `channel=${e.target.value}`;
-    window.location.replace(newUrl);
+    window.location.href = newUrl;
 }
 
 
@@ -310,7 +310,7 @@ function goMainVideo(e) {
         let temp = videoTag.currentSrc.split('_')
         let idx = temp[1].split('.');
         newUrl += `?id=${idx[0]}`;
-        window.location.replace(newUrl);
+        window.location.href = newUrl;
     }
 }
 
@@ -323,7 +323,7 @@ function goVideo(event, videoChannel, videoId) {
         newUrl = split_url + "html/video.html";
         newUrl += `?channel=${videoChannel}`;
         newUrl += `&id=${videoId}`;
-        window.location.replace(newUrl);
+        window.location.href = newUrl;
     }
 }
 
@@ -340,5 +340,5 @@ function playAll() {
     let idx = temp[1].split('.');
     newUrl += `?channel=${videoChannel}`;
     newUrl += `&id=${idx[0]}`;
-    window.location.replace(newUrl);
+    window.location.href = newUrl;
 }
