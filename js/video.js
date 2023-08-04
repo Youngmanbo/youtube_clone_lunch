@@ -179,8 +179,8 @@ async function renderChannelInfo(response){
         <div class="info-channel">
             <img src="${response.channel_profile}" alt="">
             <div class="info-channel-master">
-                <p class='info-channel-name>${response.channel_name}</p>
-                <p class='info-channel-sub>${sub}</p>
+                <p class='info-channel-name'>${response.channel_name}</p>
+                <p class='info-channel-sub'>${sub}</p>
             </div>
         </div>
         <div class="info-channel-info">
