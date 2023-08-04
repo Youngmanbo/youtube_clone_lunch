@@ -6,6 +6,18 @@
     padding-top: 3%;
 }
 
+/* 새로 추가한거!!!! */
+/* 왼쪽 상단 햄버거 바 */
+.channel-left-nav {
+    position: fixed;
+    top: 0;
+    left: -240px; /* 초기에는 숨김 */
+    width: 240px;
+    height: 100%;
+    background-color: #333;
+    transition: left 0.3s ease;
+}
+
 .main-section{
     display: flex;  /*내용물의 크기만큼만 가로로 정렬함+ 컬럼의 높이가 자동으로 맞음*/
     width: 100%;  /*컨테이너가 더이상 아이템들을 한줄에 담을 공간 없을때 어케할건지 wrap은 밑으로 내려가게함*/
@@ -517,6 +529,15 @@ iframe {
     width: 400px;
 }
 
+.side-video-tags{
+    background-color: #4e4e4e;
+    padding: 8px;
+    color: #ffffff;
+    border-radius: 10px;
+    border: #bebebe solid 1px;
+    cursor: pointer;
+}
+
 .aside-span {
     display: block;
 }
@@ -560,6 +581,7 @@ iframe {
 .username{
     font-weight: 500;
     color: #167ac6;
+    margin-right: 7px;
 }
 
 .sub {
@@ -644,12 +666,17 @@ iframe {
     flex-direction: column;
 }
 
+.userinfo{
+    display: flex;
+    align-items: center;
+}
+
 .container-comment{
     padding: 10px;
     display:flex;
-    justify-content: flex-start;
     align-items: center;
 }
+
 .container-comment img{
     margin-right:10px;
     width: 40px;
