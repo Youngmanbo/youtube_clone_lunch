@@ -91,13 +91,23 @@ async function renderVideo(info, id){
         let video = document.createElement('video');
         video.src=info.video_link;
         video.poster = info.image_link;
-        video.setAttribute('controls', "");
-        // video.setAttribute('autoplay', "");
-    
+        video.setAttribute('muted', "muted");
+
+        videoDiv.addEventListener('mouseover', e =>{
+            video.play();
+            video.setAttribute('controls', "");
+        })
+        videoDiv.addEventListener('mouseout', e =>{
+            video.removeAttribute('controls');
+            video.pause();
+        })
+
         let infoDiv = document.createElement('div');
         infoDiv.className = 'video-info'
-        infoDiv.onclick = movePage;
         info.value = info.video_channel;
+        infoDiv.addEventListener("click", (e)=>{
+            goChannel(e, info.video_channel, info.video_id);
+        })
         
         let titleTag = document.createElement('h3');
         titleTag.innerText = info.video_title;
@@ -169,8 +179,8 @@ async function renderChannelInfo(response){
         <div class="info-channel">
             <img src="${response.channel_profile}" alt="">
             <div class="info-channel-master">
-                <p>${response.channel_name}</p>
-                <p>${sub}</p>
+                <p class='info-channel-name'>${response.channel_name}</p>
+                <p class='info-channel-sub'>${sub}</p>
             </div>
         </div>
         <div class="info-channel-info">
@@ -178,7 +188,11 @@ async function renderChannelInfo(response){
         </div>
     `;
     let parent = document.querySelector('.user-logo-info');
+    let p = getParam();
     parent.innerHTML = html;
+    parent.addEventListener('click', e =>{
+        goChannel(e, response.channel_name, p['id']);
+    })
 
 }
 
@@ -191,12 +205,12 @@ async function renderChannelVideo(res){
         <div class='play-video'>
             <video src=${res.video_link} poster=${res.image_link} controls muted autoplay></video>
         <div>
-        <div class='video-mainInfo'>
+        <div class='video-mainInfo' >
             <h3>${res.video_title}</h3><br>
             <h6>${formatView} ${res.upload_date}</h6>
         </div>
         `
-        parent.innerHTML=html;
+    parent.innerHTML=html;
 }
 
 // 채널 페이지 이동 
@@ -248,6 +262,18 @@ function changeMain(e){
     e.target.setAttribute('poster', tempImg);
 }
 
+function goChannel(e, videoChannel, videoId) {
+    if (e.target == "video") {
+      return;
+    }
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("youtube_clone_lunch")[0];
+    newUrl = split_url + 'youtube_clone_lunch/html/channel.html';
+    newUrl += `?channel=${videoChannel}`;
+    newUrl += `&id=${videoId}`
+    window.location.href = newUrl;
+}
+
 
 
 
@@ -274,7 +300,6 @@ videoInfos.then(async data=>{
 })
 
 channelInfo.then(async data => renderChannelInfo(data));
-
 
 
 
