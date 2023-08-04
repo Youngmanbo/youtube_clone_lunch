@@ -91,8 +91,16 @@ async function renderVideo(info, id){
         let video = document.createElement('video');
         video.src=info.video_link;
         video.poster = info.image_link;
-        video.setAttribute('controls', "");
-        // video.setAttribute('autoplay', "");
+        video.setAttribute('muted', "muted");
+
+        videoDiv.addEventListener('mouseover', e =>{
+            video.play();
+            video.setAttribute('controls', "");
+        })
+        videoDiv.addEventListener('mouseout', e =>{
+            video.removeAttribute('controls');
+            video.pause();
+        })
 
         let infoDiv = document.createElement('div');
         infoDiv.className = 'video-info'
@@ -171,8 +179,8 @@ async function renderChannelInfo(response){
         <div class="info-channel">
             <img src="${response.channel_profile}" alt="">
             <div class="info-channel-master">
-                <p>${response.channel_name}</p>
-                <p>${sub}</p>
+                <p class='info-channel-name>${response.channel_name}</p>
+                <p class='info-channel-sub>${sub}</p>
             </div>
         </div>
         <div class="info-channel-info">
@@ -180,7 +188,11 @@ async function renderChannelInfo(response){
         </div>
     `;
     let parent = document.querySelector('.user-logo-info');
+    let p = getParam();
     parent.innerHTML = html;
+    parent.addEventListener('click', e =>{
+        goChannel(e, response.channel_name, p['id']);
+    })
 
 }
 
@@ -199,7 +211,7 @@ async function renderChannelVideo(res){
         </div>
         `
     parent.innerHTML=html;
-    infoTag = document.querySelector('video-mainInfo');
+    infoTag = document.querySelector('.video-mainInfo');
     infoTag.addEventListener('click', e => {
         goChannel(e, res.video_channel, res.video_id);
     })
@@ -292,7 +304,6 @@ videoInfos.then(async data=>{
 })
 
 channelInfo.then(async data => renderChannelInfo(data));
-
 
 
 
