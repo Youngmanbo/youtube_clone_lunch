@@ -177,13 +177,15 @@ button.addEventListener('click', () => {
 // 메인비디오 생성 함수
 async function renderChannelVideo(res) {
     let parent = document.querySelector(".channel-body-container")
+    let formatview = formatViews(res.views);
+
     let html = `
         <div class='channel-mainVideo'>
             <video src=${res.video_link} poster=${res.image_link} controls></video>
         </div>
         <div class='channel-mainInfo'>
             <h3>${res.video_title}</h3><br></br>
-            <h4>${res.views} 조회수</h4><br></br>
+            <h4>${formatview} 조회수</h4><br></br>
             <h4>${res.video_detail}</h4>
         </div>    
     `

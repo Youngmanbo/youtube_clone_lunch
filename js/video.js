@@ -40,6 +40,8 @@ async function getVideoList(){
 }
 
 
+// function renderChannel
+
 
 //videoInfoList 의 video_id값을 추출하여 한꺼번에 requests를 보내는 함수
 
@@ -57,6 +59,17 @@ async function getVideoInfoList(res){
 }
 
 //channel videoList html 생성 함수
+
+
+function formatViews(views) {
+    if (views >= 1000000) {
+        return (views / 1000000).toFixed(1) + 'M';
+    } else if (views >= 1000) {
+        return (views / 1000).toFixed(1) + 'K';
+    }
+    return views;
+}
+
 
 async function renderVideo(info, id){
 
@@ -94,7 +107,8 @@ async function renderVideo(info, id){
         container.className = 'view-date';
 
         let viewTag = document.createElement('span');
-        viewTag.innerText = "조회수 " + info.views+ "회" + ' . ';
+        let formatView = formatViews(info.views);
+        viewTag.innerText = "조회수 " + formatView+ "회" + ' . ';
         viewTag.value = info.video_channel;
 
         let date = document.createElement('span');
@@ -149,38 +163,37 @@ for (const button of buttons) {
 // 채널 정보 html 생성 및 수정 함수
 async function renderChannelInfo(response){
 
-    let parent = document.querySelector('#channel-title-profile');
-    console.log(parent);
-    let channelCover = document.querySelector("#channel-cover > img");
-    channelCover.src = response.channel_banner;
-
-    let channelProfile = document.querySelector('#channel-title-profile > .profile-container > img');
-    channelProfile.src = response.channel_profile;
-
-    let infoDiv = document.createElement('div');
-    infoDiv.className = "channel-infos";
-    
-    let subs = document.createElement("span")
-    let channelName = document.createElement("h2");
-    subs.innerText = response.subscribers + " 구독";
-
-    infoDiv.appendChild(channelName);
-    infoDiv.appendChild(subs);
-
-    parent.appendChild(infoDiv);
+    let detail = "식사조 화이팅!"
+    let sub = formatViews(response.subscribers) + '명';
+    let html = `
+        <div class="info-channel">
+            <img src="${response.channel_profile}" alt="">
+            <div class="info-channel-master">
+                <p>${response.channel_name}</p>
+                <p>${sub}</p>
+            </div>
+        </div>
+        <div class="info-channel-info">
+            ${detail}
+        </div>
+    `;
+    let parent = document.querySelector('.user-logo-info');
+    parent.innerHTML = html;
 
 }
 
 // 메인비디오 생성 함수
 async function renderChannelVideo(res){
     let parent = document.querySelector(".play-video-container")
+    let formatView = formatViews(res.views);
+
     let html = `
         <div class='play-video'>
             <video src=${res.video_link} poster=${res.image_link} controls></video>
         <div>
         <div class='video-mainInfo'>
             <h3>${res.video_title}</h3><br>
-            <h6>${res.views} ${res.upload_date}</h6>
+            <h6>${formatView} ${res.upload_date}</h6>
         </div>
         `
         parent.innerHTML=html;
@@ -234,148 +247,16 @@ function changeMain(e){
 }
 
 
-//댓글 기능
-document.addEventListener("DOMContentLoaded", function(){
-    const commentInput = document.querySelector('.add-comment-input input'); //input태그 class만든거라서 html추가해야함
-    const commentAddButton = document.querySelector('.comment-add'); //butten태그
-    const commentCancelButton=document.querySelector('.comment-cancle'); //취소버튼
-    const commentList=document.querySelector(".comment-list"); //댓글 추가시 list
-    const userImage= document.getElementById('userImage');
-
-    commentAddButton.addEventListener("click", addComment);
-    commentInput.addEventListener("keydown", function(event){ 
-        if(event.key === "Enter"){
-            addComment();
-        }
-    });
-
-        function getRandomPhotoPath(){
-            const photoPaths=[
-                "../imgs/team/ec.jpg",
-                "../imgs/team/kimziho.jpg",
-                "../imgs/team/lunchTeam.jpg",
-                "../imgs/team/nj.jpg",
-                "../imgs/team/ym.jpg",
-                "../imgs/team/youngM.jpg"
-            ];
-
-                const randomIndex = Math.floor(Math.random() * photoPaths.length);
-                return photoPaths[randomIndex];
-            }
-
-    
-
-
-
-        function addComment(){
-            const commentText = commentInput.value;
-            if(commentText.trim()===""){
-                return;
-            }
-            // 요부분 다시 수정하기
-            const commentContainer =document.createElement("div"); //<div class="comment">댓글들 </div>
-            commentContainer.classList.add("container-comment");
-
-            // const userImage=document.createElement("img");
-            // userImage.src=getRandomPhotoPath();
-            // userImage.alt="";
-
-            const username=document.createElement("div");
-            username.classList.add("username");
-            username.textContent="Lunch Group";
-
-
-            const timestamp=document.createElement("div");
-            //timestamp.textContent=" 3 minutes ago";
-            const currentTime=new Date();
-            timestamp.textContent=getTimeAgoString(currentTime);
-
-            const commentContent = document.createElement("div");
-            commentContent.textContent = commentText;
-
-            commentContainer.appendChild(userImage.cloneNode(true));
-            commentContainer.appendChild(username);
-            commentContainer.appendChild(timestamp);
-            commentContainer.appendChild(commentContent);
-
-            commentList.appendChild(commentContainer);
-
-            //댓글 오름차순
-            commentList.insertBefore(commentContainer, commentList.firstChild);
-
-            commentInput.value="";
-            userImage.src=getRandomPhotoPath();
-
-        }
-        // 취소버튼
-        commentCancelButton.addEventListener("click", function(){
-            commentInput.value="";
-        });
-
-        //이미지가 로드되기 전에 js가 실행되서 => 이미지가 로드된 후에 js코드가 실행되게 하려고 이거 만듬
-        userImage.onload = function(){
-            const initialImageLoad = userImage.onload;
-            userImage.onload=null;
-            
-            if (initialUmageLoad){
-                initialUmageLoad();
-            }
-        };
-
-        userImage.src=getRandomPhotoPath();
-
-        function getTimeAgoString(timestamp){
-            const currentTime = new Date();
-            const diffMillis=currentTime - timestamp;
-
-            const minutes = Math.floor(diffMillis / 60000);
-            if (minutes<1){
-                return "방금 전";
-            }else if (minutes < 60){
-                return `${minutes}분 전`;
-            }else if (minutes < 1440){
-                const hours=Math.floor(minutes/60);
-                return `${hours}시간 전`;
-            }else{
-                const days=Math.floor(minutes/1440);
-                return `${days}일 전`;
-            }
-
-        }
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //<---------------------------함수실행부------------------------------------->
 
 
-let channel = getChannel();
+let param = getParam();
+let channel = getChannel(param['channel']);
 // let videoList = getVideoList();
 let videoInfos = getVideoInfoList(channel);
-let channelInfo = getChannelInfo(); 
-
-let param = getParam();
-
+let channelInfo = getChannelInfo(param['channel']); 
 
 
 //메인영상 하나만 호출
@@ -390,6 +271,7 @@ videoInfos.then(async data=>{
     Promise.all(promises);
 })
 
+channelInfo.then(async data => renderChannelInfo(data));
 
 
 

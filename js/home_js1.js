@@ -9,9 +9,9 @@ async function getVideoInfoList(res) {
 }
 
 async function getVideoList() {
-  url = 'http://oreumi.appspot.com/video/getVideoList';
-  const response = await fetch(url);
-  return await response.json();
+    url = 'http://oreumi.appspot.com/video/getVideoList';
+    const response = await fetch(url);
+    return await response.json();
 }
 
 
@@ -88,7 +88,9 @@ async function createVideoItem(videoData) {
 
 
   const views = document.createElement("p");
-  views.textContent = `조회수: ${videoData.views}회`;
+  let formatView = formatViews(videoData.views);
+
+  views.textContent = `조회수: ${formatView}회`;
 
 
   videoItem.appendChild(video);
@@ -102,7 +104,9 @@ async function createVideoItem(videoData) {
     goChannel(event, videoData.video_channel, videoData.video_id)
   );
   videoItem.appendChild(videoInfoTag);
-  video.addEventListener('click', goVideo);
+  video.addEventListener('click', (e) =>
+    goVideo(e, videoData.video_channel)
+  );
   videoContainer.appendChild(videoItem)
 
 }
@@ -129,7 +133,7 @@ function nav_display() {
 
 // 비디오 클릭시 비디오 페이지로 이동
 // ? 뒤에 idx값 넣어서 이동
-function goVideo(e) {
+function goVideo(e, channel) {
   let curruntUrl = window.location.href;
   let split_url = curruntUrl.split("index.html")[0];
   newUrl = split_url + "html/video.html";
@@ -137,6 +141,7 @@ function goVideo(e) {
 
   let idx = temp[1].split('.');
   newUrl += `?id=${idx[0]}`;
+  newUrl += `&channel=${channel}`;
   window.location.replace(newUrl);
 }
 
@@ -206,6 +211,17 @@ getVideoInfoList(getVideoList()).then(async res => {
 imgtag = document.getElementsByTagName('img');
 menu_logo = imgtag[0];
 menu_logo.addEventListener('click', nav_display);
+
+
+function formatViews(views) {
+  if (views >= 1000000) {
+      return (views / 1000000).toFixed(1) + 'M';
+  } else if (views >= 1000) {
+      return (views / 1000).toFixed(1) + 'K';
+  }
+  return views;
+}
+
 
 
 
@@ -374,7 +390,9 @@ async function createVideosItem(videoDatas) {
       goChannel(event, videoData.video_channel, videoData.video_id)
     );
     videoItem.appendChild(videoInfoTag);
-    video.addEventListener('click', goVideo);
+    video.addEventListener('click', (e) => {
+      goVideo(e, videoData.video_channel);
+    });
     videoContainer.appendChild(videoItem)
   }
 
