@@ -40,6 +40,8 @@ async function getVideoList(){
 }
 
 
+// function renderChannel
+
 
 //videoInfoList 의 video_id값을 추출하여 한꺼번에 requests를 보내는 함수
 
@@ -161,25 +163,21 @@ for (const button of buttons) {
 // 채널 정보 html 생성 및 수정 함수
 async function renderChannelInfo(response){
 
-    let parent = document.querySelector('#channel-title-profile');
-    console.log(parent);
-    let channelCover = document.querySelector("#channel-cover > img");
-    channelCover.src = response.channel_banner;
-
-    let channelProfile = document.querySelector('#channel-title-profile > .profile-container > img');
-    channelProfile.src = response.channel_profile;
-
-    let infoDiv = document.createElement('div');
-    infoDiv.className = "channel-infos";
-    
-    let subs = document.createElement("span")
-    let channelName = document.createElement("h2");
-    subs.innerText = response.subscribers + " 구독";
-
-    infoDiv.appendChild(channelName);
-    infoDiv.appendChild(subs);
-
-    parent.appendChild(infoDiv);
+    let detail = "식사조 화이팅!"
+    let html = `
+        <div class="info-channel">
+            <img src="${response.channel_profile}" alt="">
+            <div class="info-channel-master">
+                <p>${response.channel_name}</p>
+                <p>${response.subscribers}</p>
+            </div>
+        </div>
+        <div class="info-channel-info">
+            ${detail}
+        </div>
+    `;
+    let parent = document.querySelector('.user-logo-info');
+    parent.innerHTML = html;
 
 }
 
@@ -260,8 +258,6 @@ let videoInfos = getVideoInfoList(channel);
 let channelInfo = getChannelInfo(); 
 
 
-
-
 //메인영상 하나만 호출
 getVideo(param['id']).then(async res => {
     renderChannelVideo(res);
@@ -274,6 +270,7 @@ videoInfos.then(async data=>{
     Promise.all(promises);
 })
 
+channelInfo.then(async data => renderChannelInfo(data));
 
 
 
