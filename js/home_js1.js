@@ -131,7 +131,7 @@ function nav_display() {
 // ? 뒤에 idx값 넣어서 이동
 function goVideo(e) {
   let curruntUrl = window.location.href;
-  let split_url = curruntUrl.split("html")[0];
+  let split_url = curruntUrl.split("index.html")[0];
   newUrl = split_url + "html/video.html";
   let temp = e.target.currentSrc.split('_');
 
@@ -147,7 +147,7 @@ function goChannel(e, videoChannel, videoId) {
     return;
   }
   let curruntUrl = window.location.href;
-  let split_url = curruntUrl.split("html")[0];
+  let split_url = curruntUrl.split("index.html")[0];
   newUrl = split_url + "html/channel.html";
   newUrl += `?channel=${videoChannel}`;
   newUrl += `&id=${videoId}`
