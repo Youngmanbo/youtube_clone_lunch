@@ -91,7 +91,7 @@ async function renderVideo(info, id){
         let video = document.createElement('video');
         video.src=info.video_link;
         video.poster = info.image_link;
-        video.setAttribute('muted', "muted");
+        video.muted = true;
 
         videoDiv.addEventListener('mouseover', e =>{
             video.play();
@@ -257,6 +257,7 @@ function changeMain(e){
     mainVideoTag.setAttribute('src', currentSrc);
     mainVideoTag.setAttribute('poster', currentImg);
     mainVideoTag.play();
+    mainVideoTag.muted = false;
 
     e.target.setAttribute('src', tempSrc);
     e.target.setAttribute('poster', tempImg);

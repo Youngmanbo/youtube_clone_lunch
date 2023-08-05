@@ -1,3 +1,50 @@
+// 검색버튼 활성화
+let inputText = document.getElementById("search-bar");
+let searchBtn = document.querySelector(".search > img");
+
+function deliverParamToHome(userInput){
+
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("youtube_clone_lunch")[0];
+    newUrl = split_url + "youtube_clone_lunch/index.html";
+    newUrl += '?search=' + encodeURI(userInput);
+
+    window.location.href = newUrl;
+
+}
+
+
+searchBtn.addEventListener('click', e => {
+
+    let userInput = inputText.value
+    deliverParamToHome(userInput);
+
+})
+
+inputText.addEventListener('keyup', enterSearch);
+
+function enterSearch(e){
+    let userInput = inputText.value;
+    if (e.keyCode !== 13){
+        return;
+    }
+    if (userInput == "") { // 검색하는게 text가 비어있을때
+        return;
+    } else {
+        deliverParamToHome(userInput);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 let channelTitleImg = "";
 
 // channel request 함수
@@ -108,7 +155,6 @@ async function renderVideo(info) {
 
 // channelInfo requests 함수
 async function getChannelInfo(res) {
-    console.log(res);
 
 
     Url = `http://oreumi.appspot.com/channel/getChannelInfo?video_channel=${res}`
@@ -191,7 +237,6 @@ async function renderChannelVideo(res) {
     `
     parent.innerHTML = html;
     let mVideo = document.querySelector(".channel-mainVideo");
-    console.log(res);
     mVideo.addEventListener('click', (e)=>{
         console.log(res.video_channel);
         goVideo(e, res.video_channel, res.video_id);

@@ -77,6 +77,16 @@ async function createVideoItem(videoData) {
   const videoDiv = document.createElement("div");
   videoDiv.className = 'video-div';
 
+  video.addEventListener("mouseover", e =>{
+    video.setAttribute('autoplay',"");
+    video.setAttribute('controls',"");
+  })
+  video.addEventListener("mouseout", e => {
+    video.removeAttribute("controls");
+    video.removeAttribute('autoplay');
+  })
+
+
   const videoInfoTag = document.createElement("div");
   videoInfoTag.calssName = 'video-infos'
 
