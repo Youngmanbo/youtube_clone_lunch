@@ -203,7 +203,7 @@ async function renderChannelVideo(res){
 
     let html = `
         <div class='play-video'>
-            <video src=${res.video_link} poster=${res.image_link} controls muted autoplay></video>
+            <video id = 'main-video' src=${res.video_link} poster=${res.image_link} controls muted autoplay></video>
         <div>
         <div class='video-mainInfo' >
             <h3>${res.video_title}</h3><br>
@@ -275,10 +275,20 @@ function goChannel(e, videoChannel, videoId) {
     window.location.href = newUrl;
 }
 
+//페이지 로드시 메인비디오 재생
+
+// async function playVideo(){
+//     let video = document.querySelector('#main-video');
+//     console.log(video);
+//     video.play();
+// }
+
 
 
 
 //<---------------------------함수실행부------------------------------------->
+
+
 
 
 let param = getParam();
@@ -290,8 +300,10 @@ let channelInfo = getChannelInfo(param['channel']);
 
 //메인영상 하나만 호출
 getVideo(param['id']).then(async res => {
-    renderChannelVideo(res);
+    await renderChannelVideo(res);
+    // document.addEventListener("DOMContentLoaded", playVideo);
 })
+
 
 videoInfos.then(async data=>{
     let promises = data.map(async el => {
@@ -301,6 +313,7 @@ videoInfos.then(async data=>{
 })
 
 channelInfo.then(async data => renderChannelInfo(data));
+
 
 
 

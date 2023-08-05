@@ -112,9 +112,20 @@ async function renderVideo(info) {
     let videoDiv = document.createElement('div');
     videoDiv.className = 'video-container';
 
+    videoDiv.addEventListener('mouseover', e =>{
+        video.play();
+        video.setAttribute('controls', "");
+    })
+    videoDiv.addEventListener('mouseout', e =>{
+        video.removeAttribute('controls');
+        video.pause();
+    })
+
     let video = document.createElement('video');
     video.src = info.video_link;
     video.poster = info.image_link;
+    video.muted = true;
+    
 
     let infoDiv = document.createElement('div');
     infoDiv.className = 'video-info';
