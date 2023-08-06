@@ -4,7 +4,6 @@ function getParam(){
     let url = decodeURI(window.location.href);
     let params = url.split("?")[1];
     if (params === undefined){
-        console.log('hello');
         return '0';
     }
     params = params.split("&");
@@ -59,7 +58,12 @@ if (p != 0){
         });
         
         await Promise.all(promises);
-        
+        let filterList = []
+        videoInfoList.map(async data => {
+            data.video_tag.forEach(a => filterList.push(a));
+        })
+        filterList = filterList.filter((item, idx) => filterList.indexOf(item) == idx)
+        filterList.forEach(e => createFilterBtn(e));
     })();
 
 
@@ -87,6 +91,7 @@ async function getVideoInfoList(res) {
   
   
   async function getVideo(id) {
+    
     const url = `http://oreumi.appspot.com/video/getVideoInfo?video_id=${id}`;
     const response = await fetch(url);
     return await response.json();
@@ -113,7 +118,22 @@ async function getVideoInfoList(res) {
     return channelData;
   }
   
+// 필터 버튼 이벤트
 
+
+async function createFilterBtn (tag){
+
+  let parent = document.querySelector(".filter-lists");
+  let btn = document.createElement("button");
+  btn.className = 'filters';
+  btn.innerText = `${tag}`;
+
+  btn.addEventListener('click', e =>{
+      let videoList = JSON.parse(sessionStorage.getItem('videoList'));
+      searchFilter(videoList, tag);
+  })
+  parent.appendChild(btn);
+}
 
   
   // 동영상 데이터를 기반으로 동영상 아이템 엘리먼트를 생성하는 함수
@@ -129,12 +149,43 @@ async function createVideoItem(videoData) {
     videoItem.id = "video-item" + videoData.video_id;
   
     const video = document.createElement("video");
+    video.className = "video-tiem-videoTag";
     video.src = videoData.video_link;
     video.preload = "metadata";
     video.poster = videoData.image_link;
     video.muted = true;
     const videoDiv = document.createElement("div");
     videoDiv.className = 'video-div';
+    const videoTagDiv = document.createElement("div");
+    videoTagDiv.className = 'videoTagDiv';
+
+    pipBtn = document.createElement("button");
+    pipBtn.className = "pip-btn";
+    pipImg = document.createElement("img");
+    pipImg.className = 'pip-img';
+    pipImg.src = './imgs/Navigations/Icongaming.svg';
+    pipBtn.appendChild(pipImg);
+
+    pipBtn.addEventListener('click',async  e => {
+      e.disabled = true;
+      try{
+        if (video !== document.pictureInPictureElement){
+          await video.requestPictureInPicture();
+          video.muted = false;
+          await video.play();
+        }else{
+          video.muted = true;
+          await document.exitPictureInPicture();
+        }
+      }catch (error){
+        console.log(error);
+      }finally {
+        e.disabled = false;
+      }
+    })
+
+    videoTagDiv.appendChild(video);
+    videoTagDiv.appendChild(pipBtn);
   
     video.addEventListener("mouseover", e =>{
       video.play();
@@ -164,11 +215,13 @@ async function createVideoItem(videoData) {
   
     const views = document.createElement("p");
     let formatView = formatViews(videoData.views);
+
+    const date = videoData.upload_date;
   
-    views.textContent = `조회수: ${formatView}회`;
+    views.textContent = `조회수: ${formatView}회 . ${formatDate(date)}`;
   
-  
-    videoItem.appendChild(video);
+    videoItem.appendChild(videoTagDiv);
+    videoItem.appendChild(videoDiv);
     videoInfoTag.appendChild(channelImgDiv);
     channelImgDiv.appendChild(channelImg);
     videoInfoTag.appendChild(videoDiv);
@@ -281,8 +334,9 @@ async function search(text=null) {
   }
 }
 
-function searchFilter(videoList, searchText){
+function searchFilter(videoList, searchTxt){
     let totalList = [];
+    let searchText= searchTxt.toLowerCase();
 
     let searchTitle = videoList.filter((video) =>       // 제목검색
     video.video_title.toLowerCase().includes(searchText)
@@ -299,10 +353,11 @@ function searchFilter(videoList, searchText){
 
     let searchTag = videoList.filter((video) => {       // 태그 검색
     for(let i = 0 ; i < video.video_tag.length ; i++){
-        video.video_tag[i].toLowerCase().includes(searchText)
+        if(video.video_tag[i].toLowerCase().includes(searchText)){
+          return true;
+        }
     }
     });
-    // 태그 검색은 왜 안될까
 
     // 검색한 거 합치기
     totalList = totalList.concat(searchTitle);
@@ -317,6 +372,7 @@ function searchFilter(videoList, searchText){
     if (totalList.length == 0) {
     alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
     } else {
+    console.log(totalList);
     createVideosItem(totalList);
     document.getElementById('search-bar').value = "";
     }
@@ -341,7 +397,7 @@ async function enterSearch(e) {  // 엔터키 검색
 async function createVideosItem(videoDatas) {
   clear_videoList();
   let videolist = videoDatas.map(async (vid) =>
-    await saveDataToSessionStorage(vid.video_id, getVideo, vid.video_id)
+    await getVideo(vid.video_id) //await saveDataToSessionStorage(vid.video_id, getVideo, vid.video_id)  
   );
   let videoInfoList = await Promise.all(videolist);
 
@@ -354,4 +410,44 @@ function clear_videoList() { //비디오들 화면 다 지우기
     videoItems.removeChild(videoItems.firstChild);
   }
 }
-//--------------------------------------------------------------------------------------------
+
+// 날짜 포맷
+function formatDate(dateStr) {
+  
+  if (dateStr == undefined){
+    return
+  }
+
+  function parseDate(dateStr) {
+      const parts = dateStr.split("/");
+      // parts[0]은 년도, parts[1]은 월, parts[2]는 일
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+  }
+
+  /** 두 날짜간 차이 계산 */
+  function calculateDifference(currentDate, pastDate) {
+      const diffMilliseconds = currentDate - pastDate;
+      const diffSeconds = diffMilliseconds / 1000;
+      const diffMinutes = diffSeconds / 60;
+      const diffHours = diffMinutes / 60;
+      const diffDays = diffHours / 24;
+      const diffWeeks = diffDays / 7;
+      const diffMonths = diffDays / 30.44; // 평균적으로 한 달은 30.44일로 계산
+
+      if (diffMonths >= 1) {
+          return Math.round(diffMonths) + "개월 전";
+      } else if (diffWeeks >= 1) {
+          return Math.round(diffWeeks) + "주 전";
+      } else if (diffDays >= 1) {
+          return Math.round(diffDays) + "일 전";
+      } else if (diffHours >= 1) {
+          return Math.round(diffHours) + "시간 전";
+      } else {
+          return Math.round(diffMinutes) + "분 전";
+      }
+  }
+
+  const pastDate = parseDate(dateStr);
+  const currentDate = new Date();
+  return calculateDifference(currentDate, pastDate);
+}

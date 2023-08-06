@@ -1,3 +1,41 @@
+// 검색버튼 활성화
+let inputText = document.getElementById("search-bar");
+let searchBtn = document.querySelector(".search > img");
+
+function deliverParamToHome(userInput){
+
+    let curruntUrl = window.location.href;
+    let split_url = curruntUrl.split("youtube_clone_lunch")[0];
+    newUrl = split_url + "youtube_clone_lunch/index.html";
+    newUrl += '?search=' + encodeURI(userInput);
+
+    window.location.href = newUrl;
+
+}
+
+
+searchBtn.addEventListener('click', e => {
+
+    let userInput = inputText.value
+    deliverParamToHome(userInput);
+
+})
+
+
+inputText.addEventListener('keyup', enterSearch);
+
+function enterSearch(e){
+    let userInput = inputText.value;
+    if (e.keyCode !== 13){
+        return;
+    }
+    if (userInput == "") { // 검색하는게 text가 비어있을때
+        return;
+    } else {
+        deliverParamToHome(userInput);
+    }
+}
+
 
 
 // channel request 함수
@@ -122,7 +160,7 @@ async function renderVideo(info, id){
         viewTag.value = info.video_channel;
 
         let date = document.createElement('span');
-        date.innerText = info.upload_date;
+        date.innerText = formatDate(info.upload_date);
         date.value = info.video_channel;
 
 
@@ -202,16 +240,20 @@ async function renderChannelVideo(res){
     let formatView = formatViews(res.views);
 
     let html = `
-        <div class='play-video'>
+        <div class='play-video' id='main-video-container'>
             <video id = 'main-video' src=${res.video_link} poster=${res.image_link} controls muted autoplay></video>
+            <button class='pip-btn-video'><img src='../imgs/Navigations/Icongaming.svg'></button>
         <div>
         <div class='video-mainInfo' >
             <h3>${res.video_title}</h3><br>
-            <h6>${formatView} ${res.upload_date}</h6>
+            <h6>${formatView} ${formatDate(res.upload_date)}</h6>
         </div>
         `
     parent.innerHTML=html;
 }
+
+
+
 
 // 채널 페이지 이동 
 
@@ -301,6 +343,7 @@ let channelInfo = getChannelInfo(param['channel']);
 //메인영상 하나만 호출
 getVideo(param['id']).then(async res => {
     await renderChannelVideo(res);
+    await createBtnEvent();
     // document.addEventListener("DOMContentLoaded", playVideo);
 })
 
@@ -315,10 +358,71 @@ videoInfos.then(async data=>{
 channelInfo.then(async data => renderChannelInfo(data));
 
 
+// pip 버튼 이벤트
+
+async function createBtnEvent(){
+
+    try{
+        let pipBtn = document.querySelector('.pip-btn-video');
+        let videoMain = document.querySelector('#main-video');
+    
+        console.log(pipBtn);
+    
+        pipBtn.addEventListener('click', async e => {
+        e.disabled = true;
+        if (videoMain !== document.pictureInPictureElement){
+            await videoMain.requestPictureInPicture();
+            videoMain.muted = false;
+            await videoMain.play();
+        }else{
+            videoMain.muted = true;
+        await document.exitPictureInPicture();
+        }
+    })
+    }catch (error){
+        console.log(error);
+    }
+    }
 
 
 
 
+//날짜 포맷
+function formatDate(dateStr) {
+    // 입력된 날짜 문자열을 파싱하여 Date 객체를 생성
+    function parseDate(dateStr) {
+        const parts = dateStr.split("/");
+        // parts[0]은 년도, parts[1]은 월, parts[2]는 일
+        return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+
+    /** 두 날짜간 차이 계산 */
+    function calculateDifference(currentDate, pastDate) {
+        const diffMilliseconds = currentDate - pastDate;
+        const diffSeconds = diffMilliseconds / 1000;
+        const diffMinutes = diffSeconds / 60;
+        const diffHours = diffMinutes / 60;
+        const diffDays = diffHours / 24;
+        const diffWeeks = diffDays / 7;
+        const diffMonths = diffDays / 30.44; // 평균적으로 한 달은 30.44일로 계산
+
+        if (diffMonths >= 1) {
+            return Math.round(diffMonths) + "개월 전";
+        } else if (diffWeeks >= 1) {
+            return Math.round(diffWeeks) + "주 전";
+        } else if (diffDays >= 1) {
+            return Math.round(diffDays) + "일 전";
+        } else if (diffHours >= 1) {
+            return Math.round(diffHours) + "시간 전";
+        } else {
+            return Math.round(diffMinutes) + "분 전";
+        }
+    }
+
+    const pastDate = parseDate(dateStr);
+    const currentDate = new Date();
+    return calculateDifference(currentDate, pastDate);
+}
 
 
 

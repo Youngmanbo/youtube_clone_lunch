@@ -1,0 +1,46 @@
+.pip-btn{
+    display: none;
+    border: none;
+    background: none;
+    position:absolute;
+    bottom: 35px;
+    right: 150px;
+    opacity: 0.3;
+}
+.pip-btn:hover{
+    opacity: 1;
+}
+
+/* index.html */
+.videoTagDiv{
+    position:relative;
+}
+.videoTagDiv:hover > .pip-btn {
+    visibility: visible;
+}
+
+/* video.html */
+.play-video-container > .play-video{
+    position: relative;
+}
+.pip-btn-video{
+    visibility: hidden;
+    border: none;
+    background: none;
+    position:absolute;
+    bottom: 105px;
+    right: 240px;
+    opacity: 0.3;
+}
+.pip-btn-video:hover{
+    opacity: 1;
+}
+#main-video-container:hover > .pip-btn-video{
+    visibility: visible;
+}
+@media all and (max-width: 1024px) {
+    .pip-btn-video{
+        bottom: 115px;
+        right: 150px;
+    } 
+}
