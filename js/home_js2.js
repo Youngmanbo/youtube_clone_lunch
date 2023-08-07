@@ -62,6 +62,7 @@ if (p != 0){
         videoInfoList.map(async data => {
             data.video_tag.forEach(a => filterList.push(a));
         })
+        
         filterList = filterList.filter((item, idx) => filterList.indexOf(item) == idx)
         filterList.forEach(e => createFilterBtn(e));
     })();
