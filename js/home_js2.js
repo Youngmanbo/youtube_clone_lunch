@@ -29,11 +29,9 @@ async function saveDataToSessionStorage(data, func, factor=null){
         const result = await getDataToSessionStorage(data);
         
         if (result){
-          console.log("session");
             return result
         }
         else{
-            console.log("api");
             const result2 = factor ? await func(factor) : await func();
             sessionStorage.setItem(data, JSON.stringify(result2));
             return result2;
@@ -43,6 +41,8 @@ async function saveDataToSessionStorage(data, func, factor=null){
         }
 }
 
+var currentFilterIndex = 0;
+const filtersPerPage = 5;
 
 let p = getParam();
 
@@ -65,12 +65,67 @@ if (p != 0){
             data.video_tag.forEach(a => filterList.push(a));
         })
         
+
         filterList = filterList.filter((item, idx) => filterList.indexOf(item) == idx)
+        let filterParent = document.querySelector('.filter-lists');
+
+        let filterAllBtn = document.createElement('button');
+        filterAllBtn.className = 'filters';
+        filterAllBtn.classList.add('fillter-all');
+        filterAllBtn.innerText = "전체";
+
+        let filterLeftBtn = document.querySelector('.filter-left-btn');
+        filterLeftBtn.addEventListener('click',showPreviousFilters);
+
+        filterParent.appendChild(filterAllBtn);
+
         filterList.forEach(e => createFilterBtn(e));
+
+        let filterRightBtn = document.querySelector('.filter-right-btn');
+        filterRightBtn.addEventListener('click', showNextFilters);
+
+        document.querySelector('.fillter-all').addEventListener('click', allFilter);
+        showFilters();
+        
     })();
 
 
 }
+
+
+
+function showFilters() {
+    const filterButtons = document.querySelectorAll('.filters');
+    filterButtons.forEach((button, index) => {
+        if (index >= currentFilterIndex && index < currentFilterIndex + filtersPerPage) {
+            button.classList.remove('hidden');
+            setTimeout(() => {
+                button.style.transform = 'translateX(0)';
+            }, index * 1);
+        } else {
+            button.classList.add('hidden');
+            button.style.transform = 'translateX(-30px)';
+        }
+    });
+}
+
+
+function showNextFilters() {
+  const totalFilters = document.querySelectorAll('.filters').length;
+  if (currentFilterIndex + filtersPerPage < totalFilters) {
+      currentFilterIndex += filtersPerPage;
+      showFilters();
+  }
+}
+
+function showPreviousFilters() {
+  if (currentFilterIndex - filtersPerPage >= 0) {
+      currentFilterIndex -= filtersPerPage;
+      showFilters();
+  }
+}
+
+
 
 //------------------------------------------------------------------------------------------------
 async function getVideoInfoList(res) {
@@ -375,7 +430,6 @@ function searchFilter(videoList, searchTxt){
     if (totalList.length == 0) {
     alert('검색하신 내용과 일치하는 동영상이 존재하지 않습니다.');
     } else {
-    console.log(totalList);
     createVideosItem(totalList);
     document.getElementById('search-bar').value = "";
     }
@@ -455,7 +509,6 @@ function formatDate(dateStr) {
   return calculateDifference(currentDate, pastDate);
 }
 
-document.getElementsByClassName('filters')[0].addEventListener('click', allFilter);
 
 async function allFilter(){
   let videoList = await saveDataToSessionStorage("videoList", getVideoList);

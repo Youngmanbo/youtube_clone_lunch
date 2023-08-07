@@ -1,7 +1,11 @@
+.filters-lists{
+    display:flex;
+    white-space: nowrap;
+}
 .filters{
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-30px);
+    transform: translateX(-50px);
     transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
   }
   
@@ -9,4 +13,40 @@
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
+  }
+  .filter-right-btn{
+    z-index: 1;
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: #303030;
+    border: 1px solid rgba(189, 189, 189, 0.3);
+    text-transform: capitalize;
+    margin-right: 10px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-right:10px;
+    text-align: center;
+  }
+
+
+  .filter-left-btn{
+    text-align: center;
+    z-index: 1;
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: #303030;
+    border: 1px solid rgba(189, 189, 189, 0.3);
+    text-transform: capitalize;
+    margin-right: 10px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .filter-lists{
+    overflow:auto;
+    display:flex;
+    width:100%;
   }
