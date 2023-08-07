@@ -179,6 +179,74 @@ async function renderVideo(info, id){
 }
 
 
+//유사도 측정 결과 가져오기
+async function getSimilarity(firstWord, secondWord) {
+    const openApiURL = "http://aiopen.etri.re.kr:8000/WiseWWN/WordRel";
+    const access_key = 'd447995d-daf4-43d8-aef6-647c28df46c9';
+
+    let requestJson = {
+      argument: {
+        first_word: firstWord,
+        second_word: secondWord,
+      },
+    };
+
+    let response = await fetch(openApiURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: access_key,
+      },
+      body: JSON.stringify(requestJson),
+    });
+    let data = await response.json();
+    return data.return_object["WWN WordRelInfo"].WordRelInfo.Distance;
+  }
+
+//유사도
+
+async function calculateVideoSimilarities(videoList, targetTagList, targetVideoId) {
+    let filteredVideoList = [];
+
+    for (let video of videoList) {
+      let totalDistance = 0;
+      let promises = [];
+
+      for (let videoTag of video.video_tag) {
+        for (let targetTag of targetTagList) {
+          if (videoTag == targetTag) {
+            promises.push(0);
+          } else {
+            promises.push(getSimilarity(videoTag, targetTag));
+          }
+        }
+      }
+
+      let distances = await Promise.all(promises);
+
+      for (let distance of distances) {
+        if (distance !== -1) {
+          totalDistance += distance;
+        }
+      }
+
+      if (totalDistance !== 0) {
+        if (targetVideoId !== video.video_id) {
+          filteredVideoList.push({ ...video, score: totalDistance });
+        }
+      }
+    }
+
+    filteredVideoList.sort((a, b) => a.score - b.score);
+
+    filteredVideoList = filteredVideoList.map((video) => ({
+      ...video,
+      score: 0,
+    }));
+    console.log(filteredVideoList);
+    return filteredVideoList;
+  }
+
 // channelInfo requests 함수
 async function getChannelInfo(res='oreumi'){
   
@@ -232,6 +300,7 @@ async function renderChannelInfo(response){
         goChannel(e, response.channel_name, p['id']);
     })
 
+
 }
 
 // 메인비디오 생성 함수
@@ -250,6 +319,7 @@ async function renderChannelVideo(res){
         </div>
         `
     parent.innerHTML=html;
+
 }
 
 
@@ -335,7 +405,7 @@ function goChannel(e, videoChannel, videoId) {
 
 let param = getParam();
 let channel = getChannel(param['channel']);
-// let videoList = getVideoList();
+let vList = getVideoList();
 let videoInfos = getVideoInfoList(channel);
 let channelInfo = getChannelInfo(param['channel']); 
 
@@ -344,16 +414,26 @@ let channelInfo = getChannelInfo(param['channel']);
 getVideo(param['id']).then(async res => {
     await renderChannelVideo(res);
     await createBtnEvent();
-    // document.addEventListener("DOMContentLoaded", playVideo);
+    let filteredVideoList = vList.then(async vidList => {
+        let targetVideoId= await res.video_id;
+        let calcul = await calculateVideoSimilarities(vidList, res.video_tag, targetVideoId); 
+        for(i=0; i<5; i++){
+            getVideo(calcul[i].video_id).then(async res => {
+                await renderVideo(res, param['id']);
+            })
+        } 
+
+    })
 })
 
 
-videoInfos.then(async data=>{
-    let promises = data.map(async el => {
-        return await renderVideo(el, param['id']);
-    });
-    Promise.all(promises);
-})
+
+// videoInfos.then(async data=>{
+//     let promises = data.map(async el => {
+//         return await renderVideo(el, param['id']);
+//     });
+//     Promise.all(promises);
+// })
 
 channelInfo.then(async data => renderChannelInfo(data));
 

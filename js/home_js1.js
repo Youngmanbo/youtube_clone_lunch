@@ -482,12 +482,12 @@ function slideVideoCardsLeft() {
     tagsContainer.style.transform = `translateX(${topMenuCurrentPosition}px)`;
 }
 
-const top_menu_button = document.querySelector('.top-menu-icon');
+const top_menu_button = document.querySelector('.top-menu-icon-leftToRightBotton');
 if (top_menu_button) {
     top_menu_button.addEventListener('click', slideTags);
 }
 
-let top_menu_left_button = document.querySelector('.top-menu-icon-left');
+let top_menu_left_button = document.querySelector('.top-menu-icon-leftBotton');
 if (top_menu_left_button) {
     top_menu_left_button.addEventListener('click', slideVideoCardsLeft);
 }
