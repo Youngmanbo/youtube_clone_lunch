@@ -204,7 +204,11 @@ async function getSimilarity(firstWord, secondWord) {
 
 //유사도
 
-async function calculateVideoSimilarities(videoList, targetTagList, targetVideoId) {
+async function calculateVideoSimilarities(response) {
+    let videoList = response[0];
+    let targetTagList = response[1];
+    let targetVideoId = response[2];
+    
     let filteredVideoList = [];
 
     for (let video of videoList) {
@@ -435,7 +439,8 @@ async function saveDataToSessionStorage(data, func, factor=null){
     await createBtnEvent();
     await renderChannelInfo(channelInfo);
 
-    let filteredVideoList = await calculateVideoSimilarities(vList, getMainVideo.video_tag, getMainVideo.vide_id);
+    let responseData = [vList, getMainVideo.video_tag, getMainVideo.video_id];
+    let filteredVideoList = await saveDataToSessionStorage("filter_"+getMainVideo.video_title, calculateVideoSimilarities, responseData);
     for(i=0; i<5; i++){
         let filterVideo = await saveDataToSessionStorage("video_id_"+filteredVideoList[i].video_id, getVideo, filteredVideoList[i].video_id);
         await renderVideo(filterVideo, param['id'])
