@@ -342,23 +342,27 @@ video[poster]{
 
 /* 필터 리스트 */
   
-.filter-box{
+.filter-lists{
     display:flex;
-    width: 800px;
-    position: relative;
-    overflow: show;   
+    width: 1900px;
+    overflow: hidden;
+}
+
+button{
+    list-style-type:none;
 }
 
 .filter-box{
     position: absolute;
     left: 0;
     top: 0;
-    width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+    width: 1900px; /* 슬라이드할 사진과 마진 총 넓이 */
     transition: left 0.5s ease-out;
 }
 
 .filter-box button:first-child{
     margin-left: 100px;
+    
   }
 
 .filter-box button:not(:last-child){
@@ -369,39 +373,46 @@ video[poster]{
     float: left;
   }
 
-  .top-menu-icon-leftToRightBotton img{
+
+  .controller span{
+    position:absolute;
     background-color: transparent;
-    color: black;  
+    color: black;
+    text-align: center;
+    border-radius: 50%;
+    padding: 4px 20px;
+    top: 3%;
+    font-size: 1.3em;
     cursor: pointer;
   }
   
+  /* 화살표 */
   /* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
-  .top-menu-icon-leftToRightBotton img:hover{
+  .controller span:hover{
     background-color: rgba(128, 128, 128, 0.11);
   }
   
-  .top-menu-icon-leftToRightBotton{
-    left: 10px;
+  .prev{
+    left: 50px;
+    
   }
   
   /* 이전 화살표에 마우스 커서가 올라가 있을때 
   이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
-  .top-menu-icon-leftToRightBotton:hover{
+  .prev:hover{
     transform: translateX(-10px);
   }
   
-  .top-menu-icon-leftBotton{
-    right: 10px;
+
+  .next{
+    right: 40rem;
   }
   
   /* 다음 화살표에 마우스 커서가 올라가 있을때 
   이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
-  .top-menu-icon-leftBotton:hover{
+  .next:hover{
     transform: translateX(10px);
   }
-
-
-
 
 
 

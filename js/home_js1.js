@@ -394,10 +394,10 @@ const filterLists=document.querySelector('.filter-box');//전체 슬라이드 �
 const filterButtons=document.querySelectorAll('.filter-box button');//모든 슬라이드들
 let currentIdx=0;//현재 슬라이드 인덱스
 const slideCount=filterButtons.length; //슬라이드 개수
-const leftBtn=document.querySelector('.top-menu-icon-leftToRightBotton')
-const rightBtn=document.querySelector('.top-menu-icon-leftBotton')
+const leftBtn=document.querySelector('.prev')
+const rightBtn=document.querySelector('.next')
 const slideWidth=100; //한개의 슬라이드 넓이
-const slideMargin=100; //슬라이드간의 margin값
+const slideMargin=50; //슬라이드간의 margin값
 
 //전체 슬라이드 컨테이너 넓이 설정
 filterLists.style.width=(slideWidth + slideMargin) + slideCount;
