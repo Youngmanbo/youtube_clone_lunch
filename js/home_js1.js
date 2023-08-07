@@ -387,3 +387,45 @@ function clear_videoList() { //비디오들 화면 다 지우기
   }
 }
 
+
+
+let topMenuCurrentPosition = 0;
+// top-menu 슬라이드
+const slideWidth = 200; // 슬라이드 한번에 이동할 너비
+
+//오른쪽 화살표 클릭시 슬라이드가 왼쪽으로 이동
+function slideTags() {
+    const tagsContainer = document.querySelector('.filters'); //필터 버튼들 전체
+    const containerWidth = document.querySelector('.filter-lists').offsetWidth; //슬라이드 가능 영역 너비
+    const minPosition = -containerWidth; // 슬라이드 최소 이동 범위 계산
+    
+    if (topMenuCurrentPosition > minPosition + slideWidth + 72) {
+        topMenuCurrentPosition -= slideWidth; // 슬라이드를 왼쪽으로 이동시키기 위해 감소
+        top_menu_left_button.style.visibility = 'visible';
+    }
+
+    tagsContainer.style.transform = `translateX(${topMenuCurrentPosition}px)`;
+}
+
+function slideVideoCardsLeft() {
+    const tagsContainer = document.querySelector('.filters');
+    const maxPosition = 0; // 최대 이동 범위 (초기 위치)
+    
+    if (topMenuCurrentPosition < maxPosition) {
+        topMenuCurrentPosition += slideWidth; // 슬라이드를 왼쪽으로 이동시키기 위해 증가
+    } else if (topMenuCurrentPosition >= 0){
+        top_menu_left_button.style.visibility = 'hidden';
+    }
+
+    tagsContainer.style.transform = `translateX(${topMenuCurrentPosition}px)`;
+}
+
+const top_menu_button = document.querySelector('.top-menu-icon');
+if (top_menu_button) {
+    top_menu_button.addEventListener('click', slideTags);
+}
+
+let top_menu_left_button = document.querySelector('.top-menu-icon-left');
+if (top_menu_left_button) {
+    top_menu_left_button.addEventListener('click', slideVideoCardsLeft);
+}
