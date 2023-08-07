@@ -396,6 +396,29 @@ function goChannel(e, videoChannel, videoId) {
 // }
 
 
+//세션 스토리지 저장 및 불러오기
+async function getDataToSessionStorage(data){
+    let result = sessionStorage.getItem(data);
+    return result ? JSON.parse(result) : null;
+}
+
+
+async function saveDataToSessionStorage(data, func, factor=null){
+    try{
+        const result = await getDataToSessionStorage(data);
+        
+        if (result){
+            return result
+        }
+        else{
+            const result2 = factor ? await func(factor) : await func();
+            sessionStorage.setItem(data, JSON.stringify(result2));
+            return result2;
+        }
+        }catch(error){
+            console.error("error  발생: ", error, data);
+        }
+}
 
 
 //<---------------------------함수실행부------------------------------------->
@@ -418,7 +441,7 @@ getVideo(param['id']).then(async res => {
         let targetVideoId= await res.video_id;
         let calcul = await calculateVideoSimilarities(vidList, res.video_tag, targetVideoId); 
         for(i=0; i<5; i++){
-            getVideo(calcul[i].video_id).then(async res => {
+            await getVideo(calcul[i].video_id).then(async res => {
                 await renderVideo(res, param['id']);
             })
         } 
@@ -426,14 +449,6 @@ getVideo(param['id']).then(async res => {
     })
 })
 
-
-
-// videoInfos.then(async data=>{
-//     let promises = data.map(async el => {
-//         return await renderVideo(el, param['id']);
-//     });
-//     Promise.all(promises);
-// })
 
 channelInfo.then(async data => renderChannelInfo(data));
 
