@@ -776,12 +776,27 @@ iframe {
 }
 
 .remove-div {
-    width:70%;
+    width:75%;
     display:flex;
     justify-content: flex-end;
     align-items: center;
 }
-
+.replace-btn{
+    background-color: rgb(73, 73, 73);
+    border: none;
+    cursor: pointer ;
+    padding: 7px 7px 7px 7px;
+    border-radius: 10px;
+    color:white;
+}
+.remove-btn{
+    background-color: rgb(73, 73, 73);
+    border: none;
+    cursor: pointer ;
+    padding: 7px 7px 7px 7px;
+    border-radius: 10px;
+    color:white;
+}
 
 /*비디오 리스트*/
 
