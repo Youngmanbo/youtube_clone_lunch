@@ -85,14 +85,13 @@ async function getVideoList(){
 
 async function getVideoInfoList(res){
 
-    
-    return res.then(data =>{
+        let data = res;
         const promises = data.map(async data => {
            return await getVideo(data.video_id);
         });
         return Promise.all(promises);
 
-    });
+
     
 }
 
@@ -423,35 +422,48 @@ async function saveDataToSessionStorage(data, func, factor=null){
 
 //<---------------------------함수실행부------------------------------------->
 
+(async () => {
+    let param = getParam();
+    let channel = await saveDataToSessionStorage("videoChannel", getChannel, param['channel']);
+    let vList = await saveDataToSessionStorage("videoVideoList", getVideoList);
+    let videoInfos = await saveDataToSessionStorage("videoVideoInfos", getVideoInfoList, channel);
+    let channelInfo = await saveDataToSessionStorage("videoChannelInfo", getChannelInfo, param['channel']); 
+    let getMainVideo = await saveDataToSessionStorage("video_id_"+param['id'], getVideo, param['id']);
 
 
+    await renderChannelVideo(getMainVideo);
+    await createBtnEvent();
+    await renderChannelInfo(channelInfo);
+
+    let filteredVideoList = await calculateVideoSimilarities(vList, getMainVideo.video_tag, getMainVideo.vide_id);
+    for(i=0; i<5; i++){
+        let filterVideo = await saveDataToSessionStorage("video_id_"+filteredVideoList[i].video_id, getVideo, filteredVideoList[i].video_id);
+        await renderVideo(filterVideo, param['id'])
+    } 
 
 
-let param = getParam();
-let channel = getChannel(param['channel']);
-let vList = getVideoList();
-let videoInfos = getVideoInfoList(channel);
-let channelInfo = getChannelInfo(param['channel']); 
+})();
+
 
 
 //메인영상 하나만 호출
-getVideo(param['id']).then(async res => {
-    await renderChannelVideo(res);
-    await createBtnEvent();
-    let filteredVideoList = vList.then(async vidList => {
-        let targetVideoId= await res.video_id;
-        let calcul = await calculateVideoSimilarities(vidList, res.video_tag, targetVideoId); 
-        for(i=0; i<5; i++){
-            await getVideo(calcul[i].video_id).then(async res => {
-                await renderVideo(res, param['id']);
-            })
-        } 
+// getVideo(param['id']).then(async res => {
+//     await renderChannelVideo(res);
+//     await createBtnEvent();
+//     let filteredVideoList = vList.then(async vidList => {
+//         let targetVideoId= await res.video_id;
+//         let calcul = await calculateVideoSimilarities(vidList, res.video_tag, targetVideoId); 
+//         for(i=0; i<5; i++){
+//             await getVideo(calcul[i].video_id).then(async res => {
+//                 await renderVideo(res, param['id']);
+//             })
+//         } 
 
-    })
-})
+//     })
+// })
 
 
-channelInfo.then(async data => renderChannelInfo(data));
+// channelInfo.then(async data => renderChannelInfo(data));
 
 
 // pip 버튼 이벤트

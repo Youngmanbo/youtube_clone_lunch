@@ -29,9 +29,11 @@ async function saveDataToSessionStorage(data, func, factor=null){
         const result = await getDataToSessionStorage(data);
         
         if (result){
+          console.log("session");
             return result
         }
         else{
+            console.log("api");
             const result2 = factor ? await func(factor) : await func();
             sessionStorage.setItem(data, JSON.stringify(result2));
             return result2;
