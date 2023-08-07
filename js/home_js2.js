@@ -451,3 +451,10 @@ function formatDate(dateStr) {
   const currentDate = new Date();
   return calculateDifference(currentDate, pastDate);
 }
+
+document.getElementsByClassName('filters')[0].addEventListener('click', allFilter);
+
+async function allFilter(){
+  let videoList = await saveDataToSessionStorage("videoList", getVideoList);
+  searchFilter(videoList, "");
+}
