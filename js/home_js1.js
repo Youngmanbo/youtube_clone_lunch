@@ -389,43 +389,84 @@ function clear_videoList() { //비디오들 화면 다 지우기
 
 
 
-let topMenuCurrentPosition = 0;
-// top-menu 슬라이드
-const slideWidth = 200; // 슬라이드 한번에 이동할 너비
+//필터 슬라이드
+const filterLists=document.querySelector('.filter-lists');//전체 슬라이드 컨테이너
+const filterButtons=document.querySelectorAll('.filters button');//모든 슬라이드들
+let currentIdx=0;//현재 슬라이드 인덱스
+const slideCount=filterButtons.length; //슬라이드 개수
+const leftBtn=document.querySelector('.top-menu-icon-leftToRightBotton')
+const rightBtn=document.querySelector('.top-menu-icon-leftBotton')
+const slideWidth=300; //한개의 슬라이드 넓이
+const slideMargin=100; //슬라이드간의 margin값
 
-//오른쪽 화살표 클릭시 슬라이드가 왼쪽으로 이동
-function slideTags() {
-    const tagsContainer = document.querySelector('.filters'); //필터 버튼들 전체
-    const containerWidth = document.querySelector('.filter-lists').offsetWidth; //슬라이드 가능 영역 너비
-    const minPosition = -containerWidth; // 슬라이드 최소 이동 범위 계산
+//전체 슬라이드 컨테이너 넓이 설정
+filterLists.style.width=(slideWidth + slideMargin) + slideCount;
+
+function moveSlide(num) {
+  filterLists.style.left = -num * 400 + 'px';
+  currentIdx = num;
+}
+
+leftBtn.addEventListener('click', function () {
+  /*첫 번째 슬라이드로 표시 됐을때는 
+  이전 버튼 눌러도 아무런 반응 없게 하기 위해 
+  currentIdx !==0일때만 moveSlide 함수 불러옴 */
+
+  if (currentIdx !== 0) moveSlide(currentIdx - 1);
+});
+
+rightBtn.addEventListener('click', function () {
+  /* 마지막 슬라이드로 표시 됐을때는 
+  다음 버튼 눌러도 아무런 반응 없게 하기 위해
+  currentIdx !==slideCount - 1 일때만 
+  moveSlide 함수 불러옴 */
+  if (currentIdx !== slideCount - 1) {
+    moveSlide(currentIdx + 1);
+  }
+});
+
+
+
+// //잠시 보류
+// let topMenuCurrentPosition = 0;
+// // top-menu 슬라이드
+// const slideWidth = 200; // 슬라이드 한번에 이동할 너비
+
+// //오른쪽 화살표 클릭시 슬라이드가 왼쪽으로 이동
+// function slideTags() {
+//     const tagsContainer = document.querySelectorAll('.filters'); //필터 버튼들 전체
+//     const containerWidth = document.querySelector('.filter-lists').offsetWidth; //슬라이드 가능 영역 너비
+//     const minPosition = -containerWidth; // 슬라이드 최소 이동 범위 계산
+//     //const top_menu_left_button=document.querySelector('.top-menu-icon-leftToRightBotton'); //이거 맞나?
+
+//     if (topMenuCurrentPosition > minPosition + slideWidth + 72) {
+//         topMenuCurrentPosition -= slideWidth; // 슬라이드를 왼쪽으로 이동시키기 위해 감소
+//         //top_menu_left_button.style.visibility = 'visible';
+//     }
+
+//     tagsContainer.style.transform = `translateX(${topMenuCurrentPosition}px)`;
+// }
+
+// //왼쪽 화살표 클릭시 슬라이드가 오른쪽으로 이동
+// function slideVideoCardsLeft() {
+//     const tagsContainer = document.querySelector('.filters');
+//     const maxPosition = 0; // 최대 이동 범위 (초기 위치)
     
-    if (topMenuCurrentPosition > minPosition + slideWidth + 72) {
-        topMenuCurrentPosition -= slideWidth; // 슬라이드를 왼쪽으로 이동시키기 위해 감소
-        top_menu_left_button.style.visibility = 'visible';
-    }
+//     if (topMenuCurrentPosition < maxPosition) {
+//         topMenuCurrentPosition += slideWidth; // 슬라이드를 왼쪽으로 이동시키기 위해 증가
+//     } else if (topMenuCurrentPosition >= 0){
+//         top_menu_left_button.style.visibility = 'hidden';
+//     }
 
-    tagsContainer.style.transform = `translateX(${topMenuCurrentPosition}px)`;
-}
+//     tagsContainer.style.transform = `translateX(${topMenuCurrentPosition}px)`;
+// }
 
-function slideVideoCardsLeft() {
-    const tagsContainer = document.querySelector('.filters');
-    const maxPosition = 0; // 최대 이동 범위 (초기 위치)
-    
-    if (topMenuCurrentPosition < maxPosition) {
-        topMenuCurrentPosition += slideWidth; // 슬라이드를 왼쪽으로 이동시키기 위해 증가
-    } else if (topMenuCurrentPosition >= 0){
-        top_menu_left_button.style.visibility = 'hidden';
-    }
+// const top_menu_button = document.querySelector('.top-menu-icon-leftToRightBotton');
+// if (top_menu_button) {
+//     top_menu_button.addEventListener('click', slideTags);
+// }
 
-    tagsContainer.style.transform = `translateX(${topMenuCurrentPosition}px)`;
-}
-
-const top_menu_button = document.querySelector('.top-menu-icon');
-if (top_menu_button) {
-    top_menu_button.addEventListener('click', slideTags);
-}
-
-let top_menu_left_button = document.querySelector('.top-menu-icon-left');
-if (top_menu_left_button) {
-    top_menu_left_button.addEventListener('click', slideVideoCardsLeft);
-}
+// let top_menu_left_button = document.querySelector('.top-menu-icon-leftBotton');
+// if (top_menu_left_button) {
+//     top_menu_left_button.addEventListener('click', slideVideoCardsLeft);
+// }
