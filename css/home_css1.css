@@ -342,6 +342,33 @@ video[poster]{
 
 /* 필터 리스트 */
   
+.filter-box{
+    display:flex;
+    width: 800px;
+    position: relative;
+    overflow: show;   
+}
+
+.filter-box{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+    transition: left 0.5s ease-out;
+}
+
+.filter-box button:first-child{
+    margin-left: 100px;
+  }
+
+.filter-box button:not(:last-child){
+    float: left;
+  }
+
+.filter-box button{
+    float: left;
+  }
+
   .top-menu-icon-leftToRightBotton img{
     background-color: transparent;
     color: black;  
