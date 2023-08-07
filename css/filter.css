@@ -1,0 +1,12 @@
+.filters{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-30px);
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .filters:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
