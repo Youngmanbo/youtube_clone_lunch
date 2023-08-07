@@ -115,10 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             username.textContent = '탈주닌자';
         }
-
-
-
-
     }
     // 취소버튼
     commentCancelButton.addEventListener("click", function () {
@@ -176,4 +172,8 @@ function replaceComments(e) {
         beforeText.innerHTML = replaceText;
         alert("수정이 완료 되었습니다.");
     }
+}
+
+function writeComments(){
+    let fr = new FileReader();
 }
