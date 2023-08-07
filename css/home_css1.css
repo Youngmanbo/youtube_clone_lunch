@@ -345,3 +345,53 @@ video[poster]{
         display: none;
     }
 }
+
+
+
+/* 필터 리스트 */
+  
+  .top-menu-icon-leftToRightBotton img{
+    background-color: transparent;
+    color: black;  
+    cursor: pointer;
+  }
+  
+  /* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+  .top-menu-icon-leftToRightBotton img:hover{
+    background-color: rgba(128, 128, 128, 0.11);
+  }
+  
+  .top-menu-icon-leftToRightBotton{
+    left: 10px;
+  }
+  
+  /* 이전 화살표에 마우스 커서가 올라가 있을때 
+  이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
+  .top-menu-icon-leftToRightBotton:hover{
+    transform: translateX(-10px);
+  }
+  
+  .top-menu-icon-leftBotton{
+    right: 10px;
+  }
+  
+  /* 다음 화살표에 마우스 커서가 올라가 있을때 
+  이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
+  .top-menu-icon-leftBotton:hover{
+    transform: translateX(10px);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
