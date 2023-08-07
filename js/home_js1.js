@@ -389,7 +389,7 @@ function clear_videoList() { //비디오들 화면 다 지우기
 
 
 
-//필터 슬라이드
+//필터 슬라이드 구글보고 한거 방법2
 const filterLists=document.querySelector('.filter-lists');//전체 슬라이드 컨테이너
 const filterButtons=document.querySelectorAll('.filters button');//모든 슬라이드들
 let currentIdx=0;//현재 슬라이드 인덱스
@@ -427,7 +427,7 @@ rightBtn.addEventListener('click', function () {
 
 
 
-// //잠시 보류
+//필터 슬라이드 방법1 - 작동안함 잠시 보류
 // let topMenuCurrentPosition = 0;
 // // top-menu 슬라이드
 // const slideWidth = 200; // 슬라이드 한번에 이동할 너비
