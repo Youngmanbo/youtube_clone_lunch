@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
             const username=document.createElement("div");
             username.classList.add("username");
-            username.textContent="Lunch Group";
+            
 
 
             const timestamp=document.createElement("span");
@@ -74,11 +74,42 @@ document.addEventListener("DOMContentLoaded", function(){
 
             commentList.appendChild(commentContainer);
 
+            // 댓글 제거 버튼
+            let removediv = document.createElement('div');
+            removediv.className = 'remove-div';
+            let replacebtn = document.createElement('button');
+            replacebtn.className = 'replace-btn';
+            let removebtn = document.createElement('button');
+            removebtn.className = 'remove-btn';
+            replacebtn.innerHTML = '수정';
+            removebtn.innerHTML = '삭제';
+            
+            removediv.appendChild(replacebtn);
+            removediv.appendChild(removebtn);
+            commentContainer.appendChild(removediv);
+
             //댓글 오름차순
             commentList.insertBefore(commentContainer, commentList.firstChild);
 
             commentInput.value="";
+            imgsrc = userImage.src.split('/team/')[1];
             userImage.src=getRandomPhotoPath();
+            if (imgsrc == "ec.jpg"){
+                username.textContent="철이네 먹방";
+            }else if(imgsrc == "kimziho.jpg"){
+                username.textContent = '지호지아';
+            }else if(imgsrc == 'lunchTeam.jpg'){
+                username.textContent = 'Lunch Group';
+            }else if(imgsrc == 'ym.jpg'){
+                username.textContent = '유미의 세포들';
+            }else if(imgsrc == 'youngM.jpg'){
+                username.textContent = '영민Tube';
+            }else{
+                username.textContent = '탈주닌자';
+            }
+
+            
+
 
         }
         // 취소버튼
