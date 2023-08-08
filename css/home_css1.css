@@ -376,7 +376,8 @@ button{
 
   .controller span{
     position:absolute;
-    background-color: transparent;
+    background-color: balck;
+    background-size: 1500px 100px;
     color: black;
     text-align: center;
     border-radius: 50%;
@@ -384,6 +385,7 @@ button{
     top: 3%;
     font-size: 1.3em;
     cursor: pointer;
+    z-index: 2;
   }
   
   /* 화살표 */
@@ -414,6 +416,13 @@ button{
     transform: translateX(10px);
   }
 
+  .background{
+    background-color: #212121;
+    height: 150px;
+    width: 300px;
+    margin-right: 1000rem;
+    z-index: 1;
+  }
 
 
 
