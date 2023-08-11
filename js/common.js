@@ -66,13 +66,16 @@ async function getVideoInfoList(res) {
  
  }
  
- async function getVideoList() {
+ async function getVideoList(){
+    const url = 'http://oreumi.appspot.com/video/getVideoList';
+    const response = await fetch(url);
+    const videoList = await response.json();
 
-   url = 'http://oreumi.appspot.com/video/getVideoList';
-   const response = await fetch(url)
-   return await response.json();
- 
- }
+    // index를 기준으로 오름차순으로 정렬
+    videoList.sort((a, b) => a.index - b.index);
+
+    return videoList;
+}
  
  
  
@@ -86,7 +89,7 @@ async function getVideoInfoList(res) {
  
  
  // 채널 정보
- async function getChannelInfo(channelName) {
+ async function getChannelInfo(channelName='oreumi') {
 
 
    let url = `http://oreumi.appspot.com/channel/getChannelInfo`;
@@ -103,6 +106,17 @@ async function getVideoInfoList(res) {
  
    return channelData;
  }
+
+ async function getChannel(param='oreumi'){
+    Url = `http://oreumi.appspot.com/channel/getChannelVideo?video_channel=${param}`
+    const response = await fetch(Url,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    return response.json();
+}
  
 //조회수 포맷
 
