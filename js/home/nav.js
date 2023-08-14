@@ -1,3 +1,11 @@
+  
+// 메뉴 클릭시 보이고 안보이게
+imgtag = document.getElementsByTagName('img');
+menu_logo = imgtag[0];
+menu_logo.addEventListener('click', nav_display);
+
+
+
 function nav_display() {
     let nav = document.getElementsByClassName('channel-left-nav')[0];
     let navStyle = getComputedStyle(nav).display;

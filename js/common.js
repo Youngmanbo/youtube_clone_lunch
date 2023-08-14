@@ -14,7 +14,7 @@ function go_home(){
 // 파라미터 함수
 function getParam(){
     let result = {};
-    let url = decodeURI(window.location.href);
+    let url = window.location.href;
     let params = url.split("?")[1];
     if (params === undefined){
         return '0';
@@ -24,6 +24,12 @@ function getParam(){
         let param = e.split('=');
         result[param[0]] = param[1];
     })
+    if (result['channel'] == undefined){
+        result['channel'] ='oreumi';
+    }
+    if (result['id'] == undefined){
+        result['id'] = '0';
+    }
     return result;
 
 }
